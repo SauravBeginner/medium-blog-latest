@@ -1,4 +1,4 @@
-import { Blog } from "../hooks/useBlogs";
+// import { Blog } from "../hooks/useBlogs";
 
 // const FullBlog = ({ blog }: { blog?: Blog }) => {
 //   // console.log(blog);

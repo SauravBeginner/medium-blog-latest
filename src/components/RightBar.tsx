@@ -4,7 +4,7 @@ import { authTokenState, myProfileDetailsAtom, userAtom } from "../store/atom";
 import axios from "axios";
 import { authURL } from "../utils/baseUrl";
 import { useEffect, useState } from "react";
-import { BlogCardSkeleton } from "./BlogCardSkeleton";
+// import { BlogCardSkeleton } from "./BlogCardSkeleton";
 
 interface User {
   id: string;
