@@ -4,13 +4,14 @@ import { useBlog } from "../hooks/useBlogs";
 
 const SingleBlog = () => {
   const { id } = useParams();
-  const { loading, blog } = useBlog({ id: id || "" });
+  const { loading } = useBlog({ id: id || "" });
 
   if (loading) return <h1 className="text-white">Loading...</h1>;
 
   return (
     <div>
-      <FullBlog blog={blog} />
+      {/* <FullBlog blog={blog} /> */}
+      <FullBlog />
     </div>
   );
 };
