@@ -34,7 +34,8 @@ import { Blog } from "../hooks/useBlogs";
 //   );
 // };
 
-const FullBlog = ({ blog }: { blog?: Blog }) => {
+// const FullBlog = ({ blog }: { blog?: Blog }) => {
+const FullBlog = () => {
   return (
     <>
       <div className="min-h-screen bg-[#121212]">

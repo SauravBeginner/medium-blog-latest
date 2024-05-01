@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { FaBookmark, FaComment, FaHeart } from "react-icons/fa";
 import { IoMdShare } from "react-icons/io";
 import { IoEllipsisVertical } from "react-icons/io5";
-import { authURL, baseURL } from "../utils/baseUrl";
+import { authURL } from "../utils/baseUrl";
 import axios from "axios";
 import { useRecoilStateLoadable, useRecoilValue } from "recoil";
 import { authTokenState, blogDetailsAtomFamily } from "../store/atom";

@@ -1,5 +1,3 @@
-import React from "react";
-
 const CreatePost = () => {
   return (
     <div className="mb-2 flex w-full items-center justify-start border-b border-t border-white px-4 py-2 sm:mb-6 sm:border-l sm:border-r sm:shadow-[5px_5px_0px_0px_#4f4e4e]">
