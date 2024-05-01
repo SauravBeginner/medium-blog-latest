@@ -13,7 +13,8 @@ const BlogDetails = () => {
 
   return (
     <section className="col-span-12 md:col-span-8 lg:col-span-6">
-      <FullBlog blog={blog.contents} />
+      {/* <FullBlog blog={blog.contents} /> */}
+      <FullBlog />
     </section>
   );
 };

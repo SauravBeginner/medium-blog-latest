@@ -177,7 +177,7 @@ export const userSelector = selector({
   key: "userSelector",
   get: async ({ get }) => {
     const token = get(authTokenState);
-    const page = get(currentPageState);
+    // const page = get(currentPageState);
     if (!token) {
       throw new Error("Token not available");
     }
