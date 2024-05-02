@@ -1,5 +1,5 @@
 import { useRecoilValueLoadable } from "recoil";
-import { myProfileDetailsAtom, userProfileDetailsAtom } from "../store/atom";
+import { myProfileDetailsAtom, userProfileDetailsAtom } from "../store";
 import { useParams } from "react-router-dom";
 import { BlogCardSkeleton } from "./BlogCardSkeleton";
 
@@ -21,8 +21,8 @@ const LeftBar = () => {
   return (
     <>
       {profileDetails?.state === "hasValue" && (
-        <aside className="col-span-12 text-white md:col-span-5 lg:col-span-4 xl:col-span-3">
-          <div className="sticky top-[100px] border-b bg-[black]/60  rounded-md md:rounded-lg border-[white]/60 p-4 sm:border">
+        <aside className="hidden md:block col-span-12 text-white md:col-span-12 lg:col-span-4 xl:col-span-3">
+          <div className="sticky top-[80px] overflow-y-hidden border-b bg-[black]/60  rounded-md md:rounded-lg border-[white]/60 p-4 sm:border">
             <img
               className="mb-3 flex aspect-square h-16 w-16 rounded-full border-2 border-[#ae7aff] object-cover"
               src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"

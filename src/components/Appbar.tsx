@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { authTokenState, isAuthenticated } from "../store/atom";
+import { authTokenState, isAuthenticated } from "../store";
+import Searchbar from "./Searchbar";
 
 const Appbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,27 +24,13 @@ const Appbar = () => {
     navigate("/login", { replace: true });
   };
   return (
-    <nav className="fixed w-full z-10 bg-[black] border-gray-200 px-4 py-3 flex items-center justify-around text-gray-100">
-      <Link to="/" className="font-semibold text-lg">
+    <nav className="fixed w-full z-50 bg-[black] border-gray-200 px-4 py-3 flex items-center justify-around text-gray-100 text-sm md:text-lg font-semibold">
+      <Link to="/" className="font-bold">
         Medium
       </Link>
       {userAuth && (
         <>
-          <ul className="hidden md:flex space-x-2  bg-opacity-50 basis-1/2 mr-10 justify-around text-center ">
-            <li
-              className="w-[50%] py-3 hover:bg-gray-500 cursor-pointer"
-              onClick={() => navigate("/")}
-            >
-              <button>All</button>
-            </li>
-            <li
-              className="w-[50%] py-3 hover:bg-gray-500 cursor-pointer"
-              onClick={() => navigate("/my-profile")}
-            >
-              <button>My Posts</button>
-            </li>
-            {/* Add more navigation links as needed  */}
-          </ul>
+          <Searchbar />
 
           <div className="relative">
             <button onClick={handleProfileClick} className="focus:outline-none">
@@ -55,14 +42,14 @@ const Appbar = () => {
             </button>
 
             {isOpen && (
-              <ul className="absolute top-10 right-0 bg-black shadow-md rounded divide-y divide-gray-100 w-48">
-                <li className="px-4 py-2 hover:bg-gray-500">
+              <ul className="absolute top-10 right-0 bg-neutral-900 shadow-md rounded-xl divide-y divide-gray-100 w-48 font-bold">
+                <li className="px-4 py-4 hover:bg-gray-500">
                   <Link to="/profile">Profile</Link>
                 </li>
-                <li className="px-4 py-2 hover:bg-gray-500">
+                <li className="px-4 py-4 hover:bg-gray-500">
                   <Link to="/settings">Settings</Link>
                 </li>
-                <li className="px-4 py-2 hover:bg-gray-500">
+                <li className="px-4 py-4 hover:bg-gray-500">
                   <button onClick={handleLogout}>Sign Out</button>
                 </li>
               </ul>

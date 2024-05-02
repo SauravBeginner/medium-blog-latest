@@ -5,7 +5,7 @@ import React, { useEffect } from "react";
 import Appbar from "./components/Appbar";
 import AuthLayout from "./pages/AuthLayout";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { authTokenState, isAuthenticated } from "./store/atom";
+import { authTokenState, isAuthenticated } from "./store";
 import { BlogCardSkeleton } from "./components/BlogCardSkeleton";
 import UserBlogDetails from "./pages/UserBlogDetails";
 
@@ -14,6 +14,8 @@ const BlogDetails = React.lazy(() => import("./pages/BlogDetails"));
 
 const MyProfile = React.lazy(() => import("./pages/MyProfile"));
 const EditProfile = React.lazy(() => import("./pages/EditProfile"));
+
+const Following = React.lazy(() => import("./pages/Following"));
 
 const Blogs = React.lazy(() => import("./pages/Blogs"));
 const Signup = React.lazy(() => import("./pages/Signup"));
@@ -63,6 +65,7 @@ function App() {
               <Route path="/blog/:id" element={<BlogDetails />} />
               <Route path="/user/blog/:id" element={<UserBlogDetails />} />
               <Route path="/my-profile" element={<MyProfile />} />
+              <Route path="/following" element={<Following />} />
               <Route path="/edit-profile" element={<EditProfile />} />
             </Route>
           ) : (

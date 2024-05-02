@@ -1,17 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { LabelInput } from "./LabelInput";
-import { signinInput } from "@10xcoder/medium-blog-common";
+import { SigninInput } from "@10xcoder/medium-blog-common";
 import { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../utils/baseUrl";
 import { Button } from "./Button";
-import { authTokenState } from "../store/atom";
+import { authTokenState } from "../store";
 import { useSetRecoilState } from "recoil";
 
 export const Login = () => {
   const navigate = useNavigate();
 
-  const [userInput, setUserInput] = useState<signinInput>({
+  const [userInput, setUserInput] = useState<SigninInput>({
     email: "",
     password: "",
   });

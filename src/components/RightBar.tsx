@@ -1,6 +1,11 @@
-import { useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { Button } from "./Button";
-import { authTokenState, myProfileDetailsAtom, userAtom } from "../store/atom";
+import {
+  authTokenState,
+  followingAtom,
+  myProfileDetailsAtom,
+  userAtom,
+} from "../store";
 import axios from "axios";
 import { authURL } from "../utils/baseUrl";
 import { useEffect, useState } from "react";
@@ -25,9 +30,10 @@ const RightBar = () => {
     "https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
   const allUserList = useRecoilValueLoadable(userAtom);
 
+  const [isFollowing, setIsFollowing] = useRecoilState(followingAtom);
   const token = useRecoilValue(authTokenState);
   const myProfileDetails = useRecoilValueLoadable(myProfileDetailsAtom);
-  const [isFollowing, setIsFollowing] = useState<Record<string, boolean>>({});
+  // const [isFollowing, setIsFollowing] = useState<Record<string, boolean>>({});
   const currentUser = myProfileDetails?.contents;
   const [users, setUsers] = useState<User[]>([]);
 
@@ -56,9 +62,6 @@ const RightBar = () => {
       console.log(e);
     }
   };
-  // const isfollow = (userId: string) => {
-  //   return !!currentUser?.following?.find((u) => u?.followingId === userId);
-  // };
 
   useEffect(() => {
     if (allUserList.state === "hasValue" && allUserList.contents) {
@@ -66,7 +69,7 @@ const RightBar = () => {
         allUserList.contents.filter((user: User) => user.id !== currentUser?.id)
       );
     }
-  }, [allUserList, currentUser?.id]);
+  }, [allUserList, currentUser?.id, isFollowing]);
 
   useEffect(() => {
     console.log(users);
@@ -93,7 +96,7 @@ const RightBar = () => {
   return (
     <>
       <aside className="hidden text-white lg:col-span-3 lg:block">
-        <div className="max-h-screen sticky top-[100px] ">
+        <div className="max-h-screen sticky top-[80px] ">
           <div className="bg-[black]/60 rounded-lg p-4 text-white mb-2 border border-[white]/60">
             <h2 className="text-lg font-bold pb-4">Who to follow</h2>
             <div className="space-y-4">

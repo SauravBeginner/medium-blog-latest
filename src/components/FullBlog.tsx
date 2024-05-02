@@ -35,6 +35,7 @@
 // };
 
 // const FullBlog = ({ blog }: { blog?: Blog }) => {
+
 const FullBlog = () => {
   return (
     <>

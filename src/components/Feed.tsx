@@ -11,7 +11,7 @@ import {
   hasMoreState,
   itemsState,
   userProfileId,
-} from "../store/atom";
+} from "../store";
 import { useCallback, useEffect } from "react";
 // import InfiniteScroll from "react-infinite-scroll-component";
 import {
@@ -20,6 +20,7 @@ import {
   useSetRecoilState,
 } from "recoil";
 import { useParams } from "react-router-dom";
+import Navbar from "./Navbar";
 const Feed = ({ blogType }: any) => {
   const { id } = useParams();
   // const { loading, blogs } = useBlogs({ blogType: blogType || "" });
@@ -68,8 +69,9 @@ const Feed = ({ blogType }: any) => {
   }, [handleScroll]);
   // console.log("items", items);
   return (
-    <section className="col-span-12 md:col-span-8 lg:col-span-6 mt-5">
-      <CreatePost />
+    <section className="col-span-12 md:col-span-12 lg:col-span-6">
+      {/* <CreatePost /> */}
+      <Navbar />
       {items?.map((blog: any) => (
         <BlogCard
           key={`${type}-${blog?.id}`}

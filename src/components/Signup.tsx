@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { LabelInput } from "./LabelInput";
-import { signupInput } from "@10xcoder/medium-blog-common";
+import { SignupInput } from "@10xcoder/medium-blog-common";
 import { useState } from "react";
 import axios from "axios";
 import { baseURL } from "../utils/baseUrl";
@@ -8,7 +8,7 @@ import { Button } from "./Button";
 
 export const Signup = () => {
   const navigate = useNavigate();
-  const [userInput, setUserInput] = useState<signupInput>({
+  const [userInput, setUserInput] = useState<SignupInput>({
     email: "",
     password: "",
     name: "",

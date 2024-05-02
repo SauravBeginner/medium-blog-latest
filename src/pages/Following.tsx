@@ -1,12 +1,12 @@
 import Feed from "../components/Feed";
 // import { BlogType } from "../store";
 
-const MyProfile = () => {
+const Following = () => {
   return (
     <>
-      <Feed blogType={"myposts"} />
+      <Feed blogType={"following"} />
     </>
   );
 };
 
-export default MyProfile;
+export default Following;

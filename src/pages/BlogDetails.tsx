@@ -1,7 +1,7 @@
 // import { useParams } from "react-router-dom";
 import FullBlog from "../components/FullBlog";
 // import { useRecoilValueLoadable } from "recoil";
-// import { blogDetailsAtomFamily } from "../store/atom";
+// import { blogDetailsAtomFamily } from "../store";
 
 const BlogDetails = () => {
   // const { id } = useParams();
