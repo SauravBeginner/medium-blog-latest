@@ -4,9 +4,9 @@ import { IoSearch } from "react-icons/io5";
 
 const Searchbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const handleOpen = () => {
-    setIsOpen((isOpen) => !isOpen);
-  };
+  //   const handleOpen = () => {
+  //     setIsOpen((isOpen) => !isOpen);
+  //   };
   return (
     <div className="w-full md:max-w-xl">
       <form className="flex items-center mb-2 mx-auto max-w-sm md:max-w-xl w-full">
@@ -36,7 +36,7 @@ const Searchbar = () => {
       {isOpen && (
         <div className="h-auto max-h-[400px] overflow-y-scroll no-scrollbar absolute top-[50px] z-50 w-full md:max-w-xl mt-2">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div className="p-2 bg-[#030712]">
+            <div className="p-2 bg-[#030712]" key={i}>
               <a href="/tracks/6SbPPXGkG8QKFOTW9BmL">
                 <p id="track-link-0" tabIndex={-1} style={{ display: "none" }}>
                   Navigate
