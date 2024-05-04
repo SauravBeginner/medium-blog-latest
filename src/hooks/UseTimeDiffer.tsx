@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { timeDifferAtom } from "../store";
 
 export const useTimeDiffer = (publishedDate: Date) => {
   const [timeDifference, setTimeDifference] = useState("");

@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
 import { followingsAtom, followTypes } from "../store";
 import FollowingCard from "../pages/FollowCard";
 import { useEffect } from "react";

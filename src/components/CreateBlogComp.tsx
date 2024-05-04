@@ -3,11 +3,10 @@ import { LabelInput } from "./LabelInput";
 import TextAreaInput from "./TextAreaInput";
 import { Button } from "./Button";
 import axios from "axios";
-import { authURL, baseURL } from "../utils/baseUrl";
+import { authURL } from "../utils/baseUrl";
 import { useNavigate } from "react-router-dom";
 import { authTokenState } from "../store";
 import { useRecoilValue } from "recoil";
-import { CiCirclePlus } from "react-icons/ci";
 
 export const CreateBlogComp = () => {
   const [title, setTitle] = useState("");
@@ -41,7 +40,6 @@ export const CreateBlogComp = () => {
           {/* <CiCirclePlus size={50} color={"gray"} /> */}
 
           <div className="w-full">
-            {" "}
             <LabelInput
               placeholder={"Title"}
               onChange={(e) => setTitle(e.target.value)}

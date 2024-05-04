@@ -34,14 +34,14 @@ interface Following {
 export const imgSrc =
   "https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 const RightBar = () => {
-  const allUserList = useRecoilValueLoadable(userAtom);
+  // const allUserList = useRecoilValueLoadable(userAtom);
 
   const [isFollowing, setIsFollowing] = useRecoilState(followingAtom);
   const token = useRecoilValue(authTokenState);
   const myProfileDetails = useRecoilValueLoadable(myProfileDetailsAtom);
   // const [isFollowing, setIsFollowing] = useState<Record<string, boolean>>({});
   const currentUser = myProfileDetails?.contents;
-  const [users, setUsers] = useState<User[]>([]);
+  // const [users, setUsers] = useState<User[]>([]);
 
   const handleFollow = async (userId: string) => {
     console.log("clicked", userId);
@@ -95,7 +95,6 @@ const RightBar = () => {
   //   };
   //   checkFollowStatus();
   // }, []);
-  const navigate = useNavigate();
 
   if (
     followingSuggestions.state === "loading" &&

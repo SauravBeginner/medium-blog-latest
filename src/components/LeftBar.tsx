@@ -1,7 +1,6 @@
 import { useRecoilValueLoadable } from "recoil";
 import { myProfileDetailsAtom, userProfileDetailsAtom } from "../store";
 import { useParams } from "react-router-dom";
-import { BlogCardSkeleton } from "./BlogCardSkeleton";
 import ProfileSkeleton from "./ProfileSkeleton";
 import UserMiniDetails from "./UserMiniDetails";
 
