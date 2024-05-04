@@ -7,8 +7,6 @@ import AuthLayout from "./pages/AuthLayout";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { authTokenState, isAuthenticated } from "./store";
 import WrapperLayout from "./pages/WrapperLayout";
-import Loader from "./components/Loader";
-
 const Login = React.lazy(() => import("./pages/Login"));
 const BlogDetails = React.lazy(() => import("./pages/BlogDetails"));
 

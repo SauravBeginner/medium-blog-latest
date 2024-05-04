@@ -1,5 +1,4 @@
 import { useRecoilValueLoadable } from "recoil";
-import Feed from "../components/Feed";
 import { suggestionAtom } from "../store";
 import FollowingCard from "./FollowCard";
 import { FollowingCardSkeleton } from "../components/FollowingCardSkeleton";

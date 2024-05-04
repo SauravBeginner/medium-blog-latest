@@ -1,7 +1,6 @@
-import { Blog } from "../hooks/useBlogs";
 import UserMiniDetails from "./UserMiniDetails";
 
-const AuthorDetails = ({ currentUser }) => {
+const AuthorDetails = ({ currentUser }: any) => {
   // console.log(blog);
   return (
     <>

@@ -1,14 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { FaHeart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
-import { authURL } from "../utils/baseUrl";
-import axios from "axios";
-import { useRecoilStateLoadable, useRecoilValue } from "recoil";
-import { authTokenState, blogDetailsAtomFamily } from "../store";
-import { useState } from "react";
-import { MdDelete, MdEditSquare } from "react-icons/md";
-import { useTimeDiffer } from "../hooks/UseTimeDiffer";
-import DeleteModal from "../modal/DeleteModal";
 import { Button } from "../components/Button";
 import { imgSrc } from "../components/RightBar";
 
@@ -17,12 +8,12 @@ type FollowingCardProps = {
   name: string;
 };
 const FollowingCard = ({ id, name }: FollowingCardProps) => {
-  const [isProcessing, setIsProcessing] = useState(false);
+  //   const [isProcessing, setIsProcessing] = useState(false);
 
   //   const [blogDetails, setBlogDetails] = useRecoilStateLoadable(
   //     blogDetailsAtomFamily(id)
   //   );
-  const token = useRecoilValue(authTokenState);
+  //   const token = useRecoilValue(authTokenState);
 
   //   const hashLiked =
   //     blogDetails.state === "hasValue" && blogDetails.contents.hasLiked;

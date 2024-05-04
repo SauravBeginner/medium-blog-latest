@@ -13,7 +13,6 @@ import {
 import Searchbar from "./Searchbar";
 import { IoIosAddCircle } from "react-icons/io";
 import { CiSaveUp2 } from "react-icons/ci";
-import { Button } from "./Button";
 
 const Appbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,9 +32,6 @@ const Appbar = () => {
     navigate("/login", { replace: true });
   };
 
-  const handleLRoute = (url) => {
-    navigate(url);
-  };
   const [icon, setIcon] = useState<JSX.Element | null>(null);
   useEffect(() => {
     const path = location.pathname;
