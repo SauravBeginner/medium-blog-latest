@@ -1,8 +1,9 @@
 import Feed from "../components/Feed";
 
-const UserBlogDetails = () => {
+const UserPosts = () => {
   return (
     <>
+      {/* <LeftBar /> */}
       <Feed blogType={"userposts"} />
 
       {/* {"Hello"} */}
@@ -10,4 +11,4 @@ const UserBlogDetails = () => {
   );
 };
 
-export default UserBlogDetails;
+export default UserPosts;

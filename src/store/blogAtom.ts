@@ -92,3 +92,8 @@ export const itemsState = atom({
   key: "itemsState", // unique ID (with respect to other atoms/selectors)
   default: [] as any, // default value (aka initial value)
 });
+
+export const timeDifferAtom = atom({
+  key: "timeDifferAtom",
+  default: "",
+});

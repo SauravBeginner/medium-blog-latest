@@ -20,7 +20,6 @@ import {
   useSetRecoilState,
 } from "recoil";
 import { useParams } from "react-router-dom";
-import Navbar from "./Navbar";
 const Feed = ({ blogType }: any) => {
   const { id } = useParams();
   // const { loading, blogs } = useBlogs({ blogType: blogType || "" });
@@ -34,10 +33,6 @@ const Feed = ({ blogType }: any) => {
 
   const setPage = useSetRecoilState(currentPageState);
 
-  // useEffect(() => {
-  //   // Provide a default value for blogType if it is undefined
-  //   setType(blogType);
-  // }, []);
   useEffect(() => {
     setType(blogType);
     setUserProfileId(id as any);
@@ -49,7 +44,7 @@ const Feed = ({ blogType }: any) => {
     const newItems = blogs.state === "hasValue" ? blogs.contents : [];
     setItems((prev: any) => [...prev, ...newItems]);
     setHasMore(newItems.length > 0);
-  }, [blogs, type, setItems]);
+  }, [blogs, type, setItems, id]);
 
   const handleScroll = useCallback(() => {
     if (
@@ -67,11 +62,12 @@ const Feed = ({ blogType }: any) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
-  // console.log("items", items);
+
   return (
-    <section className="col-span-12 md:col-span-12 lg:col-span-6">
+    <section>
       {/* <CreatePost /> */}
-      <Navbar />
+      {/* <Navbar /> */}
+
       {items?.map((blog: any) => (
         <BlogCard
           key={`${type}-${blog?.id}`}
@@ -80,14 +76,19 @@ const Feed = ({ blogType }: any) => {
           likeCount={blog?.likeCount}
           hasLiked={blog?.hasLiked}
           content={blog?.content}
-          publishedDate={blog?.publishedDate}
+          publishedDate={blog?.createdAt}
           authorId={blog?.author?.id}
           authorName={blog?.author?.name}
         />
       ))}
-
+      {blogs?.state === "hasValue" && items?.length < 1 && (
+        <h1 className="text-white text-center">No Post to Display!</h1>
+      )}
       {blogs?.state === "loading" && (
         <>
+          <BlogCardSkeleton />
+          <BlogCardSkeleton />
+          <BlogCardSkeleton />
           <BlogCardSkeleton />
         </>
       )}

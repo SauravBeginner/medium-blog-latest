@@ -1,4 +1,4 @@
-export const BlogCardSkeleton = () => {
+export const BlogCardSkeletons = () => {
   // ... your useEffect for data fetching
 
   return (
@@ -30,5 +30,39 @@ export const BlogCardSkeleton = () => {
         <span className="sr-only">Loading...</span>
       </div>
     </div>
+  );
+};
+
+export const BlogCardSkeleton = () => {
+  return (
+    <article className="flex flex-col border-b-2 border-gray-600 shadow-md mb-5 animate-pulse">
+      <div className="flex space-y-4 items-center">
+        <div className="flex-1 py-4 px-6">
+          <header className="flex items-center space-x-2">
+            <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full bg-gray-600"></span>
+            <div className="flex flex-col space-y-2">
+              <div className="text-sm font-medium bg-gray-600 h-2 w-20 rounded"></div>
+              <div className="inline-flex items-center rounded-full whitespace-nowrap border px-2.5 py-0.5 w-fit text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-gray-600"></div>
+            </div>
+          </header>
+          <h2 className="text-xl my-2 font-bold bg-gray-600 h-6 w-2/4 rounded"></h2>
+          <p className="bg-gray-600 h-4 w-3/4 rounded mb-2"></p>
+          <p className="bg-gray-600 h-4 w-full rounded mb-2"></p>
+          <p className="bg-gray-600 h-4 w-3/4 rounded mb-2"></p>
+          <p className="bg-gray-600 h-4 w-full rounded mb-2"></p>
+          <p className="bg-gray-600 h-4 w-3/5 rounded mb-2"></p>
+        </div>
+        <div className="flex-shrink-0 mx-4">
+          <div className="h-40 w-40 bg-gray-600 rounded"></div>
+        </div>
+      </div>
+      <footer className="flex items-center justify-between pb-2 px-6">
+        <div className="text-sm bg-gray-600 h-4 w-12 rounded"></div>
+        <div className="flex items-center space-x-2">
+          <div className="text-sm bg-gray-600 h-4 w-12 rounded"></div>
+          <div className="text-sm bg-gray-600 h-4 w-12 rounded"></div>
+        </div>
+      </footer>
+    </article>
   );
 };

@@ -2,6 +2,8 @@ import { useRecoilValueLoadable } from "recoil";
 import { myProfileDetailsAtom, userProfileDetailsAtom } from "../store";
 import { useParams } from "react-router-dom";
 import { BlogCardSkeleton } from "./BlogCardSkeleton";
+import ProfileSkeleton from "./ProfileSkeleton";
+import UserMiniDetails from "./UserMiniDetails";
 
 const LeftBar = () => {
   const { id } = useParams();
@@ -12,18 +14,17 @@ const LeftBar = () => {
   const profileDetails = id ? userProfileDetails : myProfileDetails;
 
   // console.log("profileDetails: ", profileDetails);
-  const { name, email } = profileDetails?.contents;
-  console.log("name:", name, "email:", email);
+  const currentUser = profileDetails?.contents;
 
   if (profileDetails?.state === "loading") {
-    return <BlogCardSkeleton />;
+    return <ProfileSkeleton />;
   }
   return (
     <>
       {profileDetails?.state === "hasValue" && (
-        <aside className="hidden md:block col-span-12 text-white md:col-span-12 lg:col-span-4 xl:col-span-3">
-          <div className="sticky top-[80px] overflow-y-hidden border-b bg-[black]/60  rounded-md md:rounded-lg border-[white]/60 p-4 sm:border">
-            <img
+        <aside className="hidden md:block col-span-12 text-white md:col-span-12 lg:col-span-4 xl:col-span-3 ">
+          <div className="sticky top-[80px] overflow-y-hidden border-b bg-[black]/60  rounded-md md:rounded-lg border-[white]/60 p-4 sm:border shadow-md shadow-[white]/70">
+            {/* <img
               className="mb-3 flex aspect-square h-16 w-16 rounded-full border-2 border-[#ae7aff] object-cover"
               src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt="avatar"
@@ -37,8 +38,8 @@ const LeftBar = () => {
 
             <p className="text-sm my-1">
               Night owl | Moon enthusiast | Wanderlust 🌕🌙🌎
-            </p>
-
+            </p> */}
+            <UserMiniDetails currentUser={currentUser} />
             <>
               <hr className="my-4 h-[1px] w-full" />
               <div className="mb-4">
@@ -49,7 +50,7 @@ const LeftBar = () => {
                   around the globe. 🌕🌙🌎
                 </p>
               </div>
-              <div className="mb-4 text-sm">
+              {/* <div className="mb-4 text-sm">
                 <h3 className="mb-1 font-bold">Public link</h3>
                 <button className="block text-[#ae7aff] hover:underline">
                   {email}
@@ -57,7 +58,7 @@ const LeftBar = () => {
                 <button className="block break-all text-[#ae7aff] hover:underline">
                   https://www.aurorastarry.com/
                 </button>
-              </div>
+              </div> */}
               <p className="mb-4 flex gap-x-4">
                 <span className="inline-block">
                   <span className="font-bold">13.5k&nbsp;</span>

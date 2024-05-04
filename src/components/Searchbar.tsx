@@ -8,8 +8,8 @@ const Searchbar = () => {
   //     setIsOpen((isOpen) => !isOpen);
   //   };
   return (
-    <div className="w-full md:max-w-xl">
-      <form className="flex items-center mb-2 mx-auto max-w-sm md:max-w-xl w-full">
+    <div className="sm:w-full">
+      <form className="flex items-center mx-auto  max-w-xs sm:max-w-sm lg:max-w-lg xl:max-w-xl md:max-w-md w-full">
         <label htmlFor="simple-search" className="sr-only">
           Search
         </label>
@@ -34,7 +34,7 @@ const Searchbar = () => {
         </div>
       </form>
       {isOpen && (
-        <div className="h-auto max-h-[400px] overflow-y-scroll no-scrollbar absolute top-[50px] z-50 w-full md:max-w-xl mt-2">
+        <div className="h-auto max-h-[400px] overflow-y-scroll no-scrollbar absolute inset-x-8 start-2 sm:inset-x-6 sm:start-0 md:inset-x-3 md:start-0 lg:inset-x-3 lg:start-0 2xl:inset-x-4 2xl:start-0 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto mt-2 top-[50px] z-50 w-full max-w-xs">
           {Array.from({ length: 6 }).map((_, i) => (
             <div className="p-2 bg-[#030712]" key={i}>
               <a href="/tracks/6SbPPXGkG8QKFOTW9BmL">
