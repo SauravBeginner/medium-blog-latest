@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import LeftBar from "../components/LeftBar";
 import RightBar from "../components/RightBar";
 import Navbar from "../components/Navbar";
 

@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import FullBlog from "../components/FullBlog";
 import { useRecoilValueLoadable } from "recoil";
 import { blogDetailsAtomFamily } from "../store";
-import { BlogCardSkeleton } from "../components/BlogCardSkeleton";
 import AuthorDetails from "../components/AuthorDetails";
 import SingleBlogSkeleton from "../components/SingleBlogSkeleton";
 

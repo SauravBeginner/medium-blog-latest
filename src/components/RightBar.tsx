@@ -5,32 +5,29 @@ import {
   followingAtom,
   myProfileDetailsAtom,
   suggestionAtom,
-  userAtom,
 } from "../store";
 import axios from "axios";
 import { authURL } from "../utils/baseUrl";
-import { useEffect, useState } from "react";
-import { BlogCardSkeleton } from "./BlogCardSkeleton";
+
 import { Link } from "react-router-dom";
 import { RightBarSkeleton } from "./RightBarSkeleton";
 import ShortProfileSkeleton from "./ShortProfileSkeleton";
 // import { BlogCardSkeleton } from "./BlogCardSkeleton";
-import { useNavigate, useParams } from "react-router-dom";
 import UserMiniDetails from "./UserMiniDetails";
 
-interface User {
-  id: string;
-  name: string;
-  followers: Follower[];
-  following: Following[];
-}
+// interface User {
+//   id: string;
+//   name: string;
+//   followers: Follower[];
+//   following: Following[];
+// }
 
-interface Follower {
-  followerId: string;
-}
-interface Following {
-  followingId: string;
-}
+// interface Follower {
+//   followerId: string;
+// }
+// interface Following {
+//   followingId: string;
+// }
 export const imgSrc =
   "https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1";
 const RightBar = () => {
