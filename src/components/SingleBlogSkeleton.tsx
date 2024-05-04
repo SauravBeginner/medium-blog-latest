@@ -1,5 +1,3 @@
-import React from "react";
-
 const SingleBlogSkeleton = () => {
   return (
     <div className="relative mb-2 w-full last:mb-0 sm:mb-4">

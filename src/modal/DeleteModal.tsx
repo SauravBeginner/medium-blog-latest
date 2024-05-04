@@ -1,7 +1,7 @@
 import { IoAlertCircleOutline } from "react-icons/io5";
 import { MdOutlineCancel } from "react-icons/md";
 
-const DeleteModal = ({ setIsOpen }) => {
+const DeleteModal = ({ setIsOpen }: any) => {
   return (
     <div>
       <div className="fixed inset-0 flex justify-center items-center h-screen bg-black bg-opacity-50 z-40">
