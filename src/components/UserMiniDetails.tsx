@@ -30,13 +30,9 @@ const UserMiniDetails = ({ currentUser }: any) => {
           onClick={() => navigate(`/user/${currentUser?.id}/followings`)}
         >
           <span className="font-bold">
-            {(currentUser?.followers?.length || currentUser?.followersCount) >
-            1000
-              ? Math.floor(
-                  (currentUser?.followers?.length ||
-                    currentUser?.followersCount) / 1000
-                ) + "k"
-              : currentUser?.followers?.length || currentUser?.followersCount}
+            {currentUser?.followersCount > 1000
+              ? Math.floor(currentUser?.followersCount / 1000) + "k"
+              : currentUser?.followersCount}
             &nbsp;
           </span>
           <span className="text-sm text-gray-400">Followers</span>
@@ -46,13 +42,9 @@ const UserMiniDetails = ({ currentUser }: any) => {
           onClick={() => navigate(`/user/${currentUser?.id}/followers`)}
         >
           <span className="font-bold">
-            {(currentUser?.follwing?.length || currentUser?.followingCount) >
-            1000
-              ? Math.floor(
-                  (currentUser?.following?.length ||
-                    currentUser?.followingCount) / 1000
-                ) + "k"
-              : currentUser?.followers?.length || currentUser?.followingCount}
+            {currentUser?.followingCount > 1000
+              ? Math.floor(currentUser?.followingCount / 1000) + "k"
+              : currentUser?.followingCount}
             &nbsp;
           </span>
           <span className="text-sm text-gray-400">Followings</span>

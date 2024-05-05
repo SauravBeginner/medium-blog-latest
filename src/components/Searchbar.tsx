@@ -4,11 +4,9 @@ import { IoSearch } from "react-icons/io5";
 
 const Searchbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  //   const handleOpen = () => {
-  //     setIsOpen((isOpen) => !isOpen);
-  //   };
+
   return (
-    <div className="sm:w-full">
+    <div className="w-full ">
       <form className="flex items-center mx-auto  max-w-xs sm:max-w-sm lg:max-w-lg xl:max-w-xl md:max-w-md w-full">
         <label htmlFor="simple-search" className="sr-only">
           Search
@@ -20,7 +18,7 @@ const Searchbar = () => {
           <input
             type="search"
             id="default-search"
-            className="block w-full p-2.5 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 cursor-pointer"
+            className="block w-full p-2.5 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Search Mockups, Logos..."
             required
             onClick={() => setIsOpen(true)}
@@ -34,9 +32,9 @@ const Searchbar = () => {
         </div>
       </form>
       {isOpen && (
-        <div className="h-auto max-h-[400px] overflow-y-scroll no-scrollbar absolute inset-x-8 start-2 sm:inset-x-6 sm:start-0 md:inset-x-3 md:start-0 lg:inset-x-3 lg:start-0 2xl:inset-x-4 2xl:start-0 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto mt-2 top-[50px] z-50 w-full max-w-xs">
+        <div className="h-auto max-h-[400px] overflow-y-scroll no-scrollbar absolute inset-x-0 start-3 sm:inset-x-2 sm:start-4 md:inset-x-4 md:start-0 lg:inset-x- lg:start-0 2xl:inset-x- 2xl:start-0 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto mt-2 top-[50px] z-50 w-full max-w-xs">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div className="p-2 bg-[#030712]" key={i}>
+            <div className="p-2 bg-[#121212]" key={i}>
               <a href="/tracks/6SbPPXGkG8QKFOTW9BmL">
                 <p id="track-link-0" tabIndex={-1} style={{ display: "none" }}>
                   Navigate

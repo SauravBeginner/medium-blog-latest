@@ -9,7 +9,7 @@ import {
 import axios from "axios";
 import { authURL } from "../utils/baseUrl";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RightBarSkeleton } from "./RightBarSkeleton";
 import ShortProfileSkeleton from "./ShortProfileSkeleton";
 // import { BlogCardSkeleton } from "./BlogCardSkeleton";
@@ -93,6 +93,7 @@ const RightBar = () => {
   //   checkFollowStatus();
   // }, []);
 
+  const navigate = useNavigate();
   if (
     followingSuggestions.state === "loading" &&
     myProfileDetails.state === "loading"
@@ -158,7 +159,12 @@ const RightBar = () => {
                   ))}
               </div>
               <div className="my-4">
-                <Button className="bg-white dark:text-black w-full hover:bg-[#ae7aff]">
+                <Button
+                  className="bg-white dark:text-black w-full hover:bg-[#ae7aff]"
+                  onClick={() =>
+                    navigate(`/user/${currentUser?.id}/suggestions`)
+                  }
+                >
                   Show More
                 </Button>
               </div>

@@ -47,20 +47,20 @@ const Appbar = () => {
   // const [isFollowing, setIsFollowing] = useState<Record<string, boolean>>({});
   const currentUser = myProfileDetails?.contents;
   return (
-    <nav className="fixed w-full z-50 bg-[black] border-gray-200 px-4 py-3 flex items-center justify-around text-gray-100 text-sm md:text-lg font-semibold">
-      <Link to="/" className="font-bold">
+    <nav className="fixed w-full z-50 bg-[black] border-gray-200 px-4 py-3 flex items-center justify-evenly text-gray-100 text-sm md:text-lg font-semibold">
+      <Link to="/" className="font-bold mx-0 lg:mx-6">
         Medium
       </Link>
       {userAuth && (
         <>
           <Searchbar />
-          <Link to="/blog/create" className="mr-4">
+          <Link to="/blog/create" className="hidden md:block">
             {icon}
           </Link>
 
           <button
             onClick={handleProfileClick}
-            className="focus:outline-none w-8 h-8"
+            className="focus:outline-none w-12 h-10 mx-0 lg:mx-6"
           >
             <img
               src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -76,6 +76,12 @@ const Appbar = () => {
                   onClick={() => navigate(`/user/${currentUser?.id}`)}
                 >
                   Profile
+                </li>
+                <li
+                  className="px-4 py-3 cursor-pointer md:hidden hover:bg-gray-500"
+                  onClick={() => navigate(`/blog/create`)}
+                >
+                  Create Post
                 </li>
                 <li
                   className="px-4 py-3 cursor-pointer hover:bg-gray-500"

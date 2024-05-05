@@ -18,6 +18,9 @@ const LeftBar = () => {
   if (profileDetails?.state === "loading") {
     return <ProfileSkeleton />;
   }
+
+  console.log("currentUser: ", currentUser);
+
   return (
     <>
       {profileDetails?.state === "hasValue" && (
