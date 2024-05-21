@@ -19,7 +19,6 @@ import {
 import {
   allBlogSelector,
   blogSelector,
-  followinBlogSelector,
   myBlogSelector,
   userBlogSelector,
 } from "../store/selectors/blogSelector";
@@ -45,7 +44,7 @@ const PostForm = ({ post }: any) => {
   const token = localStorage.getItem("token");
 
   const setBlogDetails = useSetRecoilState(blogDetailsAtomFamily(post?.id));
-  const blogs = useRecoilValueLoadable(blogSelector);
+  // const blogs = useRecoilValueLoadable(blogSelector);
 
   const navigate = useNavigate();
   // const refreshBlogList = useRecoilRefresher_UNSTABLE(blogSelector);
@@ -69,9 +68,9 @@ const PostForm = ({ post }: any) => {
   const setMyItems = useSetRecoilState(myBlogStateAtom);
   const setUserItems = useSetRecoilState(userBlogStateAtom);
 
-  const allBlogsSelectorLoadable = useRecoilValueLoadable(allBlogSelector);
-  const myBlogsSelectorLoadable = useRecoilValueLoadable(myBlogSelector);
-  const userBlogsSelectorLoadable = useRecoilValueLoadable(userBlogSelector);
+  // const allBlogsSelectorLoadable = useRecoilValueLoadable(allBlogSelector);
+  // const myBlogsSelectorLoadable = useRecoilValueLoadable(myBlogSelector);
+  // const userBlogsSelectorLoadable = useRecoilValueLoadable(userBlogSelector);
   // const follwingBlogsSelectorLoadable =
   //   useRecoilValueLoadable(followinBlogSelector);
   const publishBlog = async (data: any) => {

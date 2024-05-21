@@ -24,15 +24,7 @@ import {
   myProfileDetailsAtom,
   userProfileIdAtom,
 } from "../store/atoms/userAtoms";
-import {
-  allBlogSelector,
-  blogSelector,
-  followinBlogSelector,
-  myBlogSelector,
-  userBlogSelector,
-} from "../store/selectors/blogSelector";
 import { useBlogs } from "../hooks/useBlogs";
-import { IoThunderstormSharp } from "react-icons/io5";
 
 const Feed = ({ blogType }: any) => {
   const { id } = useParams();
@@ -42,7 +34,7 @@ const Feed = ({ blogType }: any) => {
   const myProfileDetails = useRecoilValue(myProfileDetailsAtom);
   const setPage = useSetRecoilState(currentPageStateAtom);
   const setUserProfileId = useSetRecoilState(userProfileIdAtom);
-  const blogsSelector = useRecoilValueLoadable(blogSelector);
+  // const blogsSelector = useRecoilValueLoadable(blogSelector);
 
   let blogAtom;
   const location = useLocation();

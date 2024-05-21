@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
 import { imgSrc } from "./RightBar";
 import { Button } from "./Button";
-import axios from "axios";
 import { authURL } from "../utils/baseUrl";
 import {
   myFollowingCountAtom,
   myfollowingsAtom,
   suggestionAtom,
 } from "../store/atoms/userAtoms";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { authAxios } from "../utils/axiosClient";
 
 const SuggestionList = ({ user }: any) => {
