@@ -31,7 +31,7 @@ const Topbar = () => {
               }`}
               onClick={() => navigate(`/user/${id}`)}
             >
-              <button>User Post</button>
+              <button>{myDetails.id === id ? "My" : "User"} Post</button>
             </li>
             <li
               className={`w-[50%] py-3 hover:bg-gray-500 cursor-pointer ${

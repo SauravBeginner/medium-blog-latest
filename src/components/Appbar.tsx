@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import {
   useRecoilValue,
   useRecoilValueLoadable,
@@ -13,6 +13,7 @@ import {
 import Searchbar from "./Searchbar";
 import { IoIosAddCircle } from "react-icons/io";
 import { CiSaveUp2 } from "react-icons/ci";
+import { imgSrc } from "./RightBar";
 
 const Appbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,7 +40,8 @@ const Appbar = () => {
       path !== "/blog/create" ? (
         <IoIosAddCircle size={40} color="#ae7aff" />
       ) : (
-        <CiSaveUp2 size={40} color="#ae7aff" />
+        // <CiSaveUp2 size={40} color="#ae7aff" />
+        ""
       );
     setIcon(newIcon);
   }, [location.pathname]);
@@ -63,7 +65,8 @@ const Appbar = () => {
             className="focus:outline-none w-12 h-10 mx-0 lg:mx-6"
           >
             <img
-              src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              //  src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src={imgSrc}
               alt="avatar"
               className="w-full h-full rounded-full object-cover"
             />

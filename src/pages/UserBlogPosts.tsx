@@ -5,8 +5,6 @@ const UserPosts = () => {
     <>
       {/* <LeftBar /> */}
       <Feed blogType={"userposts"} />
-
-      {/* {"Hello"} */}
     </>
   );
 };

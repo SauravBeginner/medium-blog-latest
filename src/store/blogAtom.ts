@@ -3,10 +3,6 @@ import { authURL } from "../utils/baseUrl";
 import axios from "axios";
 import { authTokenState, userProfileId } from "./userAtom";
 
-export const blogsState = atom({
-  key: "blogsState", // unique identifier for this atom
-  default: [], // initial value is an empty array
-});
 export const hasLikedAtom = atomFamily({
   key: "hasLikedAtom",
   default: false,
@@ -14,13 +10,17 @@ export const hasLikedAtom = atomFamily({
 export enum BlogType {
   MyPosts = "myposts",
   AllPosts = "allposts",
+  Following = "followingposts",
+  UserPosts = "userposts",
 }
 
 export const blogTypes = atom({
   key: "blogTypes", // unique identifier for this atom
   // default: BlogType.AllPosts, // initial value is an empty array
 
-  default: "allposts",
+  // default: "allposts",
+
+  default: BlogType.AllPosts,
 });
 
 export const blogSelector = selector({
@@ -36,12 +36,12 @@ export const blogSelector = selector({
 
     try {
       const response = await axios.get(
-        type === "userposts"
+        type === BlogType.UserPosts
           ? `${authURL}/blog/userposts/${id}?page=${page}&limit=4`
-          : type === "myposts"
+          : type === BlogType.MyPosts
           ? `${authURL}/blog/myposts?page=${page}&limit=4`
-          : type === "following"
-          ? `${authURL}/blog/followingPost?page=${page}&limit=4`
+          : type === BlogType.Following
+          ? `${authURL}/blog/followingPosts?page=${page}&limit=4`
           : `${authURL}/blog/bulk?page=${page}&limit=4`,
         {
           headers: {
@@ -79,6 +79,7 @@ export const blogDetailsAtomFamily = atomFamily({
       },
   }),
 });
+
 export const currentPageState = atom({
   key: "currentPageState",
   default: 1,
@@ -91,8 +92,89 @@ export const hasMoreState = atom({
 export const itemsState = atom({
   key: "itemsState", // unique ID (with respect to other atoms/selectors)
   default: [] as any, // default value (aka initial value)
+  effects_UNSTABLE: [
+    ({ setSelf, onSet }) => {
+      // const blogType = localStorage.getItem("currentBlogType");
+      // const savedState = localStorage.getItem("itemsState");
+      const savedState = localStorage.getItem(`itemsState`);
+
+      if (savedState !== null) {
+        setSelf(JSON.parse(savedState));
+      }
+      onSet((newValue, oldValue) => {
+        //  console.log("itemsState changed from", oldValue, "to", newValue);
+        // localStorage.setItem("itemsState", JSON.stringify(newValue));
+
+        localStorage.setItem(`itemsState`, JSON.stringify(newValue));
+      });
+    },
+  ],
+});
+export const myBlogState = atom({
+  key: "myBlogState", // unique ID (with respect to other atoms/selectors)
+  default: [] as any, // default value (aka initial value)
+  effects_UNSTABLE: [
+    ({ setSelf, onSet }) => {
+      // const blogType = localStorage.getItem("currentBlogType");
+      // const savedState = localStorage.getItem("itemsState");
+      const savedState = localStorage.getItem(`myBlogState`);
+
+      if (savedState !== null) {
+        setSelf(JSON.parse(savedState));
+      }
+      onSet((newValue, oldValue) => {
+        // console.log("myBlogState changed from", oldValue, "to", newValue);
+        // localStorage.setItem("itemsState", JSON.stringify(newValue));
+
+        localStorage.setItem(`myBlogState`, JSON.stringify(newValue));
+      });
+    },
+  ],
+});
+export const userBlogState = atom({
+  key: "userBlogState", // unique ID (with respect to other atoms/selectors)
+  default: [] as any, // default value (aka initial value)
+  effects_UNSTABLE: [
+    ({ setSelf, onSet }) => {
+      // const blogType = localStorage.getItem("currentBlogType");
+      // const savedState = localStorage.getItem("itemsState");
+      const savedState = localStorage.getItem(`userBlogState`);
+
+      if (savedState !== null) {
+        setSelf(JSON.parse(savedState));
+      }
+      onSet((newValue, oldValue) => {
+        // console.log("userBlogState changed from", oldValue, "to", newValue);
+        // localStorage.setItem("itemsState", JSON.stringify(newValue));
+
+        localStorage.setItem(`userBlogState`, JSON.stringify(newValue));
+      });
+    },
+  ],
 });
 
+export const followingBlogState = atom({
+  key: "followingBlogState", // unique ID (with respect to other atoms/selectors)
+  default: [] as any, // default value (aka initial value)
+  effects_UNSTABLE: [
+    ({ setSelf, onSet }) => {
+      // const blogType = localStorage.getItem("currentBlogType");
+      // const savedState = localStorage.getItem("itemsState");
+      const savedState = localStorage.getItem(`followingBlogState`);
+
+      if (savedState !== null) {
+        setSelf(JSON.parse(savedState));
+      }
+      onSet((newValue, oldValue) => {
+        localStorage.setItem(`followingBlogState`, JSON.stringify(newValue));
+      });
+    },
+  ],
+});
+export const blogsState = atom({
+  key: "blogsState", // unique identifier for this atom
+  default: [], // initial value is an empty array
+});
 export const timeDifferAtom = atom({
   key: "timeDifferAtom",
   default: "",

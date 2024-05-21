@@ -18,6 +18,8 @@ const Following = React.lazy(() => import("./pages/Following"));
 const Blogs = React.lazy(() => import("./pages/Blogs"));
 const Signup = React.lazy(() => import("./pages/Signup"));
 const CreateBlog = React.lazy(() => import("./pages/CreateBlog"));
+const EditPost = React.lazy(() => import("./pages/EditPost"));
+
 const UserBlogPosts = React.lazy(() => import("./pages/UserBlogPosts"));
 const Followings = React.lazy(() => import("./pages/Followings"));
 const Followers = React.lazy(() => import("./pages/Followers"));
@@ -79,6 +81,7 @@ function App() {
               </Route>
               <Route path="/blog/:id" element={<BlogDetails />} />
               <Route path="/blog/create" element={<CreateBlog />} />
+              <Route path="/blog/update/:id" element={<EditPost />} />
             </Route>
           ) : (
             <>

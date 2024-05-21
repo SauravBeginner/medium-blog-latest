@@ -5,46 +5,73 @@ import { BlogCardSkeleton } from "./BlogCardSkeleton";
 
 import {
   blogSelector,
+  BlogType,
   // BlogType,
   blogTypes,
   currentPageState,
+  followingBlogState,
   hasMoreState,
   itemsState,
+  myBlogState,
+  myProfileDetailsAtom,
+  userBlogState,
   userProfileId,
 } from "../store";
 import { useCallback, useEffect } from "react";
-// import InfiniteScroll from "react-infinite-scroll-component";
 import {
   useRecoilState,
+  useRecoilValue,
   useRecoilValueLoadable,
   useSetRecoilState,
 } from "recoil";
 import { useParams } from "react-router-dom";
+
 const Feed = ({ blogType }: any) => {
   const { id } = useParams();
-  // const { loading, blogs } = useBlogs({ blogType: blogType || "" });
   const [hasMore, setHasMore] = useRecoilState(hasMoreState);
-  const [items, setItems] = useRecoilState(itemsState);
+
   const setUserProfileId = useSetRecoilState(userProfileId);
   const [type, setType] = useRecoilState(blogTypes);
   // const currentType = useRecoilValue(blogTypes); // Access the current value of the atom
+  const myProfileDetails = useRecoilValue(myProfileDetailsAtom);
 
+  let blogAtom;
+  if (blogType === BlogType.AllPosts) {
+    blogAtom = itemsState;
+  } else if (blogType === BlogType.MyPosts) {
+    blogAtom = myBlogState;
+  } else if (blogType === BlogType.Following) {
+    blogAtom = followingBlogState;
+  } else {
+    blogAtom = myProfileDetails.id !== id ? userBlogState : myBlogState;
+  }
+
+  const [items, setItems] = useRecoilState(blogAtom);
   const blogs = useRecoilValueLoadable(blogSelector);
 
   const setPage = useSetRecoilState(currentPageState);
 
-  useEffect(() => {
-    setType(blogType);
-    setUserProfileId(id as any);
-    setPage(1); // Reset page to 1 when type changes
-    setItems([]);
-  }, [blogType, setType, type, setPage, setItems]);
+  useEffect(
+    () => {
+      setType(blogType);
+      setUserProfileId(id as any);
+      setPage(1); // Reset page to 1 when type changes
 
-  useEffect(() => {
-    const newItems = blogs.state === "hasValue" ? blogs.contents : [];
-    setItems((prev: any) => [...prev, ...newItems]);
-    setHasMore(newItems.length > 0);
-  }, [blogs, type, setItems, id]);
+      setItems([]);
+    },
+    // [blogType, setType, type, setPage, setItems]
+    [type, setPage]
+  );
+
+  useEffect(
+    () => {
+      const newItems = blogs.state === "hasValue" ? blogs.contents : [];
+      setItems((prev: any) => [...prev, ...newItems]);
+      setHasMore(newItems.length > 0);
+    },
+    //[blogs]
+    [blogs, type, setItems, id]
+  );
 
   const handleScroll = useCallback(() => {
     if (
@@ -65,9 +92,6 @@ const Feed = ({ blogType }: any) => {
 
   return (
     <section>
-      {/* <CreatePost /> */}
-      {/* <Navbar /> */}
-
       {items?.map((blog: any) => (
         <BlogCard
           key={`${type}-${blog?.id}`}

@@ -1,6 +1,6 @@
 import { ChangeEvent } from "react";
 
-interface LabelInputType {
+export interface LabelInputType {
   className?: string;
   label?: string;
   placeholder: string;
@@ -17,12 +17,14 @@ export const LabelInput = ({
 }: LabelInputType) => {
   return (
     <div>
-      <label
-        className="block text-sm font-medium text-gray-700"
-        htmlFor="username"
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          className="block text-sm font-medium text-gray-700"
+          htmlFor="username"
+        >
+          {label}
+        </label>
+      )}
       <input
         className={className}
         placeholder={placeholder}

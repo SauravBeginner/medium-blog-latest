@@ -9,6 +9,8 @@ import { useState } from "react";
 import { MdDelete, MdEditSquare } from "react-icons/md";
 import { useTimeDiffer } from "../hooks/UseTimeDiffer";
 import DeleteModal from "../modal/DeleteModal";
+import parse from "html-react-parser";
+import { imgSrc } from "./RightBar";
 
 type BlogCardProps = {
   id: string;
@@ -37,6 +39,11 @@ const BlogCard = ({
 
   const hashLiked =
     blogDetails.state === "hasValue" && blogDetails.contents.hasLiked;
+
+  if (blogDetails.state === "hasValue") {
+    title = blogDetails.contents?.title;
+    content = blogDetails.contents?.content;
+  }
 
   const handleLike = async () => {
     if (isProcessing) return;
@@ -79,7 +86,9 @@ const BlogCard = ({
                 <div className="flex items-center gap-x-4">
                   <div className="h-10 w-10 shrink-0 sm:h-10 sm:w-10">
                     <img
-                      src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                      // src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+
+                      src={imgSrc}
                       alt="Mystical Wanderer"
                       className="h-full w-full rounded-full object-cover"
                     />
@@ -104,7 +113,7 @@ const BlogCard = ({
                 <div className="">
                   <p className="pb-2 text-lg sm:text-base font-bold">{title}</p>
                   <p className="text-sm sm:text-base">
-                    {content.slice(0, 400)}
+                    {parse(content.slice(0, 400))}
                     <div className="text-[#ae7aff] underline cursor-pointer">
                       Read more...
                     </div>
@@ -112,7 +121,8 @@ const BlogCard = ({
                 </div>
                 <div className="shrink-0 h-40 w-40 md:h-24md:w-24">
                   <img
-                    src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    //    src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    src={imgSrc}
                     alt="Mystical Wanderer"
                     className="h-full w-full rounded-sm object-cover"
                   />
@@ -128,13 +138,14 @@ const BlogCard = ({
                 disabled={isProcessing}
               >
                 <FaHeart size={20} />
-                <span>{blogDetails?.contents?.likeCount}</span>
+                <span>{blogDetails?.contents?.likeCount || 0}</span>
               </button>
               {/* <button className="inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff]">
               <FaComment size={20} />
               <span>13</span>
             </button> */}
-              <div className="ml-auto">
+
+              {/* <div className="ml-auto">
                 <button className="mr-2 inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff]">
                   <MdEditSquare size={20} />
                 </button>
@@ -144,7 +155,7 @@ const BlogCard = ({
                 >
                   <MdDelete size={20} />
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

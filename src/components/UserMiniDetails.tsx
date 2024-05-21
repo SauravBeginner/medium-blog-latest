@@ -1,7 +1,25 @@
 import { useNavigate } from "react-router-dom";
+import { imgSrc } from "./RightBar";
+import { useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { myFollowingCountAtom, myProfileDetailsAtom } from "../store";
 
 const UserMiniDetails = ({ currentUser }: any) => {
   const navigate = useNavigate();
+  const followingCount = useRecoilValue(myFollowingCountAtom);
+  // const followersCount = useRecoilValue(myFollowersCountSelector);
+
+  const myprofile = useRecoilValueLoadable(myProfileDetailsAtom);
+
+  const followings =
+    currentUser?.id === myprofile.contents?.id
+      ? followingCount
+      : currentUser?.followingCount;
+
+  const followers =
+    currentUser?.id !== myprofile.contents?.id
+      ? myprofile.contents?.followersCount
+      : currentUser?.followersCount;
+  //console.log(followingCount, followersCount);
   return (
     <div>
       <div
@@ -10,7 +28,7 @@ const UserMiniDetails = ({ currentUser }: any) => {
       >
         <img
           className="mb-3 flex aspect-square h-16 w-16 rounded-full border-2 border-[#ae7aff] object-cover"
-          src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          src={imgSrc}
           alt="avatar"
         />
         <span className="mx-4">
@@ -27,24 +45,22 @@ const UserMiniDetails = ({ currentUser }: any) => {
       >
         <span
           className="inline-block cursor-pointer hover:underline"
-          onClick={() => navigate(`/user/${currentUser?.id}/followings`)}
+          onClick={() => navigate(`/user/${currentUser?.id}/followers`)}
         >
           <span className="font-bold">
-            {currentUser?.followersCount > 1000
-              ? Math.floor(currentUser?.followersCount / 1000) + "k"
-              : currentUser?.followersCount}
+            {followers > 1000 ? Math.floor(followers / 1000) + "k" : followers}
             &nbsp;
           </span>
           <span className="text-sm text-gray-400">Followers</span>
         </span>
         <span
           className="inline-block mx-5 cursor-pointer hover:underline"
-          onClick={() => navigate(`/user/${currentUser?.id}/followers`)}
+          onClick={() => navigate(`/user/${currentUser?.id}/followings`)}
         >
           <span className="font-bold">
-            {currentUser?.followingCount > 1000
-              ? Math.floor(currentUser?.followingCount / 1000) + "k"
-              : currentUser?.followingCount}
+            {followings > 1000
+              ? Math.floor(followings / 1000) + "k"
+              : followings}
             &nbsp;
           </span>
           <span className="text-sm text-gray-400">Followings</span>

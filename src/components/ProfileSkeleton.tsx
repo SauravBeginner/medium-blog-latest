@@ -20,8 +20,8 @@ const ProfileSkeleton = () => {
           <span className="inline-block h-4 w-16 bg-gray-700 animate-pulse"></span>
         </p>
 
-        <button className="inline-flex w-max items-center bg-[#ae7aff] px-4 py-2 text-center font-bold text-black shadow-[5px 5px 0px 0px #4f4e4e] transition-all duration-150 ease-in-out active:translate-x-[5px] active:translate-y-[5px] active:shadow-[0px 0px 0px 0px #4f4e4e] animate-pulse">
-          Edit Profile
+        <button className="inline-flex w-ma items-center h-10 w-24 bg-[#ae7aff] px-4 py-2 text-center font-bold text-black shadow-[5px 5px 0px 0px #4f4e4e] transition-all duration-150 ease-in-out active:translate-x-[5px] active:translate-y-[5px] active:shadow-[0px 0px 0px 0px #4f4e4e] animate-pulse">
+          {/* Edit Profile */}
         </button>
       </div>
     </aside>

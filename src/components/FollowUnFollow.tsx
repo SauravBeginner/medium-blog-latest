@@ -1,32 +1,42 @@
 import { useParams } from "react-router-dom";
-import { useRecoilState, useRecoilValueLoadable } from "recoil";
-import { followingsAtom, followTypes } from "../store";
+import {
+  useRecoilState,
+  useRecoilStateLoadable,
+  useRecoilValueLoadable,
+} from "recoil";
+import {
+  followersAtom,
+  followingsAtom,
+  followTypes,
+  myfollowingsAtom,
+  myProfileDetailsAtom,
+  suggestionAtom,
+} from "../store";
 import FollowingCard from "../pages/FollowCard";
 import { useEffect } from "react";
 import { FollowingCardSkeleton } from "./FollowingCardSkeleton";
 
 const FollowUnFollow = ({ followType }: any) => {
   const { id } = useParams();
-  const followings = useRecoilValueLoadable(followingsAtom(id));
+  const myProfile = useRecoilValueLoadable(myProfileDetailsAtom);
+  const userFollowings = useRecoilValueLoadable(followingsAtom(id));
+  const myFollowings = useRecoilValueLoadable(myfollowingsAtom);
 
-  //   const { id } = useParams();
-  // const { loading, blogs } = useBlogs({ blogType: blogType || "" });
-  //   const [hasMore, setHasMore] = useRecoilState(hasMoreState);
-  //   const [items, setItems] = useRecoilState(itemsState);
-  //   const setUserProfileId = useSetRecoilState(userProfileId);
+  const followers = useRecoilValueLoadable(followersAtom(id));
   const [type, setType] = useRecoilState(followTypes);
-  // const currentType = useRecoilValue(blogTypes); // Access the current value of the atom
-
-  //   const setPage = useSetRecoilState(currentPageState);
 
   useEffect(() => {
     setType(followType);
-    // setUserProfileId(id as any);
-    // setPage(1); // Reset page to 1 when type changes
-    // setItems([]);
   }, [followType, id]);
 
-  if (followings.state === "loading") {
+  const followings =
+    myProfile.state === "hasValue" && id === myProfile.contents?.id
+      ? myFollowings
+      : userFollowings;
+
+  const items = followType === "followings" ? followings : followers;
+
+  if (items.state === "loading") {
     return (
       <>
         <FollowingCardSkeleton />
@@ -36,19 +46,19 @@ const FollowUnFollow = ({ followType }: any) => {
       </>
     );
   }
+
   return (
     <div>
-      <h2 className="text-lg text-gray-100 font-bold pb-4">Followings</h2>
-      {followings.contents?.length < 1 && (
+      <h2 className="text-lg text-gray-100 font-bold pb-4">
+        {followType === "followings" ? "Followings" : "Followers"}
+      </h2>
+      {items.contents?.length < 1 && (
         <h1 className="text-white text-center">No Contents!</h1>
       )}
-      {followings.contents?.map((user: any) => (
-        <FollowingCard
-          key={`${type}-${user?.id}`}
-          id={user?.id}
-          name={user?.name}
-        />
-      ))}
+      {items.state === "hasValue" &&
+        items?.contents?.map((user: any) => (
+          <FollowingCard key={`${type}-${user?.id}`} following={user} />
+        ))}
     </div>
   );
 };
