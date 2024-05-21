@@ -1,7 +1,7 @@
 import FollowUnFollow from "../components/FollowUnFollow";
 
-const Followings = () => {
+const FollowingUsers = () => {
   return <FollowUnFollow followType={"followings"} />;
 };
 
-export default Followings;
+export default FollowingUsers;

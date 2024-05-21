@@ -1,7 +1,10 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { isAuthenticated, myProfileDetailsAtom } from "../store";
 import { useEffect, useState } from "react";
+import {
+  isAuthenticated,
+  myProfileDetailsAtom,
+} from "../store/atoms/userAtoms";
 
 const Topbar = () => {
   const { id } = useParams();
@@ -12,11 +15,11 @@ const Topbar = () => {
   const location = useLocation();
   const [activeTab, setActiveTab] = useState<string>("");
 
-  const istrue = id === myDetails?.id;
+  const isCurrentUser = id === myDetails?.id;
   useEffect(() => {
     const path = location.pathname;
     setActiveTab(path);
-  }, [location.pathname, istrue]);
+  }, [location.pathname, isCurrentUser]);
 
   return (
     <div className="bg-[#494747]  text-white py-2 mb-8 sm:mb-16 md:mb-4 font-semibold sticky top-[80px] z-10">
@@ -31,7 +34,7 @@ const Topbar = () => {
               }`}
               onClick={() => navigate(`/user/${id}`)}
             >
-              <button>User Post</button>
+              <button>{myDetails.id === id ? "My" : "User"} Post</button>
             </li>
             <li
               className={`w-[50%] py-3 hover:bg-gray-500 cursor-pointer ${
@@ -54,7 +57,7 @@ const Topbar = () => {
             >
               <button>Followers</button>
             </li>
-            {istrue && (
+            {isCurrentUser && (
               <li
                 className={`w-[50%] py-3 hover:bg-gray-500 cursor-pointer ${
                   activeTab === `/user/${id}/suggestions`

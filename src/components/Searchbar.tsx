@@ -35,12 +35,12 @@ const Searchbar = () => {
         <div className="h-auto max-h-[400px] overflow-y-scroll no-scrollbar absolute inset-x-0 start-3 sm:inset-x-2 sm:start-4 md:inset-x-4 md:start-0 lg:inset-x- lg:start-0 2xl:inset-x- 2xl:start-0 sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto mt-2 top-[50px] z-50 w-full max-w-xs">
           {Array.from({ length: 6 }).map((_, i) => (
             <div className="p-2 bg-[#121212]" key={i}>
-              <a href="/tracks/6SbPPXGkG8QKFOTW9BmL">
+              <div>
                 <p id="track-link-0" tabIndex={-1} style={{ display: "none" }}>
                   Navigate
                 </p>
-              </a>
-              <a href="/tracks/6SbPPXGkG8QKFOTW9BmL/ts-1">
+              </div>
+              <div>
                 <div className="flex gap-2 px-4 py-2 border-b hover:bg-slate-100 dark:hover:bg-slate-800">
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/2048px-Typescript_logo_2020.svg.png"
@@ -55,7 +55,7 @@ const Searchbar = () => {
                     </p>
                   </div>
                 </div>
-              </a>
+              </div>
             </div>
           ))}
         </div>

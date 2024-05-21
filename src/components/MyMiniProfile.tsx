@@ -3,27 +3,17 @@ import { imgSrc } from "./RightBar";
 import { useRecoilValue, useRecoilValueLoadable } from "recoil";
 // import { myFollowingCountAtom, myProfileDetailsAtom } from "../store";
 
-const UserMiniDetails = ({ currentUser }: any) => {
+const MyMiniProfile = ({ currentUser }: any) => {
   const navigate = useNavigate();
   // const followingCount = useRecoilValue(myFollowingCountAtom);
   // // const followersCount = useRecoilValue(myFollowersCountSelector);
 
   // const myprofile = useRecoilValueLoadable(myProfileDetailsAtom);
 
-  // const followings =
-  //   currentUser?.id === myprofile.contents?.id
-  //     ? followingCount
-  //     : currentUser?.followingCount;
-
-  // const followers =
-  //   currentUser?.id !== myprofile.contents?.id
-  //     ? myprofile.contents?.followersCount
-  //     : currentUser?.followersCount;
-  //console.log(followingCount, followersCount);
-
   const followings = currentUser?.followingCount;
 
   const followers = currentUser?.followersCount;
+
   return (
     <div>
       <div
@@ -40,9 +30,9 @@ const UserMiniDetails = ({ currentUser }: any) => {
           <div className="text-sm text-gray-400">@{currentUser?.name}</div>
         </span>
       </div>
-      <button className="block text-[#ae7aff] hover:underline">
-        {currentUser?.email}
-      </button>
+      {/* <button className="block text-[#ae7aff] hover:underline">
+{currentUser?.email}
+</button> */}
       <p
         className="mb-2 flex gap-x-4 items-center"
         // onClick={() => navigate(`/user/${currentUser?.id}/followings`)}
@@ -77,4 +67,4 @@ const UserMiniDetails = ({ currentUser }: any) => {
   );
 };
 
-export default UserMiniDetails;
+export default MyMiniProfile;

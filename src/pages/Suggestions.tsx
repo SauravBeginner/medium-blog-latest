@@ -1,11 +1,12 @@
-import { useRecoilValueLoadable } from "recoil";
-import { suggestionAtom } from "../store";
-import FollowingCard from "./FollowCard";
+import { useRecoilStateLoadable, useRecoilValueLoadable } from "recoil";
+import { followingsAtom, suggestionAtom } from "../store/atoms/userAtoms";
 import { FollowingCardSkeleton } from "../components/FollowingCardSkeleton";
+import FollowingCard from "../components/FollowCard";
 
 const Suggestions = () => {
   const followingSuggestions = useRecoilValueLoadable(suggestionAtom);
-
+  const suggestions =
+    followingSuggestions.state === "hasValue" && followingSuggestions.contents;
   if (followingSuggestions.state === "loading") {
     return (
       <>
@@ -16,6 +17,7 @@ const Suggestions = () => {
       </>
     );
   }
+
   return (
     <>
       <div>
@@ -23,9 +25,10 @@ const Suggestions = () => {
         {followingSuggestions.contents?.length < 1 && (
           <h1 className="text-white text-center">No Contents!</h1>
         )}
-        {followingSuggestions.contents?.map((user: any) => (
-          <FollowingCard key={`${user?.id}`} id={user?.id} name={user?.name} />
-        ))}
+        {followingSuggestions?.state === "hasValue" &&
+          suggestions?.map((user: any) => (
+            <FollowingCard key={`suggstions-${user?.id}`} following={user} />
+          ))}
       </div>
     </>
   );

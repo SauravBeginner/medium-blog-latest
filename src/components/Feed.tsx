@@ -1,51 +1,89 @@
-// import CreatePost from "./CreatePost";
 import BlogCard from "./BlogCard";
-// import { useBlogs } from "../hooks/useBlogs";
 import { BlogCardSkeleton } from "./BlogCardSkeleton";
 
-import {
-  blogSelector,
-  // BlogType,
-  blogTypes,
-  currentPageState,
-  hasMoreState,
-  itemsState,
-  userProfileId,
-} from "../store";
 import { useCallback, useEffect } from "react";
-// import InfiniteScroll from "react-infinite-scroll-component";
 import {
   useRecoilState,
+  useRecoilValue,
   useRecoilValueLoadable,
+  useResetRecoilState,
   useSetRecoilState,
 } from "recoil";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
+import {
+  allBlogStateAtom,
+  BlogType,
+  blogTypesAtom,
+  currentPageStateAtom,
+  followingBlogStateAtom,
+  hasMoreStateAtom,
+  myBlogStateAtom,
+  userBlogStateAtom,
+} from "../store/atoms/blogAtoms";
+import {
+  myProfileDetailsAtom,
+  userProfileIdAtom,
+} from "../store/atoms/userAtoms";
+import {
+  allBlogSelector,
+  blogSelector,
+  followinBlogSelector,
+  myBlogSelector,
+  userBlogSelector,
+} from "../store/selectors/blogSelector";
+import { useBlogs } from "../hooks/useBlogs";
+import { IoThunderstormSharp } from "react-icons/io5";
+
 const Feed = ({ blogType }: any) => {
   const { id } = useParams();
-  // const { loading, blogs } = useBlogs({ blogType: blogType || "" });
-  const [hasMore, setHasMore] = useRecoilState(hasMoreState);
-  const [items, setItems] = useRecoilState(itemsState);
-  const setUserProfileId = useSetRecoilState(userProfileId);
-  const [type, setType] = useRecoilState(blogTypes);
-  // const currentType = useRecoilValue(blogTypes); // Access the current value of the atom
+  const [hasMore, setHasMore] = useRecoilState(hasMoreStateAtom);
 
-  const blogs = useRecoilValueLoadable(blogSelector);
+  const [type, setType] = useRecoilState(blogTypesAtom);
+  const myProfileDetails = useRecoilValue(myProfileDetailsAtom);
+  const setPage = useSetRecoilState(currentPageStateAtom);
+  const setUserProfileId = useSetRecoilState(userProfileIdAtom);
+  const blogsSelector = useRecoilValueLoadable(blogSelector);
 
-  const setPage = useSetRecoilState(currentPageState);
+  let blogAtom;
+  const location = useLocation();
+  console.log("location", location.pathname);
 
+  const { loading, blogs } = useBlogs({ blogType }, { id });
+  // const setAllItems = useSetRecoilState(allBlogStateAtom);
+  // const setMyItems = useSetRecoilState(myBlogStateAtom);
+  // const setUserItems = useSetRecoilState(userBlogStateAtom);
+
+  // const allBlogsSelectorLoadable = useRecoilValueLoadable(allBlogSelector);
+  // const myBlogsSelectorLoadable = useRecoilValueLoadable(myBlogSelector);
+  // const userBlogsSelectorLoadable = useRecoilValueLoadable(userBlogSelector);
+
+  if (type === BlogType.AllPosts) {
+    blogAtom = allBlogStateAtom;
+  } else if (type === BlogType.FollowingPosts) {
+    blogAtom = followingBlogStateAtom;
+  } else if (type === BlogType.UserPosts) {
+    blogAtom = myProfileDetails.id !== id ? userBlogStateAtom : myBlogStateAtom;
+  } else {
+    blogAtom = myBlogStateAtom;
+  }
+  const [items, setItems] = useRecoilState(blogAtom);
+  console.log(items);
   useEffect(() => {
     setType(blogType);
     setUserProfileId(id as any);
     setPage(1); // Reset page to 1 when type changes
-    setItems([]);
-  }, [blogType, setType, type, setPage, setItems]);
+    setItems(blogs);
+  }, []);
 
-  useEffect(() => {
-    const newItems = blogs.state === "hasValue" ? blogs.contents : [];
-    setItems((prev: any) => [...prev, ...newItems]);
-    setHasMore(newItems.length > 0);
-  }, [blogs, type, setItems, id]);
-
+  useEffect(
+    () => {
+      const newItems = !loading ? blogs : [];
+      setItems((prev: any) => [...prev, ...newItems]);
+      setHasMore(newItems.length > 0);
+    },
+    //[blogs]
+    [blogs]
+  );
   const handleScroll = useCallback(() => {
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >=
@@ -63,11 +101,10 @@ const Feed = ({ blogType }: any) => {
     };
   }, [handleScroll]);
 
+  // console.log(items);
+
   return (
     <section>
-      {/* <CreatePost /> */}
-      {/* <Navbar /> */}
-
       {items?.map((blog: any) => (
         <BlogCard
           key={`${type}-${blog?.id}`}
@@ -81,10 +118,10 @@ const Feed = ({ blogType }: any) => {
           authorName={blog?.author?.name}
         />
       ))}
-      {blogs?.state === "hasValue" && items?.length < 1 && (
+      {!loading && items?.length < 1 && (
         <h1 className="text-white text-center">No Post to Display!</h1>
       )}
-      {blogs?.state === "loading" && (
+      {loading && (
         <>
           <BlogCardSkeleton />
           <BlogCardSkeleton />

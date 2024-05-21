@@ -1,65 +1,52 @@
 import { Link, useNavigate } from "react-router-dom";
-import { SignupInput } from "@10xcoder/medium-blog-common";
+import { SigninInput } from "@10xcoder/medium-blog-common";
 import { useState } from "react";
-import axios from "axios";
-import { baseURL } from "../utils/baseUrl";
 import { Button } from "./Button";
 import { useForm } from "react-hook-form";
 import Input from "./Input";
+import { publicAxios } from "../utils/axiosClient";
+import { useSetRecoilState } from "recoil";
+import { authState } from "../store/atoms/userAtoms";
 
-export const Signup = () => {
+export const LoginForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const setAuthStatus = useSetRecoilState(authState);
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupInput>({});
+  } = useForm<SigninInput>({});
 
-  const handleSignup = async (data: any) => {
+  const handleLogin = async (data: any) => {
     setError("");
     try {
-      const response = await axios.post(`${baseURL}/signup`, data);
-
+      const response = await publicAxios.post(`/signin`, data);
+      const token = response.data.jwt;
       console.log(response.data);
-      const token = await response.data.token;
-      localStorage.setItem("token", token);
 
-      navigate("/");
+      localStorage.setItem("token", token);
+      // setAuthToken(token); // Invalidate the current profile details to trigger re-fetch
+      // setIsAuth(true);
+      setAuthStatus({ status: true });
+      navigate("/", { replace: true });
     } catch (e: any) {
-      console.log(e);
+      console.log(e.response.data?.error);
       setError(e.response.data?.error);
     }
   };
+
   return (
-    <form onSubmit={handleSubmit(handleSignup)}>
+    <form onSubmit={handleSubmit(handleLogin)}>
       <h1 className="text-4xl font-bold">Log in to your account</h1>
       <p className="mt-2 text-sm">
-        Already have an account?
-        <Link className="text-blue-600" to="/login">
-          Login
+        Don't have an account?
+        <Link className="text-blue-600" to="/signup">
+          Signup
         </Link>
       </p>
       <div className="flex flex-col space-y-4 mt-8">
-        <Input
-          label="name"
-          placeholder="Name"
-          type="name"
-          {...register("name", {
-            required: true,
-            minLength: {
-              value: 4,
-              message: "Name must be at least 4 characters",
-            },
-            maxLength: {
-              value: 20,
-              message: "Name cannot exceed 20 characters",
-            },
-          })}
-        />
-        {errors.name && (
-          <span className="text-sm text-red-500">{errors.name.message}</span>
-        )}
         <Input
           label="email"
           placeholder="m@example.com"
@@ -92,13 +79,14 @@ export const Signup = () => {
           })}
           type="password"
         />
+
         {errors.password && (
           <span className="text-sm text-red-500">
             {errors.password.message}
           </span>
         )}
         {error && <p className="text-red-500">{error}</p>}
-        <Button>Signup</Button>
+        <Button>Login</Button>
       </div>
     </form>
   );
