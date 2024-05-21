@@ -49,6 +49,7 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
         ]);
         setSuggestion((prev: string[]) => {
           return prev?.filter(
+            //@ts-ignore
             (u) => u?.id !== response?.data?.newFollowing?.followingId
           );
         });
@@ -57,6 +58,7 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
       } else if (response?.data?.message === "Unfollowed") {
         setIsFollowing((prev: string[]) => {
           return prev?.filter(
+            //@ts-ignore
             (u) => u?.id !== response?.data?.deleteFollowing?.followingId
           );
         });

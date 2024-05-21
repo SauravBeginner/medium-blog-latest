@@ -1,9 +1,7 @@
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 
-import { authURL } from "../utils/baseUrl";
-import axios from "axios";
-import { useRecoilStateLoadable } from "recoil";
+import { useRecoilValueLoadable } from "recoil";
 import { useState } from "react";
 import { useTimeDiffer } from "../hooks/UseTimeDiffer";
 import parse from "html-react-parser";
@@ -28,12 +26,9 @@ const BlogCard = ({
   title,
   publishedDate,
 }: BlogCardProps) => {
-  const [isProcessing, setIsProcessing] = useState(false);
+  // const [isProcessing, setIsProcessing] = useState(false);
 
-  const [blogDetails, setBlogDetails] = useRecoilStateLoadable(
-    blogDetailsAtomFamily(id)
-  );
-  const token = localStorage.getItem("token");
+  const blogDetails = useRecoilValueLoadable(blogDetailsAtomFamily(id));
 
   const hashLiked =
     blogDetails.state === "hasValue" && blogDetails.contents.hasLiked;
@@ -132,7 +127,7 @@ const BlogCard = ({
                   hashLiked ? "text-[#ae7aff]" : "text-white"
                 }`}
                 //   onClick={handleLike}
-                disabled={isProcessing}
+                //   disabled={isProcessing}
               >
                 <FaHeart size={20} />
                 <span>{blogDetails?.contents?.likeCount || 0}</span>
