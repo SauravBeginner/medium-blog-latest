@@ -1,6 +1,6 @@
 import { selector } from "recoil";
 import { authAxios } from "../../utils/axiosClient";
-import { followingBlogStateAtom } from "../atoms/blogAtoms";
+// import { followingBlogStateAtom } from "../atoms/blogAtoms";
 import { myProfileDetailsAtom } from "../atoms/userAtoms";
 
 export const getMyProfileDataSelector = selector({
