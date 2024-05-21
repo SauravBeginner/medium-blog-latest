@@ -1,21 +1,11 @@
-import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilValueLoadable } from "recoil";
 import { Button } from "./Button";
-// import {
-//   authTokenState,
-//   followingAtom,
-//   myProfileDetailsAtom,
-//   suggestionAtom,
-// } from "../store";
-import axios from "axios";
-import { authURL } from "../utils/baseUrl";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RightBarSkeleton } from "./RightBarSkeleton";
 import ShortProfileSkeleton from "./ShortProfileSkeleton";
 // import { BlogCardSkeleton } from "./BlogCardSkeleton";
-import UserMiniDetails from "./UserMiniDetails";
 // import { useFollowUnfollow } from "./UseFollowUnfollow";
-import FollowingCard from "../pages/FollowCard";
 import { myProfileDetailsAtom, suggestionAtom } from "../store/atoms/userAtoms";
 import MyMiniProfile from "./MyMiniProfile";
 import { getMyProfileDataSelector } from "../store/selectors/userSelector";

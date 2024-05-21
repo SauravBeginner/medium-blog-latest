@@ -10,7 +10,7 @@ const AllBlogs = React.lazy(() => import("./pages/AllBlogs"));
 const MyBlogs = React.lazy(() => import("./pages/MyBlogs"));
 
 const FollowingBlogs = React.lazy(() => import("./pages/FollowingBlogs"));
-const UserProfile = React.lazy(() => import("./pages/UserProfile"));
+// const UserProfile = React.lazy(() => import("./pages/UserProfile"));
 const UserBlogs = React.lazy(() => import("./pages/UserBlogs"));
 
 const Login = React.lazy(() => import("./pages/Login"));

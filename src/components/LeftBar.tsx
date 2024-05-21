@@ -1,18 +1,10 @@
-import {
-  useRecoilState,
-  useRecoilStateLoadable,
-  useRecoilValue,
-  useRecoilValueLoadable,
-  useSetRecoilState,
-} from "recoil";
+import { useRecoilState, useRecoilValueLoadable } from "recoil";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ProfileSkeleton from "./ProfileSkeleton";
 import UserMiniDetails from "./UserMiniDetails";
 import ShortProfileSkeleton from "./ShortProfileSkeleton";
 import { Button } from "./Button";
-import axios from "axios";
-import { authURL } from "../utils/baseUrl";
 import {
   myfollowingsAtom,
   myProfileDetailsAtom,
@@ -36,12 +28,8 @@ const LeftBar = () => {
   const [isFollowing, setIsFollowing] = useRecoilState(myfollowingsAtom);
   // const setSuggestion = useSetRecoilState(suggestionAtom);
 
-  const token = localStorage.getItem("token");
   // const setMyFollowingCount = useSetRecoilState(myFollowingCountAtom);
 
-  const followings = currentUser?.followingCount;
-
-  const followers = currentUser?.followersCount;
   const handleFollow = async (userId: string) => {
     console.log("clicked", userId);
     try {
@@ -50,27 +38,23 @@ const LeftBar = () => {
       });
 
       if (response?.data?.message === "Followed") {
-        Promise.all([
-          setIsFollowing((prev: string[]) => [
-            {
-              id: response?.data?.newFollowing?.followingId,
-              name: userProfileDetails.contents.name,
-            },
-            ...prev,
-          ]),
-
-          // setMyFollowingCount((prev) => prev + 1),
+        setIsFollowing((prev: string[]) => [
+          {
+            id: response?.data?.newFollowing?.followingId,
+            name: userProfileDetails.contents.name,
+          },
+          ...prev,
         ]);
+
+        // setMyFollowingCount((prev) => prev + 1),
       } else if (response?.data?.message === "Unfollowed") {
-        Promise.all([
-          setIsFollowing((prev) => {
-            return prev?.filter(
-              (u) => u?.id !== response?.data?.deleteFollowing?.followingId
-            );
-          }),
+        setIsFollowing((prev: string[]) => {
+          return prev?.filter(
+            (u) => u?.id !== response?.data?.deleteFollowing?.followingId
+          );
+        });
 
-          // setMyFollowingCount((prev) => prev - 1),
-        ]);
+        // setMyFollowingCount((prev) => prev - 1),
       }
     } catch (e) {
       console.log(e);

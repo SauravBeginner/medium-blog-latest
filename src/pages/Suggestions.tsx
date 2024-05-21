@@ -1,5 +1,5 @@
-import { useRecoilStateLoadable, useRecoilValueLoadable } from "recoil";
-import { followingsAtom, suggestionAtom } from "../store/atoms/userAtoms";
+import { useRecoilValueLoadable } from "recoil";
+import { suggestionAtom } from "../store/atoms/userAtoms";
 import { FollowingCardSkeleton } from "../components/FollowingCardSkeleton";
 import FollowingCard from "../components/FollowCard";
 

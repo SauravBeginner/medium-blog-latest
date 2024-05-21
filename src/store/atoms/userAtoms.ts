@@ -151,8 +151,6 @@ export const followingsAtom = atomFamily({
       async ({ get }) => {
         const token = localStorage.getItem("token");
         const page = get(currentFollwoingPageAtom);
-        const followType = get(followTypes);
-
         if (!token) {
           throw new Error("Token not available");
         }
@@ -181,7 +179,6 @@ export const followersAtom = atomFamily({
       async ({ get }) => {
         const token = localStorage.getItem("token");
         const page = get(currentFollwoingPageAtom);
-        const followType = get(followTypes);
 
         if (!token) {
           throw new Error("Token not available");

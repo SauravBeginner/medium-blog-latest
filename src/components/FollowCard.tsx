@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { Button } from "../components/Button";
 import { imgSrc } from "../components/RightBar";
@@ -111,7 +111,7 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
                     handleFollow(following?.id);
                   }}
                 >
-                  {isFollowing?.some((u) => u.id === following?.id)
+                  {isFollowing?.some((u: any) => u.id === following?.id)
                     ? "Unfollow"
                     : "Follow"}
                 </Button>

@@ -1,5 +1,5 @@
 import { Editor } from "@tinymce/tinymce-react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller } from "react-hook-form";
 
 const RTE = ({ name, control, label, defaultValue = "" }: any) => {
   return (
