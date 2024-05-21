@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  useRecoilState,
-  useRecoilValueLoadable,
-  useSetRecoilState,
-} from "recoil";
+import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import { authState, myProfileDetailsAtom } from "../store/atoms/userAtoms";
 import { authAxios } from "../utils/axiosClient";
 import { getMyProfileDataSelector } from "../store/selectors/userSelector";
@@ -18,8 +14,7 @@ const AuthHandle = ({ children }: AuthHandleProps) => {
   const [loader, setLoader] = useState(true);
   const setAuthStauts = useSetRecoilState(authState);
   const myProfileData = useRecoilValueLoadable(getMyProfileDataSelector);
-  const [myProfileAtom, setMyProfileAtom] =
-    useRecoilState(myProfileDetailsAtom);
+  const setMyProfileAtom = useSetRecoilState(myProfileDetailsAtom);
 
   const token = localStorage.getItem("token");
   useEffect(() => {

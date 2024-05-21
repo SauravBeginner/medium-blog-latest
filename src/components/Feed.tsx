@@ -2,13 +2,7 @@ import BlogCard from "./BlogCard";
 import { BlogCardSkeleton } from "./BlogCardSkeleton";
 
 import { useCallback, useEffect } from "react";
-import {
-  useRecoilState,
-  useRecoilValue,
-  useRecoilValueLoadable,
-  useResetRecoilState,
-  useSetRecoilState,
-} from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { useLocation, useParams } from "react-router-dom";
 import {
   allBlogStateAtom,
