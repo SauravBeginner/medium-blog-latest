@@ -1,6 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { imgSrc } from "./RightBar";
-import { useRecoilValue, useRecoilValueLoadable } from "recoil";
 // import { myFollowingCountAtom, myProfileDetailsAtom } from "../store";
 
 const MyMiniProfile = ({ currentUser }: any) => {
