@@ -50,6 +50,7 @@ const LeftBar = () => {
       } else if (response?.data?.message === "Unfollowed") {
         setIsFollowing((prev: string[]) => {
           return prev?.filter(
+            //@ts-ignore
             (u) => u?.id !== response?.data?.deleteFollowing?.followingId
           );
         });
@@ -119,9 +120,12 @@ const LeftBar = () => {
                   className="inline-flex w-max items-center bg-[#4d17a4] px-4 py-2 text-center font-bold text-black shadow-[5px_5px_0px_0px_#4f4e4e] transition-all duration-150 ease-in-out active:translate-x-[5px] active:translate-y-[5px] active:shadow-[0px_0px_0px_0px_#4f4e4e]"
                   onClick={() => handleFollow(currentUser?.id)}
                 >
-                  {isFollowing?.some((u) => u.id === currentUser?.id)
-                    ? "Unfollow"
-                    : "Follow"}
+                  {
+                    //@ts-ignore
+                    isFollowing?.some((u) => u.id === currentUser?.id)
+                      ? "Unfollow"
+                      : "Follow"
+                  }
                 </Button>
               )}
             </div>

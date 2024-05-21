@@ -3,11 +3,7 @@ import { FaHeart } from "react-icons/fa";
 
 import { authURL } from "../utils/baseUrl";
 import axios from "axios";
-import {
-  useRecoilStateLoadable,
-  useRecoilValue,
-  useRecoilValueLoadable,
-} from "recoil";
+import { useRecoilStateLoadable, useRecoilValueLoadable } from "recoil";
 
 import { useState } from "react";
 import { MdDelete, MdEditSquare } from "react-icons/md";

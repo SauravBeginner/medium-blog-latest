@@ -37,7 +37,7 @@ export const userBlogStateAtom = atom({
 
 export const userBlogStateAtomFamily = atomFamily({
   key: "userBlogStateAtomFamily",
-  default: (id) => [] as any,
+  default: () => [] as any,
 });
 export const followingBlogStateAtom = atom({
   key: "followingBlogStateAtom",
@@ -55,7 +55,7 @@ export const blogDetailsAtomFamily = atomFamily({
     key: "singleBlogSelectorFamily",
     get:
       (id) =>
-      async ({ get }) => {
+      async ({}) => {
         const token = localStorage.getItem("token");
         if (!token) {
           throw new Error("Token not available");

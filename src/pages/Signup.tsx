@@ -1,4 +1,3 @@
-import { LoginForm } from "../components/LoginForm";
 import { Quotes } from "../components/Quotes";
 import { Signup as SignupComp } from "../components/Signup";
 const Signup = () => {

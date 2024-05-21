@@ -3,19 +3,12 @@ import { useEffect, useState } from "react";
 import { baseURL } from "../utils/baseUrl";
 import { authAxios } from "../utils/axiosClient";
 import {
-  allBlogStateAtom,
   BlogType,
   blogTypesAtom,
   currentPageStateAtom,
-  followingBlogStateAtom,
-  myBlogStateAtom,
-  userBlogStateAtom,
 } from "../store/atoms/blogAtoms";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  myProfileDetailsAtom,
-  userProfileIdAtom,
-} from "../store/atoms/userAtoms";
+import { useRecoilValue } from "recoil";
+
 import { useLocation } from "react-router-dom";
 
 export interface Blog {
@@ -28,7 +21,7 @@ export interface Blog {
   publishedDate?: string;
 }
 
-const useBlog = ({ id }: { id: string }) => {
+export const useBlog = ({ id }: { id: string }) => {
   const [loading, setLoading] = useState(true);
   const [blog, setBlogs] = useState<Blog>();
 
