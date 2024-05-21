@@ -1,12 +1,5 @@
-import { atom, atomFamily, selector, selectorFamily } from "recoil";
+import { atom, atomFamily, selectorFamily } from "recoil";
 import { authAxios } from "../../utils/axiosClient";
-import {
-  allBlogSelector,
-  followinBlogSelector,
-  myBlogSelector,
-  userBlogSelector,
-} from "../selectors/blogSelector";
-import { getMyProfileDataSelector } from "../selectors/userSelector";
 
 export enum BlogType {
   MyPosts = "myposts",
