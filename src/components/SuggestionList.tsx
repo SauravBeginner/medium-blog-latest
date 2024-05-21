@@ -35,21 +35,23 @@ const SuggestionList = ({ user }: any) => {
           ]),
           setSuggestion((prev: string[]) => {
             return prev?.filter(
+              //@ts-ignore
               (u) => u?.id !== response?.data?.newFollowing?.followingId
             );
           }),
 
-          setMyFollowingCount((prev) => prev + 1),
+          setMyFollowingCount((prev: any) => prev + 1),
         ]);
       } else if (response?.data?.message === "Unfollowed") {
         Promise.all([
-          setIsFollowing((prev) => {
+          setIsFollowing((prev: any) => {
             return prev?.filter(
+              //@ts-ignore
               (u) => u?.id !== response?.data?.deleteFollowing?.followingId
             );
           }),
 
-          setSuggestion((prev) => {
+          setSuggestion((prev: any) => {
             return [
               {
                 id: response?.data?.deleteFollowing?.followingId,
@@ -58,7 +60,7 @@ const SuggestionList = ({ user }: any) => {
               ...prev,
             ];
           }),
-          setMyFollowingCount((prev) => prev - 1),
+          setMyFollowingCount((prev: any) => prev - 1),
         ]);
       }
     } catch (e) {

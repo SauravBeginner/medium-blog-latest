@@ -4,9 +4,10 @@ import { ChangeEvent } from "react";
 export interface LabelInputType {
   className?: string;
   label?: string;
-  placeholder: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  placeholder?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   type?: string;
+  accept?: string; // Optional prop to specify accepted file types
 }
 
 const Input = (

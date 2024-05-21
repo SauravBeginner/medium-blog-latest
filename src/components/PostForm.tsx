@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import RTE from "./RTE";
 import axios from "axios";
 import { authURL } from "../utils/baseUrl";
-import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { CreateBlogInput, UpdateBlogInput } from "@10xcoder/medium-blog-common";
 import { Button } from "./Button";
@@ -16,12 +16,6 @@ import {
   myBlogStateAtom,
   userBlogStateAtom,
 } from "../store/atoms/blogAtoms";
-import {
-  allBlogSelector,
-  blogSelector,
-  myBlogSelector,
-  userBlogSelector,
-} from "../store/selectors/blogSelector";
 import { authAxios } from "../utils/axiosClient";
 
 const PostForm = ({ post }: any) => {
@@ -223,6 +217,7 @@ const PostForm = ({ post }: any) => {
               {...register("slug", {
                 required: true,
               })}
+              //@ts-ignore
               onInput={(e: any) => {
                 setValue("slug", slugTransform(e.currentTarget.value), {
                   shouldValidate: true,
@@ -248,7 +243,6 @@ const PostForm = ({ post }: any) => {
               <CiCamera />
             </div>
             <Input
-              id="profilePicInput"
               type="file"
               accept="image/*"
               className="absolute inset-0 opacity-0 cursor-pointer"
