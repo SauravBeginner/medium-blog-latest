@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
+import { useRecoilValue, useRecoilValueLoadable } from "recoil";
 
 import FollowingCard from "./FollowCard";
 import { FollowingCardSkeleton } from "./FollowingCardSkeleton";
