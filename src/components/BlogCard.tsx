@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 
 import { useRecoilValueLoadable } from "recoil";
-import { useState } from "react";
 import { useTimeDiffer } from "../hooks/UseTimeDiffer";
 import parse from "html-react-parser";
 import { imgSrc } from "./RightBar";

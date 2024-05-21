@@ -16,8 +16,8 @@ const BlogDetails = () => {
     content,
     author,
     title,
-    likeCount,
-    hasLiked,
+    // likeCount,
+    // hasLiked,
     createdAt,
   } = blog.contents;
 

@@ -1,9 +1,5 @@
 import { useParams } from "react-router-dom";
-import {
-  useRecoilState,
-  useRecoilStateLoadable,
-  useRecoilValueLoadable,
-} from "recoil";
+import { useRecoilState, useRecoilValue, useRecoilValueLoadable } from "recoil";
 
 import FollowingCard from "./FollowCard";
 import { FollowingCardSkeleton } from "./FollowingCardSkeleton";
@@ -23,7 +19,7 @@ const FollowUnFollow = ({ followType }: any) => {
   const myFollowings = useRecoilValueLoadable(myfollowingsAtom);
 
   const followers = useRecoilValueLoadable(followersAtom(id));
-  const [type, setType] = useRecoilState(followTypes);
+  const type = useRecoilValue(followTypes);
 
   // useEffect(() => {
   //   setType(followType);
