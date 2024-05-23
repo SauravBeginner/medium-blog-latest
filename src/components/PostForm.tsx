@@ -1,7 +1,6 @@
 import Input from "./Input";
 import { useForm } from "react-hook-form";
 import RTE from "./RTE";
-import axios from "axios";
 import { authURL } from "../utils/baseUrl";
 import { useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
@@ -36,8 +35,6 @@ const PostForm = ({ post }: any) => {
     },
   });
 
-  const token = localStorage.getItem("token");
-
   const setBlogDetails = useSetRecoilState(blogDetailsAtomFamily(post?.id));
 
   const navigate = useNavigate();
@@ -57,9 +54,9 @@ const PostForm = ({ post }: any) => {
     };
   };
 
-  const setAllItems = useSetRecoilState(allBlogStateAtom);
-  const setMyItems = useSetRecoilState(myBlogStateAtom);
-  const setUserItems = useSetRecoilState(userBlogStateAtom);
+  // const setAllItems = useSetRecoilState(allBlogStateAtom);
+  // const setMyItems = useSetRecoilState(myBlogStateAtom);
+  // const setUserItems = useSetRecoilState(userBlogStateAtom);
 
   const [img, setImg] = useState(post?.thumbNail);
   const publishBlog = async (data: any) => {
@@ -75,8 +72,6 @@ const PostForm = ({ post }: any) => {
 
     try {
       if (post) {
-        // const file = data.image[0] || null;
-
         const dbPost = await authAxios.put(`/blog/update/${post.id}`, formData);
         if (dbPost) {
           console.log(dbPost);
@@ -84,9 +79,8 @@ const PostForm = ({ post }: any) => {
           const updatedPost = await authAxios.get(
             `/blog/post/${dbPost.data?.post?.id}`
           );
-          // console.log(updatedPost);
 
-          const updatedData = normalizeBLogPost(updatedPost.data?.post);
+          // const updatedData = normalizeBLogPost(updatedPost.data?.post);
           setBlogDetails(updatedPost.data?.post);
 
           // setAllItems((currentList: any) =>
@@ -231,7 +225,6 @@ const PostForm = ({ post }: any) => {
             className="relative flex justify-center items-center h-40 w-40 overflow-hidden rounded-full border-gray-900 border-2 hover:opacity-75"
           >
             <img
-              //  src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               src={img || imgSrc}
               onClick={() => setImg(img)}
               alt="Mystical Wanderer"
@@ -261,13 +254,6 @@ const PostForm = ({ post }: any) => {
         </div>
       </main>
       <div className="flex flex-col flex-colitems-center justify-center my-10 ">
-        <div className="mb-4 ">
-          {/* <input
-            type="file"
-            placeholder="Tags"
-            className="w-full my-3 p-3 text-white rounded-lg"
-          /> */}
-        </div>
         <Button className="bg-[#ac7aff] text-xl w-full py-4">
           {post ? "Update" : "Publish"} Post
         </Button>
