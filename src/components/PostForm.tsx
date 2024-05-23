@@ -9,12 +9,7 @@ import { Button } from "./Button";
 import { useCallback, useEffect, useState } from "react";
 import { CiCamera } from "react-icons/ci";
 import { imgSrc } from "./RightBar";
-import {
-  allBlogStateAtom,
-  blogDetailsAtomFamily,
-  myBlogStateAtom,
-  userBlogStateAtom,
-} from "../store/atoms/blogAtoms";
+import { blogDetailsAtomFamily } from "../store/atoms/blogAtoms";
 import { authAxios } from "../utils/axiosClient";
 
 const PostForm = ({ post }: any) => {

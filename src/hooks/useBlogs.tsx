@@ -49,7 +49,7 @@ export const useBlogs = (
   const [loading, setLoading] = useState(false);
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const page = useRecoilValue(currentPageStateAtom);
-  const type = useRecoilValue(blogTypesAtom);
+  // const type = useRecoilValue(blogTypesAtom);
 
   const location = useLocation();
   console.log("location", location.pathname);
