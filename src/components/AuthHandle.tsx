@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
+import { Navigate, useNavigate } from "react-router-dom";
+import {
+  useRecoilState,
+  useRecoilValueLoadable,
+  useSetRecoilState,
+} from "recoil";
 import { authState, myProfileDetailsAtom } from "../store/atoms/userAtoms";
 import { authAxios } from "../utils/axiosClient";
 import { getMyProfileDataSelector } from "../store/selectors/userSelector";
@@ -27,7 +31,12 @@ const AuthHandle = ({ children }: AuthHandleProps) => {
           console.log(response?.data?.myDetails);
           setMyProfileAtom(response?.data?.myDetails);
           console.log(myProfileData);
-          //  navigate("/", { replace: true });
+          if (
+            window.location.pathname === "/login" ||
+            window.location.pathname === "/signup"
+          ) {
+            navigate("/", { replace: true });
+          }
         })
         .catch(() => {
           setAuthStauts({ status: false });
@@ -40,6 +49,7 @@ const AuthHandle = ({ children }: AuthHandleProps) => {
       navigate("/login");
     }
   }, [token]);
+
   return loader ? <h1>Loading...</h1> : <>{children}</>;
 };
 

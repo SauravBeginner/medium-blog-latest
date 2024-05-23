@@ -6,6 +6,7 @@ import { Button } from "../components/Button";
 import { ArrowLeft } from "lucide-react";
 import { blogDetailsAtomFamily } from "../store/atoms/blogAtoms";
 import FullBlog from "../components/FullBlog";
+import UserMiniDetails from "../components/UserMiniDetails";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -56,7 +57,11 @@ const BlogDetails = () => {
             //  hasLiked={hasLiked}
           />
         </section>
-        {/* <AuthorDetails currentUser={author} /> */}
+        <aside className="hidden md:block col-span-12 text-white md:col-span-12 lg:col-span-4 xl:col-span-3 ">
+          <div className="sticky top-[80px] overflow-y-hidden border-b bg-[black]/60  rounded-md md:rounded-lg border-[white]/60 p-4 sm:border shadow-md shadow-[white]/70">
+            <UserMiniDetails currentUser={author} />
+          </div>
+        </aside>
       </div>
     </div>
   );

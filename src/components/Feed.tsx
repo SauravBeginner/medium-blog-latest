@@ -55,7 +55,7 @@ const Feed = ({ blogType }: any) => {
     return () => {
       setItems([]);
     };
-  }, [blogType]);
+  }, [blogType, id]);
 
   useEffect(
     () => {
@@ -101,7 +101,7 @@ const Feed = ({ blogType }: any) => {
           thumbNail={blog?.thumbNail}
         />
       ))}
-      {!loading && items?.length < 1 && (
+      {!loading && items?.length === 0 && (
         <h1 className="text-white text-center">No Post to Display!</h1>
       )}
       {loading && (

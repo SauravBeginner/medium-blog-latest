@@ -73,10 +73,32 @@ const App = () => {
             <Route path="/user/:id/followers" element={<FollowerUsers />} />
             <Route path="/user/:id/suggestions" element={<Suggestions />} />
           </Route>
-          <Route path="/blog/create" element={<CreateBlog />} />
-          <Route path="/blog/update/:id" element={<EditPost />} />
 
-          <Route path="/blog/:id" element={<BlogDetails />} />
+          <Route
+            path="/blog/create"
+            element={
+              <AuthHandle>
+                <CreateBlog />
+              </AuthHandle>
+            }
+          />
+          <Route
+            path="/blog/update/:id"
+            element={
+              <AuthHandle>
+                <EditPost />
+              </AuthHandle>
+            }
+          />
+
+          <Route
+            path="/blog/:id"
+            element={
+              <AuthHandle>
+                <BlogDetails />
+              </AuthHandle>
+            }
+          />
         </Routes>
       </React.Suspense>
     </BrowserRouter>

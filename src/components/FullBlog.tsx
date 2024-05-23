@@ -103,40 +103,6 @@ const FullBlog = ({
                 </div>
               </div>
             </Link>
-          </div>
-          <Link to={`/blog/${id}`}>
-            <div className="flex items-center justify-between mb-4 space-x-2">
-              <div className="mr-10">
-                <p className="py-2 text-lg sm:text-4xl font-bold text-center">
-                  {title}
-                </p>
-                <div className="shrink-0 h-80 w-4/6 md:h-24md:w-24 mx-auto my-4">
-                  <img
-                    // src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    src={imgURL}
-                    alt="Mystical Wanderer"
-                    className="h-full w-full rounded-sm object-cover"
-                  />
-                </div>
-                <p className="text-sm sm:text-2xl py-2 font-bold">Content:</p>
-                <p className="text-sm sm:text-lg py-2">{parse(content)}</p>
-              </div>
-            </div>
-          </Link>
-          <div className="flex gap-x-4 items-center">
-            <button
-              className={`inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff] ${
-                hashLiked ? "text-[#ae7aff]" : "text-white"
-              }`}
-              onClick={handleLike}
-              disabled={isProcessing}
-            >
-              <FaHeart size={25} />
-              <span className="text-2xl">
-                {blogDetails?.contents?.likeCount || 0}
-              </span>
-            </button>
-
             {currentUser?.id ===
               (blogDetails?.contents?.authorId || authorId) && (
               <div className="ml-auto">
@@ -151,6 +117,38 @@ const FullBlog = ({
                 </button>
               </div>
             )}
+          </div>
+
+          <div className="flex items-center justify-between mb-4 space-x-2">
+            <div className="mr-10">
+              <p className="py-2 text-lg sm:text-4xl font-bold text-center">
+                {title}
+              </p>
+              <div className="shrink-0 h-80 w-4/6 md:h-24md:w-24 mx-auto my-4">
+                <img
+                  // src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  src={imgURL}
+                  alt="Mystical Wanderer"
+                  className="h-full w-full rounded-sm object-cover"
+                />
+              </div>
+              <p className="text-sm sm:text-2xl py-2 font-bold">Content:</p>
+              <p className="text-sm sm:text-lg py-2">{parse(content)}</p>
+            </div>
+          </div>
+          <div className="flex gap-x-4 items-center">
+            <button
+              className={`inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff] ${
+                hashLiked ? "text-[#ae7aff]" : "text-white"
+              }`}
+              onClick={handleLike}
+              disabled={isProcessing}
+            >
+              <FaHeart size={25} />
+              <span className="text-2xl">
+                {blogDetails?.contents?.likeCount || 0}
+              </span>
+            </button>
           </div>
         </div>
       </div>

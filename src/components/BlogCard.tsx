@@ -108,7 +108,7 @@ const BlogCard = ({
                 <div className="">
                   <p className="pb-2 text-lg sm:text-base font-bold">{title}</p>
                   <p className="text-sm sm:text-base">
-                    {parse(content.slice(0, 400))}
+                    {parse(content.slice(0, 1000))}
                     <div className="text-[#ae7aff] underline cursor-pointer">
                       Read more...
                     </div>
