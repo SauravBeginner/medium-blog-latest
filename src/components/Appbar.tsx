@@ -5,11 +5,7 @@ import { IoIosAddCircle } from "react-icons/io";
 // import { CiSaveUp2 } from "react-icons/ci";
 import Searchbar from "./Searchbar";
 import { imgSrc } from "../utils/baseUrl";
-import {
-  useRecoilState,
-  useRecoilStateLoadable,
-  useSetRecoilState,
-} from "recoil";
+import { useRecoilState, useRecoilStateLoadable } from "recoil";
 import { authState, myProfileDetailsAtom } from "../store/atoms/userAtoms";
 // import { imgSrc } from "./RightBar";
 

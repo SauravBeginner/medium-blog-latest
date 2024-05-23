@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import {
-  useRecoilState,
-  useRecoilValueLoadable,
-  useSetRecoilState,
-} from "recoil";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValueLoadable, useSetRecoilState } from "recoil";
 import { authState, myProfileDetailsAtom } from "../store/atoms/userAtoms";
 import { authAxios } from "../utils/axiosClient";
 import { getMyProfileDataSelector } from "../store/selectors/userSelector";
