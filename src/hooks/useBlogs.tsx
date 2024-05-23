@@ -2,11 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { baseURL } from "../utils/baseUrl";
 import { authAxios } from "../utils/axiosClient";
-import {
-  BlogType,
-  blogTypesAtom,
-  currentPageStateAtom,
-} from "../store/atoms/blogAtoms";
+import { BlogType, currentPageStateAtom } from "../store/atoms/blogAtoms";
 import { useRecoilValue } from "recoil";
 
 import { useLocation } from "react-router-dom";
