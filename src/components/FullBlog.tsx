@@ -20,6 +20,7 @@ type BlogCardProps = {
   authorName: string;
   authorId: string;
   publishedDate: Date;
+  thumbNail?: string;
   // likeCount: number;
   // hasLiked: boolean;
 };
@@ -30,6 +31,7 @@ const FullBlog = ({
   authorId,
   title,
   publishedDate,
+  thumbNail,
 }: BlogCardProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -73,6 +75,7 @@ const FullBlog = ({
 
   const timeDifference = useTimeDiffer(publishedDate);
   const navigate = useNavigate();
+  const imgURL = thumbNail ? thumbNail : imgSrc;
 
   return (
     <div className="relative mb-2 w-full last:mb-0 sm:mb-4 ">
@@ -85,6 +88,7 @@ const FullBlog = ({
                   <img
                     // src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                     src={imgSrc}
+                    loading={"lazy"}
                     alt="Mystical Wanderer"
                     className="h-full w-full rounded-full object-cover"
                   />
@@ -109,7 +113,7 @@ const FullBlog = ({
                 <div className="shrink-0 h-80 w-4/6 md:h-24md:w-24 mx-auto my-4">
                   <img
                     // src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    src={imgSrc}
+                    src={imgURL}
                     alt="Mystical Wanderer"
                     className="h-full w-full rounded-sm object-cover"
                   />

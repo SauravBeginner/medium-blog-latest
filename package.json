@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@10xcoder/medium-blog-common": "^1.0.8",
+    "@10xcoder/medium-blog-common": "^2.0.0",
     "@hookform/resolvers": "^3.3.4",
     "@tinymce/tinymce-react": "^5.0.1",
     "@types/lodash.debounce": "^4.0.9",

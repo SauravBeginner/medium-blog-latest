@@ -16,6 +16,7 @@ const BlogDetails = () => {
     content,
     author,
     title,
+    thumbNail,
     // likeCount,
     // hasLiked,
     createdAt,
@@ -50,6 +51,7 @@ const BlogDetails = () => {
             authorName={author?.name}
             authorId={author?.id}
             publishedDate={createdAt}
+            thumbNail={thumbNail}
             //  likeCount={likeCount}
             //  hasLiked={hasLiked}
           />

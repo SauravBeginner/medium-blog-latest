@@ -28,20 +28,12 @@ const Feed = ({ blogType }: any) => {
   const myProfileDetails = useRecoilValue(myProfileDetailsAtom);
   const setPage = useSetRecoilState(currentPageStateAtom);
   const setUserProfileId = useSetRecoilState(userProfileIdAtom);
-  // const blogsSelector = useRecoilValueLoadable(blogSelector);
 
   let blogAtom;
   const location = useLocation();
   console.log("location", location.pathname);
 
   const { loading, blogs } = useBlogs({ blogType }, { id });
-  // const setAllItems = useSetRecoilState(allBlogStateAtom);
-  // const setMyItems = useSetRecoilState(myBlogStateAtom);
-  // const setUserItems = useSetRecoilState(userBlogStateAtom);
-
-  // const allBlogsSelectorLoadable = useRecoilValueLoadable(allBlogSelector);
-  // const myBlogsSelectorLoadable = useRecoilValueLoadable(myBlogSelector);
-  // const userBlogsSelectorLoadable = useRecoilValueLoadable(userBlogSelector);
 
   if (type === BlogType.AllPosts) {
     blogAtom = allBlogStateAtom;
@@ -59,7 +51,11 @@ const Feed = ({ blogType }: any) => {
     setUserProfileId(id as any);
     setPage(1); // Reset page to 1 when type changes
     setItems(blogs);
-  }, []);
+
+    return () => {
+      setItems([]);
+    };
+  }, [blogType]);
 
   useEffect(
     () => {
@@ -78,7 +74,7 @@ const Feed = ({ blogType }: any) => {
     ) {
       setPage((page) => page + 1);
     }
-  }, [setPage, hasMore]);
+  }, [setPage, type, hasMore]);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -102,6 +98,7 @@ const Feed = ({ blogType }: any) => {
           publishedDate={blog?.createdAt}
           authorId={blog?.author?.id}
           authorName={blog?.author?.name}
+          thumbNail={blog?.thumbNail}
         />
       ))}
       {!loading && items?.length < 1 && (

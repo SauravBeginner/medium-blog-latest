@@ -7,7 +7,7 @@ import { useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { CreateBlogInput, UpdateBlogInput } from "@10xcoder/medium-blog-common";
 import { Button } from "./Button";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CiCamera } from "react-icons/ci";
 import { imgSrc } from "./RightBar";
 import {
@@ -32,16 +32,15 @@ const PostForm = ({ post }: any) => {
       title: post?.title || "",
       content: post?.content || "",
       slug: post?.slug || "",
+      thumbNail: post?.thumbNail || "",
     },
   });
 
   const token = localStorage.getItem("token");
 
   const setBlogDetails = useSetRecoilState(blogDetailsAtomFamily(post?.id));
-  // const blogs = useRecoilValueLoadable(blogSelector);
 
   const navigate = useNavigate();
-  // const refreshBlogList = useRecoilRefresher_UNSTABLE(blogSelector);
 
   const normalizeBLogPost = (detailedPost: any) => {
     return {
@@ -62,102 +61,101 @@ const PostForm = ({ post }: any) => {
   const setMyItems = useSetRecoilState(myBlogStateAtom);
   const setUserItems = useSetRecoilState(userBlogStateAtom);
 
-  // const allBlogsSelectorLoadable = useRecoilValueLoadable(allBlogSelector);
-  // const myBlogsSelectorLoadable = useRecoilValueLoadable(myBlogSelector);
-  // const userBlogsSelectorLoadable = useRecoilValueLoadable(userBlogSelector);
-  // const follwingBlogsSelectorLoadable =
-  //   useRecoilValueLoadable(followinBlogSelector);
+  const [img, setImg] = useState(post?.thumbNail);
   const publishBlog = async (data: any) => {
+    const formData = new FormData();
+
+    formData.append("title", data.title);
+    formData.append("content", data.content);
+    formData.append("slug", data.slug);
+
+    if (data.thumbNail[0]) {
+      formData.append("file", data.thumbNail[0]);
+    }
+
     try {
       if (post) {
-        const dbPost = await authAxios.put(
-          `/blog/update/${post.id}`,
+        // const file = data.image[0] || null;
 
-          data,
-
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
+        const dbPost = await authAxios.put(`/blog/update/${post.id}`, formData);
         if (dbPost) {
           console.log(dbPost);
           // Fetch the updated post separately
           const updatedPost = await authAxios.get(
-            `/blog/post/${dbPost.data?.id}`
+            `/blog/post/${dbPost.data?.post?.id}`
           );
-          console.log(updatedPost);
+          // console.log(updatedPost);
 
           const updatedData = normalizeBLogPost(updatedPost.data?.post);
-          // console.log(updatedData);
           setBlogDetails(updatedPost.data?.post);
 
-          setAllItems((currentList: any) =>
-            currentList.map((item: any) =>
-              item.id === updatedData.id ? updatedData : item
-            )
-          );
-          setMyItems((currentList: any) =>
-            currentList.map((item: any) =>
-              item.id === updatedData.id ? updatedData : item
-            )
-          );
-          setUserItems((currentList: any) =>
-            currentList.map((item: any) =>
-              item.id === updatedData.id ? updatedData : item
-            )
-          );
+          // setAllItems((currentList: any) =>
+          //   currentList.map((item: any) =>
+          //     item.id === updatedData.id ? updatedData : item
+          //   )
+          // );
+          // setMyItems((currentList: any) =>
+          //   currentList.map((item: any) =>
+          //     item.id === updatedData.id ? updatedData : item
+          //   )
+          // );
+          // setUserItems((currentList: any) =>
+          //   currentList.map((item: any) =>
+          //     item.id === updatedData.id ? updatedData : item
+          //   )
+          // );
 
-          navigate(`/blog/${dbPost.data?.id}`);
+          navigate(`/blog/${dbPost.data?.post?.id}`);
         }
       } else {
-        const response = await axios.post(
+        const file = data.thumbNail[0] || null;
+        console.log(file);
+        const response = await authAxios.post(
           `${authURL}/blog/create`,
 
-          data,
-
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
+          formData
         );
         console.log(response);
         if (response) {
           console.log(response);
           // Fetch the updated post separately
           const newPost = await authAxios.get(
-            `/blog/post/${response.data?.id}`,
-            {
-              headers: {
-                Authorization: "Bearer " + token,
-              },
-            }
+            `/blog/post/${response.data?.id}`
           );
           console.log(newPost);
 
           const newData = normalizeBLogPost(newPost.data?.post);
           setBlogDetails(newData);
 
-          setAllItems((currentList: any) => {
-            const newArray = [newData, ...currentList];
+          // setAllItems((currentList: any) => {
+          //   const newArray = [newData, ...currentList];
 
-            console.log("newArrayCreate: ", newArray);
-            return newArray;
-          });
-          setMyItems((currentList: any) => {
-            return [newData, ...currentList];
-          });
-          setUserItems((currentList: any) => {
-            return [newData, ...currentList];
-          });
+          //   console.log("newArrayCreate: ", newArray);
+          //   return newArray;
+          // });
+          // setMyItems((currentList: any) => {
+          //   return [newData, ...currentList];
+          // });
+          // setUserItems((currentList: any) => {
+          //   return [newData, ...currentList];
+          // });
 
           navigate(`/blog/${response.data?.id}`);
         }
       }
     } catch (e) {
       console.log(e);
+    }
+  };
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImg(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -223,30 +221,33 @@ const PostForm = ({ post }: any) => {
                   shouldValidate: true,
                 });
               }}
+              disabled={true}
             />
           </div>
           {/* Input for file upload */}
 
           <label
             htmlFor="profilePicInput"
-            className="relative flex h-40 w-40 overflow-hidden rounded-full border-gray-900 border-2"
+            className="relative flex justify-center items-center h-40 w-40 overflow-hidden rounded-full border-gray-900 border-2 hover:opacity-75"
           >
-            <div className="shrink-0 md:h-24md:w-24 mx-auto my-4">
-              <img
-                //  src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                src={imgSrc}
-                alt="Mystical Wanderer"
-                className="h-full w-full rounded-sm object-cover"
-              />
-            </div>
+            <img
+              //  src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src={img || imgSrc}
+              onClick={() => setImg(img)}
+              alt="Mystical Wanderer"
+              className=" object-cover"
+            />
+
             <div className="absolute py-2  bottom-0 left-0 right-0 flex items-center justify-center bg-black bg-opacity-50 text-white cursor-pointer">
               <CiCamera />
             </div>
             <Input
               type="file"
+              // accept="image/png, image/jpg, image/jpeg, image/gif"
               accept="image/*"
               className="absolute inset-0 opacity-0 cursor-pointer"
-              //  onChange={handleProfilePicChange}
+              {...register("thumbNail", { required: false })}
+              onChange={handleImageChange}
             />
           </label>
         </div>

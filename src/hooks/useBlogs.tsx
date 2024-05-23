@@ -49,24 +49,10 @@ export const useBlogs = (
   const [loading, setLoading] = useState(false);
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const page = useRecoilValue(currentPageStateAtom);
-  // const myProfileDetails = useRecoilValue(myProfileDetailsAtom);
   const type = useRecoilValue(blogTypesAtom);
 
-  // let blogAtom;
   const location = useLocation();
   console.log("location", location.pathname);
-
-  // if (blogType === BlogType.AllPosts) {
-  //   blogAtom = allBlogStateAtom;
-  // } else if (blogType === BlogType.FollowingPosts) {
-  //   blogAtom = followingBlogStateAtom;
-  // } else if (blogType === BlogType.UserPosts) {
-  //   blogAtom = myProfileDetails.id !== id ? userBlogStateAtom : myBlogStateAtom;
-  // } else {
-  //   blogAtom = myBlogStateAtom;
-  // }
-  // const [blogs, setBlogs] = useRecoilState(blogAtom);
-  // const setUserProfileId = useSetRecoilState(userProfileIdAtom);
 
   useEffect(() => {
     setLoading(true);
@@ -91,7 +77,7 @@ export const useBlogs = (
     // return () => {
     //   setBlogs([]);
     // };
-  }, [type, page]);
+  }, [page]);
 
   return { loading, blogs };
 };

@@ -16,6 +16,7 @@ type BlogCardProps = {
   publishedDate: Date;
   likeCount: number;
   hasLiked: boolean;
+  thumbNail?: string;
 };
 const BlogCard = ({
   id,
@@ -24,6 +25,7 @@ const BlogCard = ({
   authorId,
   title,
   publishedDate,
+  thumbNail,
 }: BlogCardProps) => {
   // const [isProcessing, setIsProcessing] = useState(false);
 
@@ -32,6 +34,7 @@ const BlogCard = ({
   const hashLiked =
     blogDetails.state === "hasValue" && blogDetails.contents.hasLiked;
 
+  const imgURL = thumbNail ? thumbNail : imgSrc;
   // if (blogDetails.state === "hasValue") {
   //   title = blogDetails.contents?.title;
   //   content = blogDetails.contents?.content;
@@ -80,6 +83,7 @@ const BlogCard = ({
                       // src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
 
                       src={imgSrc}
+                      loading={"lazy"}
                       alt="Mystical Wanderer"
                       className="h-full w-full rounded-full object-cover"
                     />
@@ -113,7 +117,7 @@ const BlogCard = ({
                 <div className="shrink-0 h-40 w-40 md:h-24md:w-24">
                   <img
                     //    src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    src={imgSrc}
+                    src={imgURL}
                     alt="Mystical Wanderer"
                     className="h-full w-full rounded-sm object-cover"
                   />

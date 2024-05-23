@@ -21,7 +21,7 @@ const Suggestions = () => {
   return (
     <>
       <div>
-        <h2 className="text-lg text-gray-100 font-bold pb-4">Followings</h2>
+        <h2 className="text-lg text-gray-100 font-bold pb-4">Suggestions</h2>
         {followingSuggestions.contents?.length < 1 && (
           <h1 className="text-white text-center">No Contents!</h1>
         )}
