@@ -104,7 +104,7 @@ const BlogCard = ({
             </button> */}
             </div>
             <Link to={`/blog/${id}`}>
-              <div className="flex items-center justify-between mb-4 space-x-2">
+              <div className="flex items-center justify-between mb-4 space-x-10">
                 <div className="">
                   <p className="pb-2 text-lg sm:text-base font-bold">{title}</p>
                   <p className="text-sm sm:text-base">

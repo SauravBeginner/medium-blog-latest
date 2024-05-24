@@ -6,7 +6,7 @@ const Searchbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <div className="w-full ">
+    <div className="w-100% sm:w-full">
       <form className="flex items-center mx-auto  max-w-xs sm:max-w-sm lg:max-w-lg xl:max-w-xl md:max-w-md w-full">
         <label htmlFor="simple-search" className="sr-only">
           Search

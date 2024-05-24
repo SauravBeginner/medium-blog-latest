@@ -57,8 +57,10 @@ const BlogDetails = () => {
             //  hasLiked={hasLiked}
           />
         </section>
-        <aside className="hidden md:block col-span-12 text-white md:col-span-12 lg:col-span-4 xl:col-span-3 ">
+
+        <aside className="md:block col-span-12 text-white md:col-span-12 lg:col-span-4 xl:col-span-3 ">
           <div className="sticky top-[80px] overflow-y-hidden border-b bg-[black]/60  rounded-md md:rounded-lg border-[white]/60 p-4 sm:border shadow-md shadow-[white]/70">
+            <h1 className="pb-2 text-2xl font-semibold">Author</h1>
             <UserMiniDetails currentUser={author} />
           </div>
         </aside>

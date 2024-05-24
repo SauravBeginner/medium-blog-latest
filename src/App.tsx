@@ -5,6 +5,7 @@ import Appbar from "./components/Appbar";
 import AuthLayout from "./components/AuthLayout";
 import AuthHandle from "./components/AuthHandle";
 import WrapperLayout from "./components/WrapperLayout";
+import { BlogCardSkeleton } from "./components/BlogCardSkeleton";
 
 const AllBlogs = React.lazy(() => import("./pages/AllBlogs"));
 const MyBlogs = React.lazy(() => import("./pages/MyBlogs"));
@@ -24,11 +25,23 @@ const FollowingUsers = React.lazy(() => import("./pages/FollowingUsers"));
 const FollowerUsers = React.lazy(() => import("./pages/FollowerUsers"));
 const Suggestions = React.lazy(() => import("./pages/Suggestions"));
 
+const EditProfile = React.lazy(() => import("./pages/EditProfile"));
+
 const App = () => {
   return (
     <BrowserRouter>
       <Appbar />
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <React.Suspense
+        fallback={
+          <div>
+            {" "}
+            <BlogCardSkeleton />
+            <BlogCardSkeleton />
+            <BlogCardSkeleton />
+            <BlogCardSkeleton />
+          </div>
+        }
+      >
         <Routes>
           <Route>
             <Route
@@ -48,7 +61,6 @@ const App = () => {
               }
             />
           </Route>
-
           <Route
             element={
               <AuthHandle>
@@ -72,8 +84,8 @@ const App = () => {
             <Route path="/user/:id/followings" element={<FollowingUsers />} />
             <Route path="/user/:id/followers" element={<FollowerUsers />} />
             <Route path="/user/:id/suggestions" element={<Suggestions />} />
+            <Route path="/user/:id/edit-profile" element={<EditProfile />} />
           </Route>
-
           <Route
             path="/blog/create"
             element={
@@ -90,7 +102,6 @@ const App = () => {
               </AuthHandle>
             }
           />
-
           <Route
             path="/blog/:id"
             element={
@@ -98,7 +109,7 @@ const App = () => {
                 <BlogDetails />
               </AuthHandle>
             }
-          />
+          />{" "}
         </Routes>
       </React.Suspense>
     </BrowserRouter>

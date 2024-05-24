@@ -47,9 +47,6 @@ export const useBlogs = (
   const page = useRecoilValue(currentPageStateAtom);
   // const type = useRecoilValue(blogTypesAtom);
 
-  const location = useLocation();
-  console.log("location", location.pathname);
-
   useEffect(() => {
     setLoading(true);
     authAxios
@@ -73,7 +70,7 @@ export const useBlogs = (
     // return () => {
     //   setBlogs([]);
     // };
-  }, [page]);
+  }, [page, blogType, id]);
 
   return { loading, blogs };
 };

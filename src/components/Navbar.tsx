@@ -18,7 +18,7 @@ const Navbar = () => {
         >
           Explore
         </NavLink>
-        <NavLink
+        {/* <NavLink
           to="/my-posts"
           className={({ isActive }) =>
             `w-[50%] py-3 hover:bg-gray-500 cursor-pointer ${
@@ -27,7 +27,7 @@ const Navbar = () => {
           }
         >
           My Posts
-        </NavLink>
+        </NavLink> */}
         <NavLink
           to="/following-blogs"
           className={({ isActive }) =>

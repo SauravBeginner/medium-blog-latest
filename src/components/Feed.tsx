@@ -3,7 +3,7 @@ import { BlogCardSkeleton } from "./BlogCardSkeleton";
 
 import { useCallback, useEffect } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   allBlogStateAtom,
   BlogType,
@@ -26,26 +26,24 @@ const Feed = ({ blogType }: any) => {
 
   const [type, setType] = useRecoilState(blogTypesAtom);
   const myProfileDetails = useRecoilValue(myProfileDetailsAtom);
-  const setPage = useSetRecoilState(currentPageStateAtom);
+  const [page, setPage] = useRecoilState(currentPageStateAtom);
   const setUserProfileId = useSetRecoilState(userProfileIdAtom);
 
   let blogAtom;
-  const location = useLocation();
-  console.log("location", location.pathname);
 
   const { loading, blogs } = useBlogs({ blogType }, { id });
 
+  const isCurrentUser = myProfileDetails?.id === id;
   if (type === BlogType.AllPosts) {
     blogAtom = allBlogStateAtom;
   } else if (type === BlogType.FollowingPosts) {
     blogAtom = followingBlogStateAtom;
   } else if (type === BlogType.UserPosts) {
-    blogAtom = myProfileDetails.id !== id ? userBlogStateAtom : myBlogStateAtom;
+    blogAtom = !isCurrentUser ? userBlogStateAtom : myBlogStateAtom;
   } else {
     blogAtom = myBlogStateAtom;
   }
   const [items, setItems] = useRecoilState(blogAtom);
-  console.log(items);
   useEffect(() => {
     setType(blogType);
     setUserProfileId(id as any);
@@ -59,12 +57,17 @@ const Feed = ({ blogType }: any) => {
 
   useEffect(
     () => {
-      const newItems = !loading ? blogs : [];
-      setItems((prev: any) => [...prev, ...newItems]);
-      setHasMore(newItems.length > 0);
+      // const newItems = !loading ? blogs : [];
+      // setItems((prev: any) => [...prev, ...newItems]);
+      // setHasMore(newItems.length > 0);
+
+      if (!loading) {
+        setItems((prev: any) => (page === 1 ? blogs : [...prev, ...blogs]));
+        setHasMore(blogs.length > 0);
+      }
     },
     //[blogs]
-    [blogs]
+    [blogs, id]
   );
   const handleScroll = useCallback(() => {
     if (
@@ -82,8 +85,6 @@ const Feed = ({ blogType }: any) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
-
-  // console.log(items);
 
   return (
     <section>

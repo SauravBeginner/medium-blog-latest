@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { IoIosAddCircle } from "react-icons/io";
@@ -12,15 +12,35 @@ import { authState, myProfileDetailsAtom } from "../store/atoms/userAtoms";
 const Appbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [authStatus, setAuthStauts] = useRecoilState(authState);
+  const dropdownRef = useRef(null);
+  const btnRef = useRef(null);
 
   //   const userAuth = useRecoilValue(isAuthenticated);
   //   const setAuthToken = useSetRecoilState(authTokenState);
 
   const navigate = useNavigate();
-
   const handleProfileClick = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
+  useEffect(() => {
+    setIsOpen(false);
+    const handleClickOutside = (event: any) => {
+      if (
+        dropdownRef.current &&
+        btnRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        !btnRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const [myProfileDetails, setMyProfileDetails] =
     useRecoilStateLoadable(myProfileDetailsAtom);
@@ -57,13 +77,14 @@ const Appbar = () => {
       {authStatus?.status && (
         <>
           <Searchbar />
-          <Link to="/blog/create" className="hidden md:block">
+          <Link to="/blog/create" className="md:block">
             {icon}
           </Link>
 
           <button
             onClick={handleProfileClick}
             className="focus:outline-none w-12 h-10 mx-0 lg:mx-6"
+            ref={btnRef}
           >
             <img
               //  src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -74,7 +95,10 @@ const Appbar = () => {
           </button>
           <div className="relative">
             {isOpen && (
-              <ul className="absolute top-8 right-0 bg-[#121212] shadow-white shadow-md rounded-md divide-y  divide-gray-400 w-40 font-medium text-base text-center">
+              <ul
+                ref={dropdownRef}
+                className="appbar-dropdown absolute top-8 right-0 bg-[#121212] shadow-white shadow-md rounded-md divide-y  divide-gray-400 w-40 font-medium text-base text-center"
+              >
                 <li
                   className="py-3 cursor-pointer hover:bg-gray-500 hover:rounded-t-md"
                   onClick={() => navigate(`/user/${currentUser?.id}`)}
