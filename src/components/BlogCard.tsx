@@ -110,11 +110,11 @@ const BlogCard = ({
                 <div className="w-full sm:w-auto">
                   <p className="pb-2 text-lg sm:text-base font-bold">{title}</p>
                   <p className="text-sm sm:text-base line-clamp-3">
-                    {parse(content.slice(0, 500))}
-                    <div className="text-[#ae7aff] underline cursor-pointer">
-                      Read more...
-                    </div>
+                    {parse(content.slice(0, 800))}
                   </p>
+                  <span className="text-[#ae7aff] text-sm underline cursor-pointer">
+                    Read more...
+                  </span>
                 </div>
               </div>
             </Link>
