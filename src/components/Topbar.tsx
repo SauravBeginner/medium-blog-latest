@@ -25,10 +25,10 @@ const Topbar = () => {
   }, [location.pathname, isCurrentUser]);
 
   return (
-    <div className="bg-[#494747]  text-white py-2 mb-8 sm:mb-16 md:mb-4 font-semibold sticky top-[80px] z-10">
+    <div className="bg-[#494747] text-white py-2 mb-8 sm:mb-16 md:mb-4 text-sm md:text-base font-semibold sticky top-[80px] z-10">
       {userAuth && (
         <>
-          <ul className="flex space-x-2  bg-opacity-50 basis-1/2 mx-10 justify-around text-center ">
+          <ul className="flex space-x-4 bg-opacity-50 basis-1/2 mx-5 md:mx-10 justify-around text-center no-scrollbar overflow-x-auto items-center">
             <li
               className={`w-[50%] py-3 hover:bg-gray-500 cursor-pointer ${
                 activeTab === `/user/${id}`

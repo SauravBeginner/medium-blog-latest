@@ -53,7 +53,7 @@ const Feed = ({ blogType }: any) => {
     return () => {
       setItems([]);
     };
-  }, [blogType, id]);
+  }, [type]);
 
   useEffect(
     () => {

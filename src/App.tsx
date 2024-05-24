@@ -34,7 +34,6 @@ const App = () => {
       <React.Suspense
         fallback={
           <div>
-            {" "}
             <BlogCardSkeleton />
             <BlogCardSkeleton />
             <BlogCardSkeleton />

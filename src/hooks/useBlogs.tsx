@@ -68,7 +68,7 @@ export const useBlogs = (
     // return () => {
     //   setBlogs([]);
     // };
-  }, [page, blogType, id]);
+  }, [page, id]);
 
   return { loading, blogs };
 };

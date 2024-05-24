@@ -71,91 +71,67 @@ const BlogCard = ({
   const timeDifference = useTimeDiffer(publishedDate);
 
   return (
-    <>
-      <div className="relative mb-2 w-full last:mb-0 sm:mb-4 ">
-        <div className="flex bg-[black]/40 rounded-none sm:rounded-md md:rounded-lg border-b border-t border-[white]/60 p-4 text-white sm:border-l sm:border-r  shadow-md shadow-[white]/70 ">
-          <div className="pl-4 pt-1 w-full">
-            <div className=" mb-2 flex items-center gap-x-2">
-              <Link to={`/user/${authorId}`}>
-                <div className="flex items-center gap-x-4">
-                  <div className="h-10 w-10 shrink-0 sm:h-10 sm:w-10">
-                    <img
-                      // src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-
-                      src={imgSrc}
-                      loading={"lazy"}
-                      alt="Mystical Wanderer"
-                      className="h-full w-full rounded-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h2 className="inline-block font-bold  hover:underline">
-                      {authorName}
-                    </h2>
-                    <span className="ml-2 inline-block text-sm text-gray-400">
-                      {timeDifference}
-                    </span>
-                  </div>
+    <div className="relative mb-2 w-full last:mb-0 sm:mb-4">
+      <div className="flex flex-col sm:flex-row bg-[black]/40 rounded-none sm:rounded-md md:rounded-lg border-b border-t border-[white]/60 p-4 text-white sm:border-l sm:border-r shadow-md shadow-[white]/70 sm:space-x-4 md:h-60 h-full">
+        <div className="shrink-0 h-60 w-full sm:h-auto sm:w-60 sm:mb-0 mb-4">
+          <img
+            src={imgURL}
+            loading={"lazy"}
+            alt="Blog Thumbnail"
+            className="h-full w-full rounded-sm object-cover"
+          />
+        </div>
+        <div className="flex flex-col pl-0 sm:pl-4 pt-1 w-full h-full">
+          <div className="mb-2 flex items-center gap-x-2">
+            <Link to={`/user/${authorId}`}>
+              <div className="flex items-center gap-x-4">
+                <div className="h-10 w-10 shrink-0 sm:h-10 sm:w-10">
+                  <img
+                    src={imgSrc}
+                    loading={"lazy"}
+                    alt="Author"
+                    className="h-full w-full rounded-full object-cover"
+                  />
                 </div>
-              </Link>
-
-              {/* <button className="ml-auto shrink-0 hover:text-[#ae7aff]">
-              <IoEllipsisVertical />
-            </button> */}
-            </div>
+                <div>
+                  <h2 className="inline-block font-bold hover:underline">
+                    {authorName}
+                  </h2>
+                  <span className="ml-2 inline-block text-sm text-gray-400">
+                    {timeDifference}
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <div className="flex-grow overflow-hidden">
             <Link to={`/blog/${id}`}>
-              <div className="flex items-center justify-between mb-4 space-x-10">
-                <div className="">
+              <div className="flex flex-col items-start sm:flex-row sm:items-center justify-between mb-4 space-y-4 sm:space-y-0 sm:space-x-5 md:space-x-10">
+                <div className="w-full sm:w-auto">
                   <p className="pb-2 text-lg sm:text-base font-bold">{title}</p>
-                  <p className="text-sm sm:text-base">
-                    {parse(content.slice(0, 1000))}
+                  <p className="text-sm sm:text-base line-clamp-3">
+                    {parse(content.slice(0, 500))}
                     <div className="text-[#ae7aff] underline cursor-pointer">
                       Read more...
                     </div>
                   </p>
                 </div>
-                <div className="shrink-0 h-40 w-40 md:h-24md:w-24">
-                  <img
-                    //    src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    src={imgURL}
-                    alt="Mystical Wanderer"
-                    className="h-full w-full rounded-sm object-cover"
-                  />
-                </div>
               </div>
             </Link>
-            <div className="flex gap-x-4 items-center">
-              <button
-                className={`inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff] ${
-                  hashLiked ? "text-[#ae7aff]" : "text-white"
-                }`}
-                //   onClick={handleLike}
-                //   disabled={isProcessing}
-              >
-                <FaHeart size={20} />
-                <span>{blogDetails?.contents?.likeCount || 0}</span>
-              </button>
-              {/* <button className="inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff]">
-              <FaComment size={20} />
-              <span>13</span>
-            </button> */}
-
-              {/* <div className="ml-auto">
-                <button className="mr-2 inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff]">
-                  <MdEditSquare size={20} />
-                </button>
-                <button
-                  className="ml-2 inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff] focus:text-[#ae7aff]"
-                  onClick={() => setIsOpen(true)}
-                >
-                  <MdDelete size={20} />
-                </button>
-              </div> */}
-            </div>
+          </div>
+          <div className="flex gap-x-4 items-center mt-auto">
+            <button
+              className={`inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff] ${
+                hashLiked ? "text-[#ae7aff]" : "text-white"
+              }`}
+            >
+              <FaHeart size={20} />
+              <span>{blogDetails?.contents?.likeCount || 0}</span>
+            </button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
