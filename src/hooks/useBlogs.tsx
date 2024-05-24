@@ -50,12 +50,12 @@ export const useBlogs = (
     authAxios
       .get(
         blogType === BlogType.UserPosts
-          ? `/blog/userposts/${id}?page=${page}&limit=4`
+          ? `/blog/userposts/${id}?page=${page}&limit=10`
           : blogType === BlogType.MyPosts
-          ? `/blog/myposts?page=${page}&limit=4`
+          ? `/blog/myposts?page=${page}&limit=10`
           : blogType === BlogType.FollowingPosts
-          ? `/blog/followingPosts?page=${page}&limit=4`
-          : `/blog/bulk?page=${page}&limit=4`
+          ? `/blog/followingPosts?page=${page}&limit=10`
+          : `/blog/bulk?page=${page}&limit=10`
       )
       .then((response) => {
         setBlogs(response.data.posts);
