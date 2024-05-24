@@ -1,26 +1,9 @@
 import { useRecoilValue } from "recoil";
 import { myProfileDetailsAtom } from "../store/atoms/userAtoms";
-import { useForm } from "react-hook-form";
 
 const EditProfile = () => {
   const myDetailsAtom = useRecoilValue(myProfileDetailsAtom);
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    control,
-    getValues,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      name: myDetailsAtom?.name || "",
-      email: myDetailsAtom?.email || "",
-      Tagline: myDetailsAtom?.slug || "",
-      shortbio: myDetailsAtom?.thumbNail || "",
-      portFolioUrl: myDetailsAtom.portfolioLink || "",
-    },
-  });
+
   console.log(myDetailsAtom);
   return (
     <div className="min-h-screen bg-[#121212] flex  justify-center">

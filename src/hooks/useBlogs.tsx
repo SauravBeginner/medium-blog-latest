@@ -5,8 +5,6 @@ import { authAxios } from "../utils/axiosClient";
 import { BlogType, currentPageStateAtom } from "../store/atoms/blogAtoms";
 import { useRecoilValue } from "recoil";
 
-import { useLocation } from "react-router-dom";
-
 export interface Blog {
   title: string;
   content: string;

@@ -28,7 +28,9 @@ const Appbar = () => {
       if (
         dropdownRef.current &&
         btnRef.current &&
+        //@ts-ignore
         !dropdownRef.current.contains(event.target) &&
+        //@ts-ignore
         !btnRef.current.contains(event.target)
       ) {
         setIsOpen(false);
