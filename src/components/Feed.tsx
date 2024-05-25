@@ -63,7 +63,7 @@ const Feed = ({ blogType }: any) => {
       }
     },
     //[blogs]
-    [blogs, id]
+    [blogs]
   );
   const handleScroll = useCallback(() => {
     if (

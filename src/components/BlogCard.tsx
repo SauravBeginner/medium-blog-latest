@@ -92,7 +92,7 @@ const BlogCard = ({
                     src={authorImg || imgSrc}
                     loading={"lazy"}
                     alt="Author"
-                    className="h-full w-full rounded-full object-cover"
+                    className="w-full h-full rounded-full aspect-square object-cover  border-2 border-[#ae7aff]"
                   />
                 </div>
                 <div>

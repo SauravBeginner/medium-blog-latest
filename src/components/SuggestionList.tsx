@@ -28,8 +28,8 @@ const SuggestionList = ({ user }: any) => {
           setIsFollowing((prev: string[]) => [
             {
               id: response?.data?.newFollowing?.followingId,
-              name: user.name,
-              profileImg: user.profileImg,
+              name: user?.name,
+              profileImg: user?.profileImg,
             },
             ...prev,
           ]),
@@ -55,8 +55,8 @@ const SuggestionList = ({ user }: any) => {
             return [
               {
                 id: response?.data?.deleteFollowing?.followingId,
-                name: user.name,
-                profileImg: user.profileImg,
+                name: user?.name,
+                profileImg: user?.profileImg,
               },
               ...prev,
             ];
@@ -75,7 +75,7 @@ const SuggestionList = ({ user }: any) => {
         <div className="flex items-center space-x-3">
           <span className="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full">
             <img
-              className="aspect-square h-full w-full object-cover"
+              className="w-full h-full rounded-full aspect-square object-cover  border-2 border-[#ae7aff]"
               alt="Ubisoft Logo"
               src={user?.profileImg || imgSrc}
               loading="eager"

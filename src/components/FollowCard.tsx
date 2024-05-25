@@ -49,6 +49,7 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
           {
             id: response?.data?.newFollowing?.followingId,
             name: following.name,
+            profileImg: following?.profileImg,
           },
           ...prev,
         ]);
@@ -73,6 +74,7 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
             {
               id: response?.data?.deleteFollowing?.followingId,
               name: following.name,
+              profileImg: following?.profileImg,
             },
             ...prev,
           ];
@@ -83,7 +85,7 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
       console.log(e);
     }
   };
-
+  console.log(following);
   return (
     <>
       <div className="relative mb-2 w-full last:mb-0 sm:mb-4 cursor-pointer">

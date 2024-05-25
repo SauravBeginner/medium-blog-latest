@@ -92,7 +92,7 @@ const Appbar = () => {
               //  src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               src={currentUser?.profileImg || imgSrc}
               alt="avatar"
-              className="w-full h-full rounded-full object-cover"
+              className="w-full h-full rounded-full aspect-square object-cover  border-2 border-[#ae7aff]"
             />
           </button>
           <div className="relative">

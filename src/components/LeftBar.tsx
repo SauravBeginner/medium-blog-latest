@@ -108,14 +108,14 @@ const LeftBar = () => {
   return (
     <>
       {
-        <aside className=" md:block col-span-12 text-white md:col-span-12 lg:col-span-3 xl:col-span-3 ">
+        <aside className=" col-span-12 text-white md:col-span-12 lg:col-span-3 xl:col-span-3 ">
           <div className="sticky top-[80px]">
             {isEdit || (
               <>
                 {myProfileDetails.state !== "loading" ? (
                   <>
-                    {myProfileDetails.contents?.id == id && (
-                      <div className="mb-4 shadow-md shadow-[white]/70  overflow-y-hidden border-b bg-[black]/60  rounded-md md:rounded-lg border-[white]/60 p-4 sm:border ">
+                    {myProfileDetails.contents?.id !== id && (
+                      <div className="mb-4 lg:block hidden shadow-md shadow-[white]/70  overflow-y-hidden border-b bg-[black]/60  rounded-md md:rounded-lg border-[white]/60 p-4 sm:border ">
                         <MyMiniProfile
                           currentUser={myProfileDetails.contents}
                         />
