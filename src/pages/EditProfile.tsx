@@ -1,16 +1,15 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   myProfileDetailsAtom,
   userProfileDetailsAtomFamily,
 } from "../store/atoms/userAtoms";
 import { authAxios } from "../utils/axiosClient";
-import { authURL, imgSrc } from "../utils/baseUrl";
+import { imgSrc } from "../utils/baseUrl";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UpdateProfileInput } from "@10xcoder/medium-blog-common";
 import { useForm } from "react-hook-form";
 import Input from "../components/Input";
-import { Button } from "../components/Button";
 
 const EditProfile = () => {
   const { id } = useParams();
@@ -23,23 +22,19 @@ const EditProfile = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    //  formState: { errors },
   } = useForm<UpdateProfileInput>({
     defaultValues: {
       name: myDetailsAtom?.name || "",
       tagLine: myDetailsAtom?.tagLine || "",
       profileImg: myDetailsAtom?.profileImg || "",
       email: myDetailsAtom?.email || "",
-      //  password: myDetailsAtom?.password || "",
       portfolioUrl: myDetailsAtom?.portfolioUrl || "",
       shortBio: myDetailsAtom?.shortBio || "",
     },
   });
 
   const navigate = useNavigate();
-  // const setAllItems = useSetRecoilState(allBlogStateAtom);
-  // const setMyItems = useSetRecoilState(myBlogStateAtom);
-  // const setUserItems = useSetRecoilState(userBlogStateAtom);
 
   const [img, setImg] = useState(myDetailsAtom.profileImg);
 
@@ -80,44 +75,11 @@ const EditProfile = () => {
     <div className="min-h-screen bg-[#121212] flex  justify-center">
       <div className="pt[65px] pb-8  sm:px-4 sm:pt8 md:pt[83px] lg:px-10  max-w-4xl ">
         <section className="col-span-12 text-white md:col-span-7 lg:col-span-5 xl:col-span-6">
-          {/* <div className="sticky top-[80px] z-10 mt-[1px] bg-[#121212] pb-4 before:absolute before:inset-x-0 before:bottom-full before:h-[17px] before:bg-[#121212] md:mt-0">
-            <ul className="no-scrollbar flex  justify-center w-full overflow-x-auto px-4 sm:px-0">
-              <li className="mr-2 inline-block shrink-0">
-                <button className="inline-block px-6 py-1.5 hover:bg-[#2c2c2c]">
-                  Posts
-                </button>
-              </li>
-              <li className="mr-2 inline-block shrink-0">
-                <button className="inline-block bg-[#2c2c2c] px-6 py-1.5">
-                  Edit profile
-                </button>
-              </li>
-              <li className="mr-2 inline-block shrink-0">
-                <button className="inline-block px-6 py-1.5 hover:bg-[#2c2c2c]">
-                  Change password
-                </button>
-              </li>
-              <li className="mr-2 inline-block shrink-0">
-                <button className="inline-block px-6 py-1.5 hover:bg-[#2c2c2c]">
-                  Bookmarked
-                </button>
-              </li>
-            </ul>
-          </div> */}
           <form
             onSubmit={handleSubmit(editProfile)}
             className="mb-4 mt-8 flex flex-wrap gap-y-4 p-4 md:p-0"
           >
             <div className="flex w-full items-center justify-center">
-              {/* <input
-                id="avatar-input-1"
-                // hidden
-                type="file"
-                accept="image/*"
-                className="absolute inset-0 opacity-0 cursor-pointer"
-                {...register("profileImg", { required: false })}
-                onChange={handleImageChange}
-              /> */}
               <label
                 htmlFor="avatar-input-1"
                 className="relative flex aspect-square h-24 w-24 cursor-pointer items-center justify-center overflow-visible rounded-full border-4 border-[#ae7aff] p-1"
@@ -130,7 +92,6 @@ const EditProfile = () => {
                 />
                 <Input
                   type="file"
-                  // accept="image/png, image/jpg, image/jpeg, image/gif"
                   accept="image/*"
                   className="absolute inset-0 opacity-0 cursor-pointer"
                   {...register("profileImg", { required: false })}
@@ -166,38 +127,6 @@ const EditProfile = () => {
                 })}
               />
             </div>
-            {/* <div className="flex w-full flex-col items-start justify-start gap-2 xl:w-1/2 xl:pl-2">
-              <label className="text-xs text-slate-200">Last name</label>
-              <Input
-                placeholder="Enter last name"
-                // autoComplete="false"
-                className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500"
-                defaultValue="Starlight"
-                {...register("email", {
-                  required: true,
-                  minLength: {
-                    value: 6,
-                    message: "Name must be at least 1 characters",
-                  },
-                })}
-              />
-            </div> */}{" "}
-            {/*<div className="flex w-full flex-col items-start justify-start gap-2">
-              <label className="text-xs text-slate-200">Username</label>
-              <Input
-                placeholder="Enter username"
-                // autoComplete="false"
-                className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500"
-                defaultValue="starryaurora"
-                {...register("username", {
-                  required: true,
-                  minLength: {
-                    value: 6,
-                    message: "Name must be at least 1 characters",
-                  },
-                })}
-              />
-            </div> */}
             <div className="flex w-full flex-col items-start justify-start gap-2">
               <label className="text-xs text-slate-200">Email</label>
               <Input
@@ -212,6 +141,7 @@ const EditProfile = () => {
                     message: "Name must be at least 1 characters",
                   },
                 })}
+                //@ts-ignore
                 disabled={true}
               />
             </div>
@@ -257,7 +187,7 @@ const EditProfile = () => {
                 className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500"
                 type="bio"
                 // defaultValue="https://www.aurorastarry.com/"
-                {...register("bio", {
+                {...register("shortBio", {
                   required: false,
                   minLength: {
                     value: 6,
@@ -284,7 +214,7 @@ const EditProfile = () => {
               />
             </div>
             <button className="w-full bg-[#ae7aff] p-3 text-center font-bold text-black shadow-[5px_5px_0px_0px_#4f4e4e] transition-all duration-150 ease-in-out active:translate-x-[5px] active:translate-y-[5px] active:shadow-[0px_0px_0px_0px_#4f4e4e]">
-              Edit profile
+              Update Profile
             </button>
           </form>
         </section>

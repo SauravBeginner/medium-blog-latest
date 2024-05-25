@@ -5,8 +5,6 @@ import Appbar from "./components/Appbar";
 import AuthLayout from "./components/AuthLayout";
 import AuthHandle from "./components/AuthHandle";
 import WrapperLayout from "./components/WrapperLayout";
-import { BlogCardSkeleton } from "./components/BlogCardSkeleton";
-import { Loader } from "lucide-react";
 
 const AllBlogs = React.lazy(() => import("./pages/AllBlogs"));
 const MyBlogs = React.lazy(() => import("./pages/MyBlogs"));

@@ -17,7 +17,7 @@ type BlogCardProps = {
   likeCount: number;
   hasLiked: boolean;
   thumbNail?: string;
-  authorImg?: String;
+  authorImg?: string;
 };
 const BlogCard = ({
   id,
