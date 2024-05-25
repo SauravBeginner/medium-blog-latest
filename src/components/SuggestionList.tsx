@@ -9,6 +9,7 @@ import {
 } from "../store/atoms/userAtoms";
 import { useSetRecoilState } from "recoil";
 import { authAxios } from "../utils/axiosClient";
+import { useState } from "react";
 
 const SuggestionList = ({ user }: any) => {
   const setIsFollowing = useSetRecoilState(myfollowingsAtom);
@@ -17,8 +18,11 @@ const SuggestionList = ({ user }: any) => {
 
   const setMyFollowingCount = useSetRecoilState(myFollowingCountAtom);
 
+  const [isProcessing, setIsProcessing] = useState(false);
   const handleFollow = async (userId: string) => {
+    if (isProcessing) return;
     try {
+      setIsProcessing(true);
       const response = await authAxios.put(`${authURL}/user/follow`, {
         id: userId,
       });
@@ -66,6 +70,8 @@ const SuggestionList = ({ user }: any) => {
       }
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsProcessing(false);
     }
   };
 

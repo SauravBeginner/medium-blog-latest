@@ -12,6 +12,7 @@ import parse from "html-react-parser";
 import { blogDetailsAtomFamily } from "../store/atoms/blogAtoms";
 import { myProfileDetailsAtom } from "../store/atoms/userAtoms";
 import { imgSrc } from "./RightBar";
+import { authAxios } from "../utils/axiosClient";
 
 type BlogCardProps = {
   id: string;
@@ -40,7 +41,6 @@ const FullBlog = ({
   const [blogDetails, setBlogDetails] = useRecoilStateLoadable(
     blogDetailsAtomFamily(id)
   );
-  const token = localStorage.getItem("token");
   const hashLiked =
     blogDetails.state === "hasValue" && blogDetails.contents.hasLiked;
 
@@ -48,17 +48,9 @@ const FullBlog = ({
     if (isProcessing) return;
     try {
       setIsProcessing(true);
-      const response = await axios.put(
-        `${authURL}/blog/like`,
-        {
-          id: id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await authAxios.put(`${authURL}/blog/like`, {
+        id: id,
+      });
 
       setBlogDetails((prevDetails: any) => ({
         ...prevDetails,
@@ -128,7 +120,6 @@ const FullBlog = ({
               </p>
               <div className="shrink-0 h-80 w-4/6 md:h-24md:w-24 mx-auto my-4">
                 <img
-                  // src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                   src={imgURL}
                   alt="Mystical Wanderer"
                   className="h-full w-full rounded-sm object-cover"
@@ -140,7 +131,9 @@ const FullBlog = ({
           </div>
           <div className="flex gap-x-4 items-center">
             <button
-              className={`inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff] ${
+              className={`${
+                isProcessing && "cursor-not-allowed"
+              }inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff] ${
                 hashLiked ? "text-[#ae7aff]" : "text-white"
               }`}
               onClick={handleLike}

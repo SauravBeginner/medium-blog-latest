@@ -15,6 +15,7 @@ import {
   userFollowersCountAtomFamily,
 } from "../store/atoms/userAtoms";
 import { authAxios } from "../utils/axiosClient";
+import { useState } from "react";
 
 type FollowingCardProps = {
   following: {
@@ -31,15 +32,16 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
   const myprofileDetails = useRecoilValueLoadable(myProfileDetailsAtom);
 
   const setMyFollowingCount = useSetRecoilState(myFollowingCountAtom);
-  const setUserFollowingCount = useSetRecoilState(
-    userFollowersCountAtomFamily(following.id)
-  );
+  // const setUserFollowingCount = useSetRecoilState(
+  //   userFollowersCountAtomFamily(following.id)
+  // );
 
   const navigate = useNavigate();
-
+  const [isProcessing, setIsProcessing] = useState(false);
   const handleFollow = async (userId: string) => {
-    console.log("clicked", userId);
+    if (isProcessing) return;
     try {
+      setIsProcessing(true);
       const response = await authAxios.put(`/user/follow`, {
         id: userId,
       });
@@ -83,6 +85,8 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
       }
     } catch (e) {
       console.log(e);
+    } finally {
+      setIsProcessing(false);
     }
   };
   console.log(following);
@@ -95,7 +99,7 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
               <div className="flex items-center space-x-3">
                 <span className="relative flex h-16 w-16 shrink-0 overflow-hidden rounded-full">
                   <img
-                    className="aspect-square h-full w-full object-cover"
+                    className="mb-3 flex aspect-square h-16 w-16 rounded-full border-2 border-[#ae7aff] object-cover"
                     alt="Ubisoft Logo"
                     src={following?.profileImg || imgSrc}
                   />

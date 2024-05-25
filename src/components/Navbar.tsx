@@ -1,45 +1,36 @@
 import { NavLink } from "react-router-dom";
-// import { isAuthenticated } from "../store";
 
 const Navbar = () => {
-  // const userAuth = useRecoilValue(isAuthenticated);
-
   return (
-    <div className="bg-[#494747] text-white py-2 mb-4 sm:mb-16 md:mb-4 font-semibold sticky top-[65px] z-10 text-sm md:text-base">
-      {/* {userAuth && ( */}
-      <div className="flex space-x-2  bg-opacity-50 basis-1/2 mx-5 md:mx-10 justify-around text-center ">
+    <div className="bg-[#121212] border-b text-base md:text-lg border-[white]/60 text-white p-4 flex justify-around items-center sticky top-0 z-10 mb-4">
+      <div className="flex space-x-8">
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `w-[50%] py-3 hover:bg-gray-500 cursor-pointer ${
-              isActive ? "bg-white text-slate-900 hover:text-slate-100" : ""
+            `border-b-4 px-4 pb-2  ${
+              // isActive ? "bg-white text-slate-900 hover:text-slate-100" : ""
+              isActive
+                ? "border-[#ae7aff] text-white font-semibold"
+                : "border-transparent text-gray-500"
             }`
           }
         >
           Explore
         </NavLink>
-        {/* <NavLink
-          to="/my-posts"
-          className={({ isActive }) =>
-            `w-[50%] py-3 hover:bg-gray-500 cursor-pointer ${
-              isActive ? "bg-white text-slate-900 hover:text-slate-100" : ""
-            }`
-          }
-        >
-          My Posts
-        </NavLink> */}
         <NavLink
           to="/following-blogs"
           className={({ isActive }) =>
-            `w-[50%] py-3 hover:bg-gray-500 cursor-pointer ${
-              isActive ? "bg-white text-slate-900 hover:text-slate-100" : ""
+            `border-b-4 px-4 pb-2  ${
+              // isActive ? "bg-white text-slate-900 hover:text-slate-100" : ""
+              isActive
+                ? "border-[#ae7aff] text-white font-semibold"
+                : "border-transparent text-gray-500"
             }`
           }
         >
           Following Posts
         </NavLink>
       </div>
-      {/* )} */}
     </div>
   );
 };

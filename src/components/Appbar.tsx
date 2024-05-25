@@ -2,21 +2,19 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { IoIosAddCircle } from "react-icons/io";
-// import { CiSaveUp2 } from "react-icons/ci";
 import Searchbar from "./Searchbar";
 import { imgSrc } from "../utils/baseUrl";
 import { useRecoilState, useRecoilStateLoadable } from "recoil";
 import { authState, myProfileDetailsAtom } from "../store/atoms/userAtoms";
-// import { imgSrc } from "./RightBar";
 
 const Appbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSticky, setIsSticky] = useState(false);
+  const [showAppbar, setShowAppbar] = useState(true);
+  const [lastScrollY, setlastScrollY] = useState(0);
   const [authStatus, setAuthStauts] = useRecoilState(authState);
   const dropdownRef = useRef(null);
   const btnRef = useRef(null);
-
-  //   const userAuth = useRecoilValue(isAuthenticated);
-  //   const setAuthToken = useSetRecoilState(authTokenState);
 
   const navigate = useNavigate();
   const handleProfileClick = () => {
@@ -43,6 +41,23 @@ const Appbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  // if user scroll on y access then navbar colour will be change.
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setShowAppbar(false);
+      } else {
+        setShowAppbar(true);
+      }
+      setlastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
 
   const [myProfileDetails, setMyProfileDetails] =
     useRecoilStateLoadable(myProfileDetailsAtom);
@@ -71,7 +86,11 @@ const Appbar = () => {
   }, [location.pathname]);
 
   return (
-    <nav className="fixed w-full z-50 bg-[black] border-gray-200 px-4 py-3 flex items-center justify-evenly text-gray-100 text-sm md:text-lg font-semibold">
+    <nav
+      className={`fixed w-full z-50 
+      ${showAppbar ? "translate-y-0" : "-translate-y-full"}
+        bg-black text-white border-gray-200 px-4 py-3 flex items-center justify-evenly text-sm md:text-lg font-semibold`}
+    >
       <Link to="/" className="font-bold mx-0 lg:mx-6">
         Medium
       </Link>
@@ -89,7 +108,6 @@ const Appbar = () => {
             ref={btnRef}
           >
             <img
-              //  src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               src={currentUser?.profileImg || imgSrc}
               alt="avatar"
               className="w-full h-full rounded-full aspect-square object-cover  border-2 border-[#ae7aff]"

@@ -1,11 +1,14 @@
 import { Link } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 
-import { useRecoilValueLoadable } from "recoil";
+import { useRecoilStateLoadable, useRecoilValueLoadable } from "recoil";
 import { useTimeDiffer } from "../hooks/UseTimeDiffer";
 import parse from "html-react-parser";
 import { imgSrc } from "./RightBar";
 import { blogDetailsAtomFamily } from "../store/atoms/blogAtoms";
+import { useState } from "react";
+import { authAxios } from "../utils/axiosClient";
+import { authURL } from "../utils/baseUrl";
 
 type BlogCardProps = {
   id: string;
@@ -31,8 +34,9 @@ const BlogCard = ({
 }: BlogCardProps) => {
   // const [isProcessing, setIsProcessing] = useState(false);
 
-  const blogDetails = useRecoilValueLoadable(blogDetailsAtomFamily(id));
-
+  const [blogDetails, setBlogDetails] = useRecoilStateLoadable(
+    blogDetailsAtomFamily(id)
+  );
   const hashLiked =
     blogDetails.state === "hasValue" && blogDetails.contents.hasLiked;
 
@@ -42,33 +46,27 @@ const BlogCard = ({
   //   content = blogDetails.contents?.content;
   // }
 
-  // const handleLike = async () => {
-  //   if (isProcessing) return;
-  //   try {
-  //     setIsProcessing(true);
-  //     const response = await axios.put(
-  //       `${authURL}/blog/like`,
-  //       {
-  //         id: id,
-  //       },
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
+  const [isProcessing, setIsProcessing] = useState(false);
 
-  //     setBlogDetails((prevDetails: any) => ({
-  //       ...prevDetails,
-  //       likeCount: response.data.likeCount,
-  //       hasLiked: response.data.hasLiked,
-  //     }));
-  //   } catch (e) {
-  //     console.log(e);
-  //   } finally {
-  //     setIsProcessing(false);
-  //   }
-  // };
+  const handleLike = async () => {
+    if (isProcessing) return;
+    try {
+      setIsProcessing(true);
+      const response = await authAxios.put(`${authURL}/blog/like`, {
+        id: id,
+      });
+
+      setBlogDetails((prevDetails: any) => ({
+        ...prevDetails,
+        likeCount: response.data.likeCount,
+        hasLiked: response.data.hasLiked,
+      }));
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
   // useTimeDiffer custom hook
   const timeDifference = useTimeDiffer(publishedDate);
 
@@ -126,6 +124,8 @@ const BlogCard = ({
               className={`inline-flex items-center gap-x-1 outline-none hover:text-[#ae7aff] ${
                 hashLiked ? "text-[#ae7aff]" : "text-white"
               }`}
+              onClick={handleLike}
+              disabled={isProcessing}
             >
               <FaHeart size={20} />
               <span>{blogDetails?.contents?.likeCount || 0}</span>

@@ -56,6 +56,9 @@ const LeftBar = () => {
   const [isFollowing, setIsFollowing] = useRecoilState(myfollowingsAtom);
   const setSuggestion = useSetRecoilState(suggestionAtom);
 
+  const [showAppbar, setShowAppbar] = useState(false);
+  const [lastScrollY, setlastScrollY] = useState(0);
+
   const handleFollow = async (userId: string) => {
     try {
       const response = await authAxios.put(`/user/follow`, {
@@ -104,12 +107,27 @@ const LeftBar = () => {
       console.log(e);
     }
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setShowAppbar(false);
+      } else {
+        setShowAppbar(true);
+      }
+      setlastScrollY(window.scrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
 
   return (
     <>
       {
         <aside className=" col-span-12 text-white md:col-span-12 lg:col-span-3 xl:col-span-3 ">
-          <div className="sticky top-[80px]">
+          <div className={`sticky ${showAppbar ? "top-[80px]" : "top-[10px]"}`}>
             {isEdit || (
               <>
                 {myProfileDetails.state !== "loading" ? (
@@ -137,16 +155,16 @@ const LeftBar = () => {
                 )}
 
                 {myProfileDetails.contents?.id === id ? (
-                  <Button
+                  <button
                     className="inline-flex w-max items-center bg-[#885dcf] px-4 py-2 text-center font-bold text-black shadow-[5px_5px_0px_0px_#4f4e4e] transition-all duration-150 ease-in-out active:translate-x-[5px] active:translate-y-[5px] active:shadow-[0px_0px_0px_0px_#4f4e4e]"
                     onClick={() =>
                       navigate(`/user/${currentUser?.id}/edit-profile`)
                     }
                   >
                     Edit Profile
-                  </Button>
+                  </button>
                 ) : (
-                  <Button
+                  <button
                     className="inline-flex w-max items-center bg-[#885dcf] px-4 py-2 text-center font-bold text-black shadow-[5px_5px_0px_0px_#4f4e4e] transition-all duration-150 ease-in-out active:translate-x-[5px] active:translate-y-[5px] active:shadow-[0px_0px_0px_0px_#4f4e4e]"
                     onClick={() =>
                       handleFollow(userProfileDetails.contents?.id)
@@ -160,7 +178,7 @@ const LeftBar = () => {
                         ? "Unfollow"
                         : "Follow"
                     }
-                  </Button>
+                  </button>
                 )}
               </div>
             ) : (
