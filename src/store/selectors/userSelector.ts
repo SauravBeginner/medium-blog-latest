@@ -1,7 +1,10 @@
-import { selector } from "recoil";
+import { selector, selectorFamily } from "recoil";
 import { authAxios } from "../../utils/axiosClient";
 // import { followingBlogStateAtom } from "../atoms/blogAtoms";
-import { myProfileDetailsAtom } from "../atoms/userAtoms";
+import {
+  myProfileDetailsAtom,
+  userProfileDetailsAtomFamily,
+} from "../atoms/userAtoms";
 
 export const getMyProfileDataSelector = selector({
   key: "getMyProfileDataSelector",
@@ -38,7 +41,36 @@ export const myFollowingCountSelector = selector({
     return followingCount;
   },
 });
+export const userFollowingCountSelectorFamily = selectorFamily({
+  key: "userFollowingCountSelectorFamily",
+  get:
+    (id) =>
+    ({ get }) => {
+      // const following = get(followingAtom);
+      const userId = String(id);
+      const userProfile = get(userProfileDetailsAtomFamily(userId));
+      const followingCount = userProfile.followingCount;
 
+      console.log("FollowingCount", followingCount);
+
+      return followingCount;
+    },
+});
+export const userFollowersCountSelectorFamily = selectorFamily({
+  key: "userFollowersCountSelectorFamily",
+  get:
+    (id) =>
+    ({ get }) => {
+      // const following = get(followingAtom);
+      const userId = String(id);
+      const userProfile = get(userProfileDetailsAtomFamily(userId));
+      const followersCount = userProfile.followersCount;
+
+      console.log("followersCount", followersCount);
+
+      return followersCount;
+    },
+});
 export const myFollowersCountSelector = selector({
   key: "myFollowersCountSelector",
   get: ({ get }) => {

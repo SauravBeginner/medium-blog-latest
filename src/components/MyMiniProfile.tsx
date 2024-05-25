@@ -1,17 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { imgSrc } from "./RightBar";
+import { useRecoilValue } from "recoil";
+import {
+  myFollowersCountAtom,
+  myFollowingCountAtom,
+} from "../store/atoms/userAtoms";
 // import { myFollowingCountAtom, myProfileDetailsAtom } from "../store";
 
 const MyMiniProfile = ({ currentUser }: any) => {
   const navigate = useNavigate();
-  // const followingCount = useRecoilValue(myFollowingCountAtom);
+  const followingCount = useRecoilValue(myFollowingCountAtom);
+  const followerCount = useRecoilValue(myFollowersCountAtom);
+
   // // const followersCount = useRecoilValue(myFollowersCountSelector);
 
   // const myprofile = useRecoilValueLoadable(myProfileDetailsAtom);
 
-  const followings = currentUser?.followingCount;
+  // const followings = currentUser?.followingCount;
 
-  const followers = currentUser?.followersCount;
+  // const followers = currentUser?.followersCount;
 
   return (
     <div>
@@ -41,7 +48,9 @@ const MyMiniProfile = ({ currentUser }: any) => {
           onClick={() => navigate(`/user/${currentUser?.id}/followers`)}
         >
           <span className="font-bold">
-            {followers > 1000 ? Math.floor(followers / 1000) + "k" : followers}
+            {followerCount > 1000
+              ? Math.floor(followerCount / 1000) + "k"
+              : followerCount}
             &nbsp;
           </span>
           <span className="text-sm text-gray-400">Followers</span>
@@ -51,9 +60,9 @@ const MyMiniProfile = ({ currentUser }: any) => {
           onClick={() => navigate(`/user/${currentUser?.id}/followings`)}
         >
           <span className="font-bold">
-            {followings > 1000
-              ? Math.floor(followings / 1000) + "k"
-              : followings}
+            {followingCount > 1000
+              ? Math.floor(followingCount / 1000) + "k"
+              : followingCount}
             &nbsp;
           </span>
           <span className="text-sm text-gray-400">Followings</span>

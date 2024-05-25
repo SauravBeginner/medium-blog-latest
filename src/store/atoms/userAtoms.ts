@@ -3,6 +3,8 @@ import {
   getMyProfileDataSelector,
   myFollowersCountSelector,
   myFollowingCountSelector,
+  userFollowersCountSelectorFamily,
+  userFollowingCountSelectorFamily,
 } from "../selectors/userSelector";
 import { authAxios } from "../../utils/axiosClient";
 
@@ -98,9 +100,18 @@ export const myFollowingCountAtom = atom({
   key: "myFollowingCountAtom",
   default: myFollowingCountSelector, // Set the default value to the result of the selector
 });
+
+export const userFollowingCountAtomFamily = atomFamily({
+  key: "userFollowingCountAtomFamily",
+  default: userFollowingCountSelectorFamily, // Set the default value to the result of the selector
+});
 export const myFollowersCountAtom = atom({
   key: "myFollowersCountAtom",
   default: myFollowersCountSelector, // Set the default value to the result of the selector
+});
+export const userFollowersCountAtomFamily = atomFamily({
+  key: "userFollowersCountAtomFamily",
+  default: userFollowersCountSelectorFamily, // Set the default value to the result of the selector
 });
 export const myfollowingsAtom = atom({
   key: "myfollowingsAtom",

@@ -12,6 +12,7 @@ import {
   myfollowingsAtom,
   myProfileDetailsAtom,
   suggestionAtom,
+  userFollowersCountAtomFamily,
 } from "../store/atoms/userAtoms";
 import { authAxios } from "../utils/axiosClient";
 
@@ -30,6 +31,9 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
   const myprofileDetails = useRecoilValueLoadable(myProfileDetailsAtom);
 
   const setMyFollowingCount = useSetRecoilState(myFollowingCountAtom);
+  const setUserFollowingCount = useSetRecoilState(
+    userFollowersCountAtomFamily(following.id)
+  );
 
   const navigate = useNavigate();
 

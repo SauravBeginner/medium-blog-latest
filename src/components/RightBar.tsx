@@ -38,7 +38,7 @@ const RightBar = () => {
             <ShortProfileSkeleton />
           )}
 
-          {followingSuggestions.state !== "loading" ? (
+          {followingSuggestions.state === "hasValue" ? (
             <div className="max-h-screen ">
               <div className="bg-[black]/60 rounded-lg p-4 text-white mb-2 border border-[white]/60 shadow-md shadow-[white]/70">
                 <h2 className="text-lg font-bold pb-4">Who to follow</h2>
@@ -46,17 +46,7 @@ const RightBar = () => {
                   {followingSuggestions.contents?.length > 0 &&
                     followingSuggestions.contents
                       ?.slice(0, 3)
-                      .map((user: any) => (
-                        <SuggestionList user={user} />
-
-                        // <FollowingCard
-                        //   key={`suggstions-${user?.id}`}
-                        //   following={user}
-                        //   list={true}
-                        //   // setFollowings={setFollowings}
-                        //   // setFollowingSuggestions={setFollowingSuggestions}
-                        // />
-                      ))}
+                      .map((user: any) => <SuggestionList user={user} />)}
                 </div>
                 <div className="my-4">
                   <Button

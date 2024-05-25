@@ -39,7 +39,7 @@ const Feed = ({ blogType }: any) => {
   } else if (type === BlogType.FollowingPosts) {
     blogAtom = followingBlogStateAtom;
   } else if (type === BlogType.UserPosts) {
-    blogAtom = !isCurrentUser ? userBlogStateAtom : myBlogStateAtom;
+    blogAtom = isCurrentUser ? myBlogStateAtom : userBlogStateAtom;
   } else {
     blogAtom = myBlogStateAtom;
   }
@@ -49,10 +49,6 @@ const Feed = ({ blogType }: any) => {
     setUserProfileId(id as any);
     setPage(1); // Reset page to 1 when type changes
     setItems(blogs);
-
-    return () => {
-      setItems([]);
-    };
   }, [type]);
 
   useEffect(

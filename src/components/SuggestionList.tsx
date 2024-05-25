@@ -18,7 +18,6 @@ const SuggestionList = ({ user }: any) => {
   const setMyFollowingCount = useSetRecoilState(myFollowingCountAtom);
 
   const handleFollow = async (userId: string) => {
-    console.log("clicked", userId);
     try {
       const response = await authAxios.put(`${authURL}/user/follow`, {
         id: userId,
@@ -30,6 +29,7 @@ const SuggestionList = ({ user }: any) => {
             {
               id: response?.data?.newFollowing?.followingId,
               name: user.name,
+              profileImg: user.profileImg,
             },
             ...prev,
           ]),
@@ -56,6 +56,7 @@ const SuggestionList = ({ user }: any) => {
               {
                 id: response?.data?.deleteFollowing?.followingId,
                 name: user.name,
+                profileImg: user.profileImg,
               },
               ...prev,
             ];
@@ -77,6 +78,7 @@ const SuggestionList = ({ user }: any) => {
               className="aspect-square h-full w-full object-cover"
               alt="Ubisoft Logo"
               src={user?.profileImg || imgSrc}
+              loading="eager"
             />
           </span>
           <div>

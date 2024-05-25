@@ -122,7 +122,7 @@ const FullBlog = ({
           </div>
 
           <div className="flex items-center justify-between mb-4 space-x-2">
-            <div className="mr-10">
+            <div className="w-full">
               <p className="py-2 text-lg sm:text-4xl font-bold text-center">
                 {title}
               </p>

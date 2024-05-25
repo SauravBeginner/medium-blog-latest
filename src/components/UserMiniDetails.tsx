@@ -1,14 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { imgSrc } from "./RightBar";
+import { useRecoilValue } from "recoil";
+import {
+  myFollowingCountAtom,
+  myProfileDetailsAtom,
+  userFollowersCountAtomFamily,
+  userFollowingCountAtomFamily,
+} from "../store/atoms/userAtoms";
 // import { myFollowingCountAtom, myProfileDetailsAtom } from "../store";
 
 const UserMiniDetails = ({ currentUser }: any) => {
   const navigate = useNavigate();
-  console.log("currentUser", currentUser);
+
   // const followingCount = useRecoilValue(myFollowingCountAtom);
   // // const followersCount = useRecoilValue(myFollowersCountSelector);
 
-  // const myprofile = useRecoilValueLoadable(myProfileDetailsAtom);
+  const myprofile = useRecoilValue(myProfileDetailsAtom);
 
   // const followings =
   //   currentUser?.id === myprofile.contents?.id
@@ -20,9 +27,19 @@ const UserMiniDetails = ({ currentUser }: any) => {
   //     ? myprofile.contents?.followersCount
   //     : currentUser?.followersCount;
   //console.log(followingCount, followersCount);
+  const myFollowingCount = useRecoilValue(myFollowingCountAtom);
 
-  const followings = currentUser?.followingCount;
-  const followers = currentUser?.followersCount;
+  const userFollowingCount = useRecoilValue(
+    userFollowingCountAtomFamily(currentUser?.id)
+  );
+  const followerCount = useRecoilValue(
+    userFollowersCountAtomFamily(currentUser?.id)
+  );
+  // const followings = currentUser?.followingCount;
+  // const followers = currentUser?.followersCount;
+
+  const followingCount =
+    myprofile?.id === currentUser?.id ? myFollowingCount : userFollowingCount;
   return (
     <div>
       <div
@@ -51,7 +68,9 @@ const UserMiniDetails = ({ currentUser }: any) => {
           onClick={() => navigate(`/user/${currentUser?.id}/followers`)}
         >
           <span className="font-bold">
-            {followers > 1000 ? Math.floor(followers / 1000) + "k" : followers}
+            {followerCount > 1000
+              ? Math.floor(followerCount / 1000) + "k"
+              : followerCount}
             &nbsp;
           </span>
           <span className="text-sm text-gray-400">Followers</span>
@@ -61,16 +80,15 @@ const UserMiniDetails = ({ currentUser }: any) => {
           onClick={() => navigate(`/user/${currentUser?.id}/followings`)}
         >
           <span className="font-bold">
-            {followings > 1000
-              ? Math.floor(followings / 1000) + "k"
-              : followings}
+            {followingCount > 1000
+              ? Math.floor(followingCount / 1000) + "k"
+              : followingCount}
             &nbsp;
           </span>
           <span className="text-sm text-gray-400">Followings</span>
         </span>
       </p>
       <p className="text-sm my-1">
-        '{" "}
         {currentUser?.tagLine ||
           "Night owl | Moon enthusiast | Wanderlust 🌕🌙🌎"}
         '
@@ -82,8 +100,8 @@ const UserMiniDetails = ({ currentUser }: any) => {
           <p className="text-sm">
             {currentUser?.bio ||
               `Immersed in the enchanting world of the night, captivated
-                      by the moon's allure, and constantly seeking new
-                      adventures around the globe. 🌕🌙🌎`}
+              by the moon's allure, and constantly seeking new
+              adventures around the globe. 🌕🌙🌎`}
           </p>
         </div>
         <div className="mb-4 text-sm">
@@ -95,7 +113,7 @@ const UserMiniDetails = ({ currentUser }: any) => {
             {currentUser?.portfolioUrl}
           </button>
         </div>
-        <p className="mb-4 flex gap-x-4">
+        {/* <p className="mb-4 flex gap-x-4">
           <span className="inline-block">
             <span className="font-bold">13.5k&nbsp;</span>
             <span className="text-sm text-gray-400">Followers</span>
@@ -104,7 +122,7 @@ const UserMiniDetails = ({ currentUser }: any) => {
             <span className="font-bold">204&nbsp;</span>
             <span className="text-sm text-gray-400">Following</span>
           </span>
-        </p>
+        </p> */}
       </>
     </div>
   );
