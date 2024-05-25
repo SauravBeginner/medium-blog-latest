@@ -99,6 +99,7 @@ const Feed = ({ blogType }: any) => {
           publishedDate={blog?.createdAt}
           authorId={blog?.author?.id}
           authorName={blog?.author?.name}
+          authorImg={blog?.author?.profileImg}
           thumbNail={blog?.thumbNail}
         />
       ))}

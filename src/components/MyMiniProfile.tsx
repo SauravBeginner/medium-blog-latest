@@ -21,7 +21,7 @@ const MyMiniProfile = ({ currentUser }: any) => {
       >
         <img
           className="mb-3 flex aspect-square h-16 w-16 rounded-full border-2 border-[#ae7aff] object-cover"
-          src={imgSrc}
+          src={currentUser?.profileImg || imgSrc}
           alt="avatar"
         />
         <span className="mx-4">
@@ -60,7 +60,8 @@ const MyMiniProfile = ({ currentUser }: any) => {
         </span>
       </p>
       <p className="text-sm my-1">
-        Night owl | Moon enthusiast | Wanderlust 🌕🌙🌎
+        {currentUser?.tagLine ||
+          "Night owl | Moon enthusiast | Wanderlust 🌕🌙🌎"}
       </p>
     </div>
   );

@@ -42,7 +42,8 @@ export const Signup = () => {
       </p>
       <div className="flex flex-col space-y-4 mt-8">
         <Input
-          label="name"
+          className="focus:bg-gray-100"
+          label="Name"
           placeholder="Name"
           type="name"
           {...register("name", {
@@ -60,8 +61,12 @@ export const Signup = () => {
         {errors.name && (
           <span className="text-sm text-red-500">{errors.name.message}</span>
         )}
+        {errors.name && (
+          <span className="text-sm text-red-500">{errors.name.message}</span>
+        )}
         <Input
-          label="email"
+          className="focus:bg-gray-100"
+          label="Email"
           placeholder="m@example.com"
           type="email"
           {...register("email", {
@@ -77,7 +82,8 @@ export const Signup = () => {
           <span className="text-sm text-red-500">{errors.email.message}</span>
         )}
         <Input
-          label="password"
+          className="focus:bg-gray-100"
+          label="Enter Password"
           placeholder="••••••••"
           {...register("password", {
             required: true,

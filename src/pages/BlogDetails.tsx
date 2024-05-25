@@ -50,6 +50,7 @@ const BlogDetails = () => {
             content={content}
             title={title}
             authorName={author?.name}
+            authorImg={author?.profileImg}
             authorId={author?.id}
             publishedDate={createdAt}
             thumbNail={thumbNail}

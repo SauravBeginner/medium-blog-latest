@@ -12,6 +12,7 @@ import {
 } from "../store/atoms/userAtoms";
 import { authAxios } from "../utils/axiosClient";
 import { useEffect, useState } from "react";
+import MyMiniProfile from "./MyMiniProfile";
 
 const LeftBar = () => {
   const [isEdit, setIsEdit] = useState(false);
@@ -87,7 +88,7 @@ const LeftBar = () => {
                   <>
                     {myProfileDetails.contents?.id !== id && (
                       <div className="mb-4 shadow-md shadow-[white]/70  overflow-y-hidden border-b bg-[black]/60  rounded-md md:rounded-lg border-[white]/60 p-4 sm:border ">
-                        <UserMiniDetails
+                        <MyMiniProfile
                           currentUser={myProfileDetails.contents}
                         />
                       </div>
@@ -102,41 +103,13 @@ const LeftBar = () => {
             {profileDetails?.state === "hasValue" ? (
               <div className="sticky top-[80px] overflow-y-hidden border-b bg-[black]/60  rounded-md md:rounded-lg border-[white]/60 p-4 sm:border shadow-md shadow-[white]/70">
                 <UserMiniDetails currentUser={currentUser} />
-                <>
-                  <hr className="my-4 h-[1px] w-full" />
-                  <div className="mb-4">
-                    <h3 className="mb-1 font-bold">Short Bio</h3>
-                    <p className="text-sm">
-                      Immersed in the enchanting world of the night, captivated
-                      by the moon's allure, and constantly seeking new
-                      adventures around the globe. 🌕🌙🌎
-                    </p>
-                  </div>
-                  {/* <div className="mb-4 text-sm">
-                  <h3 className="mb-1 font-bold">Public link</h3>
-                  <button className="block text-[#ae7aff] hover:underline">
-                    {currentUser?.email}
-                  </button>
-                  <button className="block break-all text-[#ae7aff] hover:underline">
-                    https://www.aurorastarry.com/
-                  </button>
-                </div> */}
-                  <p className="mb-4 flex gap-x-4">
-                    <span className="inline-block">
-                      <span className="font-bold">13.5k&nbsp;</span>
-                      <span className="text-sm text-gray-400">Followers</span>
-                    </span>
-                    <span className="inline-block">
-                      <span className="font-bold">204&nbsp;</span>
-                      <span className="text-sm text-gray-400">Following</span>
-                    </span>
-                  </p>
-                </>
 
                 {myProfileDetails.contents?.id == id ? (
                   <Button
                     className="inline-flex w-max items-center bg-[#885dcf] px-4 py-2 text-center font-bold text-black shadow-[5px_5px_0px_0px_#4f4e4e] transition-all duration-150 ease-in-out active:translate-x-[5px] active:translate-y-[5px] active:shadow-[0px_0px_0px_0px_#4f4e4e]"
-                    onClick={() => navigate("/user/edit-profile")}
+                    onClick={() =>
+                      navigate(`/user/${currentUser?.id}/edit-profile`)
+                    }
                   >
                     Edit Profile
                   </Button>

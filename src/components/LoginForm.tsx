@@ -48,6 +48,7 @@ export const LoginForm = () => {
       </p>
       <div className="flex flex-col space-y-4 mt-8">
         <Input
+          className="focus:bg-gray-100"
           label="email"
           placeholder="m@example.com"
           type="email"
@@ -64,6 +65,7 @@ export const LoginForm = () => {
           <span className="text-sm text-red-500">{errors.email.message}</span>
         )}
         <Input
+          className="focus:bg-gray-100"
           label="password"
           placeholder="••••••••"
           {...register("password", {

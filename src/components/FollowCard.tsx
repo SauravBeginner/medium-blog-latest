@@ -19,6 +19,7 @@ type FollowingCardProps = {
   following: {
     id: string;
     name: string;
+    profileImg?: string;
   };
 };
 const FollowingCard = ({ following }: FollowingCardProps) => {
@@ -90,7 +91,7 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
                   <img
                     className="aspect-square h-full w-full object-cover"
                     alt="Ubisoft Logo"
-                    src={imgSrc}
+                    src={following?.profileImg || imgSrc}
                   />
                 </span>
                 <div>

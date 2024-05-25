@@ -90,7 +90,7 @@ const Appbar = () => {
           >
             <img
               //  src="https://images.pexels.com/photos/7775642/pexels-photo-7775642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              src={imgSrc}
+              src={currentUser?.profileImg || imgSrc}
               alt="avatar"
               className="w-full h-full rounded-full object-cover"
             />

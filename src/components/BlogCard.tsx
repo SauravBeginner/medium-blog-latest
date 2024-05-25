@@ -17,6 +17,7 @@ type BlogCardProps = {
   likeCount: number;
   hasLiked: boolean;
   thumbNail?: string;
+  authorImg?: String;
 };
 const BlogCard = ({
   id,
@@ -26,6 +27,7 @@ const BlogCard = ({
   title,
   publishedDate,
   thumbNail,
+  authorImg,
 }: BlogCardProps) => {
   // const [isProcessing, setIsProcessing] = useState(false);
 
@@ -87,7 +89,7 @@ const BlogCard = ({
               <div className="flex items-center gap-x-4">
                 <div className="h-10 w-10 shrink-0 sm:h-10 sm:w-10">
                   <img
-                    src={imgSrc}
+                    src={authorImg || imgSrc}
                     loading={"lazy"}
                     alt="Author"
                     className="h-full w-full rounded-full object-cover"

@@ -4,6 +4,7 @@ import { imgSrc } from "./RightBar";
 
 const UserMiniDetails = ({ currentUser }: any) => {
   const navigate = useNavigate();
+  console.log("currentUser", currentUser);
   // const followingCount = useRecoilValue(myFollowingCountAtom);
   // // const followersCount = useRecoilValue(myFollowersCountSelector);
 
@@ -21,7 +22,6 @@ const UserMiniDetails = ({ currentUser }: any) => {
   //console.log(followingCount, followersCount);
 
   const followings = currentUser?.followingCount;
-
   const followers = currentUser?.followersCount;
   return (
     <div>
@@ -31,7 +31,7 @@ const UserMiniDetails = ({ currentUser }: any) => {
       >
         <img
           className="mb-3 flex aspect-square h-16 w-16 rounded-full border-2 border-[#ae7aff] object-cover"
-          src={imgSrc}
+          src={currentUser?.profileImg || imgSrc}
           alt="avatar"
         />
         <span className="mx-4">
@@ -39,9 +39,9 @@ const UserMiniDetails = ({ currentUser }: any) => {
           <div className="text-sm text-gray-400">@{currentUser?.name}</div>
         </span>
       </div>
-      <button className="block text-[#ae7aff] hover:underline">
+      {/* <button className="block text-[#ae7aff] hover:underline">
         {currentUser?.email}
-      </button>
+      </button> */}
       <p
         className="mb-2 flex gap-x-4 items-center"
         // onClick={() => navigate(`/user/${currentUser?.id}/followings`)}
@@ -70,8 +70,42 @@ const UserMiniDetails = ({ currentUser }: any) => {
         </span>
       </p>
       <p className="text-sm my-1">
-        Night owl | Moon enthusiast | Wanderlust 🌕🌙🌎
+        '{" "}
+        {currentUser?.tagLine ||
+          "Night owl | Moon enthusiast | Wanderlust 🌕🌙🌎"}
+        '
       </p>
+      <>
+        <hr className="my-4 h-[1px] w-full" />
+        <div className="mb-4">
+          <h3 className="mb-1 font-bold">Short Bio</h3>
+          <p className="text-sm">
+            {currentUser?.bio ||
+              `Immersed in the enchanting world of the night, captivated
+                      by the moon's allure, and constantly seeking new
+                      adventures around the globe. 🌕🌙🌎`}
+          </p>
+        </div>
+        <div className="mb-4 text-sm">
+          <h3 className="mb-1 font-bold">Public link</h3>
+          <button className="block text-[#ae7aff] hover:underline">
+            {currentUser?.email}
+          </button>
+          <button className="block break-all text-[#ae7aff] hover:underline">
+            {currentUser?.portfolioUrl}
+          </button>
+        </div>
+        <p className="mb-4 flex gap-x-4">
+          <span className="inline-block">
+            <span className="font-bold">13.5k&nbsp;</span>
+            <span className="text-sm text-gray-400">Followers</span>
+          </span>
+          <span className="inline-block">
+            <span className="font-bold">204&nbsp;</span>
+            <span className="text-sm text-gray-400">Following</span>
+          </span>
+        </p>
+      </>
     </div>
   );
 };

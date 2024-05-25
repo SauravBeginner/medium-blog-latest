@@ -21,6 +21,8 @@ type BlogCardProps = {
   authorId: string;
   publishedDate: Date;
   thumbNail?: string;
+  authorImg?: string;
+
   // likeCount: number;
   // hasLiked: boolean;
 };
@@ -32,9 +34,9 @@ const FullBlog = ({
   title,
   publishedDate,
   thumbNail,
+  authorImg,
 }: BlogCardProps) => {
   const [isProcessing, setIsProcessing] = useState(false);
-
   const [blogDetails, setBlogDetails] = useRecoilStateLoadable(
     blogDetailsAtomFamily(id)
   );
@@ -87,7 +89,7 @@ const FullBlog = ({
                 <div className="h-10 w-10 shrink-0 sm:h-10 sm:w-10">
                   <img
                     // src="https://images.pexels.com/photos/18264716/pexels-photo-18264716.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    src={imgSrc}
+                    src={authorImg || imgSrc}
                     loading={"lazy"}
                     alt="Mystical Wanderer"
                     className="h-full w-full rounded-full object-cover"

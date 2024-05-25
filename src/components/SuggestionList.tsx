@@ -76,7 +76,7 @@ const SuggestionList = ({ user }: any) => {
             <img
               className="aspect-square h-full w-full object-cover"
               alt="Ubisoft Logo"
-              src={imgSrc}
+              src={user?.profileImg || imgSrc}
             />
           </span>
           <div>

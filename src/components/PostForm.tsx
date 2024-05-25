@@ -180,6 +180,7 @@ const PostForm = ({ post }: any) => {
           {/* <CiCirclePlus size={50} color={"gray"} /> */}
           <div className="w-3/4">
             <Input
+              className="focus:bg-gray-100"
               label="Title"
               placeholder="Enter Title"
               type="title"
@@ -198,6 +199,7 @@ const PostForm = ({ post }: any) => {
             )}
 
             <Input
+              className="focus:bg-gray-50 cursor-not-allowed"
               label="Slug"
               placeholder="Enter Slug"
               type="slug"
