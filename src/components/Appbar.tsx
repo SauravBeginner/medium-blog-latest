@@ -9,7 +9,6 @@ import { authState, myProfileDetailsAtom } from "../store/atoms/userAtoms";
 
 const Appbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isSticky, setIsSticky] = useState(false);
   const [showAppbar, setShowAppbar] = useState(true);
   const [lastScrollY, setlastScrollY] = useState(0);
   const [authStatus, setAuthStauts] = useRecoilState(authState);

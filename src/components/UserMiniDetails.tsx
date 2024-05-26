@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { imgSrc } from "./RightBar";
 import { useRecoilValue } from "recoil";
 import {

@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaHeart } from "react-icons/fa";
 
 import { authURL } from "../utils/baseUrl";
-import axios from "axios";
 import { useRecoilStateLoadable, useRecoilValueLoadable } from "recoil";
 
 import { useState } from "react";

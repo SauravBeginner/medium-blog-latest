@@ -1,16 +1,11 @@
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { useEffect, useState } from "react";
-import {
-  isAuthenticated,
-  myProfileDetailsAtom,
-} from "../store/atoms/userAtoms";
-import { FaCog } from "react-icons/fa";
+import { myProfileDetailsAtom } from "../store/atoms/userAtoms";
 
 const Topbar = () => {
   const { id: paramId } = useParams();
   const myDetails = useRecoilValue(myProfileDetailsAtom);
-  const userAuth = useRecoilValue(isAuthenticated);
 
   const navigate = useNavigate();
   const location = useLocation();

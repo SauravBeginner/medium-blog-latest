@@ -81,6 +81,7 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
             ...prev,
           ];
         });
+
         setMyFollowingCount((prev: number) => prev - 1);
       }
     } catch (e) {

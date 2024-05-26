@@ -8,7 +8,6 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ProfileSkeleton from "./ProfileSkeleton";
 import UserMiniDetails from "./UserMiniDetails";
 import ShortProfileSkeleton from "./ShortProfileSkeleton";
-import { Button } from "./Button";
 import {
   myFollowingCountAtom,
   myfollowingsAtom,
@@ -81,8 +80,8 @@ const LeftBar = () => {
           );
         });
 
-        setMyFollowingCount((prev) => prev + 1);
-        setUserFollowersCount((prev) => prev + 1);
+        setMyFollowingCount((prev: any) => prev + 1);
+        setUserFollowersCount((prev: any) => prev + 1);
       } else if (response?.data?.message === "Unfollowed") {
         setIsFollowing((prev: string[]) => {
           return prev?.filter(
@@ -100,8 +99,8 @@ const LeftBar = () => {
           ];
         });
 
-        setMyFollowingCount((prev) => prev - 1);
-        setUserFollowersCount((prev) => prev - 1);
+        setMyFollowingCount((prev: any) => prev - 1);
+        setUserFollowersCount((prev: any) => prev - 1);
       }
     } catch (e) {
       console.log(e);
@@ -173,7 +172,7 @@ const LeftBar = () => {
                     {
                       //@ts-ignore
                       isFollowing?.some(
-                        (u) => u.id === userProfileDetails.contents?.id
+                        (u: any) => u.id === userProfileDetails.contents?.id
                       )
                         ? "Unfollow"
                         : "Follow"
