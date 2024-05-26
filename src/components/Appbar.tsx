@@ -145,7 +145,9 @@ const Appbar = () => {
                 </li>
                 <li
                   className="px-4 py-3 cursor-pointer hover:bg-gray-500"
-                  onClick={() => navigate(`/user/id/suggestions`)}
+                  onClick={() =>
+                    navigate(`/user/${currentUser?.id}/suggestions`)
+                  }
                 >
                   Suggestions
                 </li>

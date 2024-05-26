@@ -3,6 +3,7 @@ import { authAxios } from "../../utils/axiosClient";
 // import { followingBlogStateAtom } from "../atoms/blogAtoms";
 import {
   myProfileDetailsAtom,
+  suggestionAtom,
   userProfileDetailsAtomFamily,
 } from "../atoms/userAtoms";
 
@@ -79,5 +80,12 @@ export const myFollowersCountSelector = selector({
     console.log("followersCount", followersCount);
 
     return followersCount;
+  },
+});
+export const suggestionListSelector = selector({
+  key: "suggestionListSelector",
+  get: ({ get }) => {
+    const suggestions = get(suggestionAtom);
+    return suggestions.slice(0, 3);
   },
 });

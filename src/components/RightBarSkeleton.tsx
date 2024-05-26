@@ -1,6 +1,6 @@
 import { Button } from "./Button";
 
-export const RightBarSkeleton = () => {
+export const SuggestionListSkeleton = () => {
   return (
     <aside className="hidden text-white lg:col-span-3 lg:block">
       <div className="max-h-screen sticky top-[80px]">

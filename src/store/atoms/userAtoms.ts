@@ -136,14 +136,15 @@ export const myfollowingsAtom = atom({
           );
           console.log("followings: ", response?.data?.folllowingUsers);
           return response?.data?.folllowingUsers || [];
-        } else if (followType === "followers") {
-          const response = await authAxios.get(
-            `/user/followers/${userId}?page=${page}&limit=3`
-          );
-          console.log("followers: ", response?.data?.followerUsers);
-
-          return response?.data?.followerUsers || [];
         }
+        // else if (followType === "followers") {
+        //   const response = await authAxios.get(
+        //     `/user/followers/${userId}?page=${page}&limit=3`
+        //   );
+        //   console.log("followers: ", response?.data?.followerUsers);
+
+        //   return response?.data?.followerUsers || [];
+        // }
       } catch (error) {
         // Handle errors, such as by returning a default value or re-throwing the error
         console.error("Error fetching profile details:", error);

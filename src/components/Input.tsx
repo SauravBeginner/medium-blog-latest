@@ -14,7 +14,7 @@ const Input = (
   {
     label,
     type = "text",
-    className = "bg-white text-black ",
+    className = "bg-white text-black focus:bg-gray-100",
     ...props
   }: LabelInputType,
   ref: React.LegacyRef<HTMLInputElement>
@@ -29,7 +29,7 @@ const Input = (
       )}
       <input
         type={type}
-        className={`px-3 py-2 rounded-lg  border outline-none focus:bg-gray-700 duration-200 border-gray-200  w-full ${className}`}
+        className={`px-3 py-2 rounded-lg  border outline-none duration-200 border-gray-200  w-full ${className}`}
         ref={ref}
         {...props}
         id={id}

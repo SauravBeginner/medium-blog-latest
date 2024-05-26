@@ -115,7 +115,7 @@ const EditProfile = () => {
               <Input
                 placeholder="Enter first name"
                 // autoComplete="false"
-                className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500"
+                className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500 focus:bg-gray-700"
                 // defaultValue="Aurora"
                 type="title"
                 {...register("name", {
@@ -150,7 +150,7 @@ const EditProfile = () => {
               <Input
                 placeholder="Enter tagline"
                 // autoComplete="false"
-                className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500 "
+                className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500 focus:bg-gray-700 "
                 //  defaultValue="Night owl | Moon enthusiast | Wanderlust 🌕🌙🌎"
                 {...register("tagLine", {
                   required: false,
@@ -166,7 +166,7 @@ const EditProfile = () => {
               <textarea
                 placeholder="Enter short bio"
                 // autoComplete="false"
-                className="w-full resize-none border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500"
+                className="w-full resize-none border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500 focus:bg-gray-700"
                 defaultValue={
                   "Immersed in the enchanting world of the night, captivated by\nthe moon's allure, and constantly seeking new adventures\n             around the globe. 🌕🌙🌎\n                "
                 }
@@ -184,7 +184,7 @@ const EditProfile = () => {
               <Input
                 placeholder="Enter Bio"
                 // autoComplete="false"
-                className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500"
+                className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500 focus:bg-gray-700"
                 type="bio"
                 // defaultValue="https://www.aurorastarry.com/"
                 {...register("shortBio", {
@@ -195,13 +195,13 @@ const EditProfile = () => {
                   },
                 })}
               />
-            </div>{" "}
+            </div>
             <div className="flex w-full flex-col items-start justify-start gap-2">
               <label className="text-xs text-slate-200">Portfolio URL</label>
               <Input
                 placeholder="Enter url"
                 // autoComplete="false"
-                className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500"
+                className="w-full border-[1px] border-white bg-black p-4 text-white placeholder:text-gray-500 focus:bg-gray-700"
                 type="url"
                 // defaultValue="https://www.aurorastarry.com/"
                 {...register("portfolioUrl", {

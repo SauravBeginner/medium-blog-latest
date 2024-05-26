@@ -26,7 +26,7 @@ type FollowingCardProps = {
 const FollowingCard = ({ following }: FollowingCardProps) => {
   const [isFollowing, setIsFollowing] = useRecoilState(myfollowingsAtom);
 
-  const setSuggestion = useSetRecoilState(suggestionAtom);
+  const [suggestion, setSuggestion] = useRecoilState(suggestionAtom);
 
   const myprofileDetails = useRecoilValueLoadable(myProfileDetailsAtom);
 
@@ -45,43 +45,46 @@ const FollowingCard = ({ following }: FollowingCardProps) => {
         id: userId,
       });
 
-      if (response?.data?.message === "Followed") {
-        setIsFollowing((prev: string[]) => [
+      const { message, newFollowing, deleteFollowing } = response?.data;
+      let updateFollowing;
+      let updatedSuggestionList;
+      if (message === "Followed") {
+        updateFollowing = [
           {
-            id: response?.data?.newFollowing?.followingId,
-            name: following.name,
+            id: newFollowing?.followingId,
+            name: following?.name,
             profileImg: following?.profileImg,
           },
-          ...prev,
-        ]);
+          ...isFollowing,
+        ];
+        console.log(updateFollowing);
+        setIsFollowing(updateFollowing);
         setSuggestion((prev: string[]) => {
           return prev?.filter(
             //@ts-ignore
-            (u) => u?.id !== response?.data?.newFollowing?.followingId
+            (u) => u?.id !== newFollowing?.followingId
           );
         });
 
-        setMyFollowingCount((prev: number) => prev + 1);
-      } else if (response?.data?.message === "Unfollowed") {
+        setMyFollowingCount(updateFollowing.length);
+      } else if (message === "Unfollowed") {
         setIsFollowing((prev: string[]) => {
           return prev?.filter(
             //@ts-ignore
-            (u) => u?.id !== response?.data?.deleteFollowing?.followingId
+            (u) => u?.id !== deleteFollowing?.followingId
           );
         });
 
-        setSuggestion((prev: string[]) => {
-          return [
-            {
-              id: response?.data?.deleteFollowing?.followingId,
-              name: following.name,
-              profileImg: following?.profileImg,
-            },
-            ...prev,
-          ];
-        });
-
-        setMyFollowingCount((prev: number) => prev - 1);
+        updatedSuggestionList = [
+          {
+            id: deleteFollowing?.followingId,
+            name: following?.name,
+            profileImg: following?.profileImg,
+          },
+          ...suggestion,
+        ];
+        setSuggestion(updatedSuggestionList);
+        setMyFollowingCount(isFollowing.length - 1);
       }
     } catch (e) {
       console.log(e);
