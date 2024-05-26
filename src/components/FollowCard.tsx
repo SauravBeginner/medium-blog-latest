@@ -12,7 +12,6 @@ import {
   myfollowingsAtom,
   myProfileDetailsAtom,
   suggestionAtom,
-  userFollowersCountAtomFamily,
 } from "../store/atoms/userAtoms";
 import { authAxios } from "../utils/axiosClient";
 import { useState } from "react";
