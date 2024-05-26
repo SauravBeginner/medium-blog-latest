@@ -77,7 +77,6 @@ const Appbar = () => {
       path !== "/blog/create" ? (
         <IoIosAddCircle size={40} color="#ae7aff" />
       ) : (
-        // <CiSaveUp2 size={40} color="#ae7aff" />
         ""
       );
     //@ts-ignore
