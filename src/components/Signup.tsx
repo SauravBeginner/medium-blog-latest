@@ -33,7 +33,9 @@ export const Signup = () => {
   };
   return (
     <form onSubmit={handleSubmit(handleSignup)}>
-      <h1 className="text-4xl font-bold">Log in to your account</h1>
+      <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
+        Log in to your account
+      </h1>
       <p className="mt-2 text-sm">
         Already have an account?
         <Link className="text-blue-600" to="/login">

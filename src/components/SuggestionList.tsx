@@ -1,4 +1,4 @@
-import { useRecoilValueLoadable } from "recoil";
+import { useRecoilValue, useRecoilValueLoadable } from "recoil";
 import { suggestionListSelector } from "../store/selectors/userSelector";
 import SuggestionCard from "./SuggestionCard";
 import { Button } from "./Button";
@@ -7,11 +7,12 @@ import { SuggestionListSkeleton } from "./RightBarSkeleton";
 import {
   myfollowingsAtom,
   myProfileDetailsAtom,
+  suggestionAtom,
 } from "../store/atoms/userAtoms";
 
 const SuggestionList = () => {
-  const suggestionList = useRecoilValueLoadable(suggestionListSelector);
-  const myFollowingList = useRecoilValueLoadable(myfollowingsAtom);
+  const suggestionList = useRecoilValueLoadable(suggestionAtom);
+  const myFollowingList = useRecoilValue(myfollowingsAtom);
 
   const navigate = useNavigate();
   const myDetailsAtom = useRecoilValueLoadable(myProfileDetailsAtom);
@@ -25,7 +26,7 @@ const SuggestionList = () => {
     <div className="bg-[black]/60 rounded-lg p-4 text-white mb-2 border border-[white]/60 shadow-md shadow-[white]/70">
       <h2 className="text-lg font-bold pb-4">Who to follow</h2>
       <div className="space-y-4">
-        {suggestionList.contents?.map((user: any) => (
+        {suggestionList.contents?.slice(0, 3).map((user: any) => (
           <SuggestionCard
             key={user?.id}
             user={user}

@@ -12,14 +12,6 @@ const MyMiniProfile = ({ currentUser }: any) => {
   const followingCount = useRecoilValue(myFollowingCountAtom);
   const followerCount = useRecoilValue(myFollowersCountAtom);
 
-  // // const followersCount = useRecoilValue(myFollowersCountSelector);
-
-  // const myprofile = useRecoilValueLoadable(myProfileDetailsAtom);
-
-  // const followings = currentUser?.followingCount;
-
-  // const followers = currentUser?.followersCount;
-
   return (
     <div>
       <div
