@@ -1,5 +1,5 @@
 import { useRecoilValue, useRecoilValueLoadable } from "recoil";
-import { suggestionListSelector } from "../store/selectors/userSelector";
+// import { suggestionListSelector } from "../store/selectors/userSelector";
 import SuggestionCard from "./SuggestionCard";
 import { Button } from "./Button";
 import { useNavigate } from "react-router-dom";
