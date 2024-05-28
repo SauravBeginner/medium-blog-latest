@@ -7,7 +7,7 @@ compatibility_date = "2023-12-01"
 DATABASE_URL = ""
 JWT_SECRET = ""
 
-R2_URL = "https://pub-96c5670691c8435283fb5dea0d94a7e8.r2.dev"
+# R2_URL = "https://pub-96c5670691c8435283fb5dea0d94a7e8.r2.dev"
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
