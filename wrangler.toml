@@ -2,18 +2,21 @@ name = "backend"
 compatibility_date = "2023-12-01"
 
 [vars]
-DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiMWQyZmE3YzItZjY5MC00MjU3LWIwMWQtNTExZTk4MjdmYmUzIiwidGVuYW50X2lkIjoiMTY5MTYyMDcyNDdiNjU5ZDVmNGVjYWJhYjY3YTlmYzIzZjNmNGE2MjU4MTIxNWE5ZjdmOWVhZGM3YTUyMTIwYSIsImludGVybmFsX3NlY3JldCI6IjkxYzMxMTQ1LTU1ZGItNDkyOS05Y2ZmLWI4N2QyMTdjYjg1MiJ9.alq4zSvQOnZXuBnOnL-h7RsUHjT1d0IjkHUtNFWCcIs"
+# DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiNmQ3NzY4OTAtOWQxMC00MmIzLTk4ZGYtMDY5YWNkZTEyYWU2IiwidGVuYW50X2lkIjoiNTUyZTYyYzQxYjRjOWU4N2Q5NDhjM2IxN2UyMWI0OGEyNjBmYTMyMjFiODc3ZDVjNWZlNWMxYTM4YmQyMDQwYiIsImludGVybmFsX3NlY3JldCI6ImJhZmYzMDM0LThlYTgtNGY3MS1hNThjLTI0NmU3ZDQ4YjNkZCJ9.NsLU-0RTK7mHBzVwal-MS7on4NJTq1XmiM1kOi6N6Ow"
+DATABASE_URL = "prisma://accelerate.prisma-data.net/?api_key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlfa2V5IjoiZDhhM2Q1YWUtYTJhMS00YjYyLTkzMTQtYTFlYzlhMzI1Y2E1IiwidGVuYW50X2lkIjoiZWZhYTkzNTE3NzMxYWE4MDQxOThlZWQ0YjkyMTQ2YTI3NjcxYTI4Yzg5YmIwZGE5M2RiNjc0MjQ3MWQ2ZWM5MyIsImludGVybmFsX3NlY3JldCI6ImU0ZTU5MjBiLTQzYmMtNGI1NC04ZmQ5LTMzZmEwODc0ZTE3NyJ9.2wwRflBxqDql1bHig82Sp2EmDyvMXyBAYJh7OwS02cU"
 
 
 JWT_SECRET = "Y5MC00MjU3LWIwMWQtNTExZTk4M"
+
+R2_URL = "https://pub-96c5670691c8435283fb5dea0d94a7e8.r2.dev"
 
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
+[[r2_buckets]]
+binding = "HONO_R2_UPLOAD"
+bucket_name = "hono-r2-upload"
 
 # [[d1_databases]]
 # binding = "DB"

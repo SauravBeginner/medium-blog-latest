@@ -14,18 +14,52 @@ datasource db {
 }
 
 model User {
-  id       String  @id @default(uuid())
-  email    String  @unique
-  name     String?
-  password String
-  posts    Post[]
+  id           String   @id @default(uuid())
+  email        String   @unique
+  name         String?
+  tagLine      String?
+  password     String
+  posts        Post[]
+  likes        Like[]
+  portfolioUrl String?
+  profileImg   String?
+  shortBio     String?
+  followers    Follow[] @relation("UserFollowed")
+  following    Follow[] @relation("UserFollows")
 }
 
 model Post {
-  id        String  @id @default(uuid())
+  id        String   @id @default(uuid())
   title     String
+  slug      String?
   content   String
-  published Boolean @default(false)
-  author    User    @relation(fields: [authorId], references: [id])
+  thumbNail String?
+  published Boolean  @default(false)
+  author    User     @relation(fields: [authorId], references: [id])
   authorId  String
+  likes     Like[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId])
+}
+
+model Like {
+  id     String @id @default(uuid())
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@unique([postId, userId])
+}
+
+model Follow {
+  id          String @id @default(uuid())
+  follower    User   @relation(name: "UserFollows", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId  String
+  following   User   @relation(name: "UserFollowed", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String
+
+  @@unique([followerId, followingId])
 }
